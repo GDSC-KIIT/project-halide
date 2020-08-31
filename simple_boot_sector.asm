@@ -2,7 +2,7 @@
 
 ;Infinite loop (e9 fd ff)
 inf_loop:
-    jmp inf_loop
+    jmp inf_loop 
 
 times 510-($-$$) db 0 ;Fill with 510 zeros minus the size of the previous code
 
