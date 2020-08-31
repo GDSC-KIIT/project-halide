@@ -78,4 +78,5 @@ So basically filename.bin will do the same as defined in __Approach 1__
 ### Booting from your bootsector
 To boot from you binary file use the following command : _qemu-system-x86_64 filename.bin_
 You will see the following screen in the qemu emulator:
+
 ![Image broken](https://imagehost7.online-image-editor.com/oie_upload/images/31184331883Rs3/TbzTMOtLyoae.png)
