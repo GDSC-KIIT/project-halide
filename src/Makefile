@@ -11,10 +11,24 @@ objects = loader.o kernel.o
 	as $(assemblerflags) -o $@ $<
 
 kernel.bin: linker.ld $(objects)
-	make clean | ls
 	ld $(linkerflags) -T $< -o $@ $(objects)
 	mkdir -p objs/
 	mv *.o objs/
 
+kernel.iso: kernel.bin
+	mkdir -p iso
+	mkdir -p iso/boot
+	mkdir -p iso/boot/grub
+	cp kernel.bin iso/boot/kernel.bin
+	echo 'set timeout=0'                      > iso/boot/grub/grub.cfg
+	echo 'set default=0'                     >> iso/boot/grub/grub.cfg
+	echo ''                                  >> iso/boot/grub/grub.cfg
+	echo 'menuentry "My Operating System" {' >> iso/boot/grub/grub.cfg
+	echo '  multiboot /boot/kernel.bin'    >> iso/boot/grub/grub.cfg
+	echo '  boot'                            >> iso/boot/grub/grub.cfg
+	echo '}'                                 >> iso/boot/grub/grub.cfg
+	grub-mkrescue --output=kernel.iso iso
+	rm -rf iso
+
 clean:
-	rm ./objs/*.o *.bin
+	rm ./objs/*.o *.iso *.bin
