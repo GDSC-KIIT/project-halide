@@ -6,7 +6,7 @@
 
 #### Tools and dependencies
 - gcc, g++ compiler ```sudo apt instal gcc```
-- nasm assembler ```_sudo apt install nasm_```
-- qemu emulator for emulating  ```_sudo apt instal qemu_```
+- nasm assembler ```*sudo apt install nasm*```
+- qemu emulator for emulating  ```*sudo apt instal qemu*```
 
 ##### ```_Updating_```
