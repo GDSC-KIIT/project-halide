@@ -42,8 +42,8 @@ namespace FrameBuffer
 
 	public:
 		Writer(const unsigned char &foreground, const unsigned char &background);
-
 		void print(char *str);
+		void colorTheme(const unsigned char &foreground, const unsigned char &background);
 	};
 } // namespace FrameBuffer
 
