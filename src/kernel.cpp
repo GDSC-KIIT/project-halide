@@ -12,11 +12,11 @@ void print(char* str) {
     for (int i = 0; str[i]!='\0'; i++)
     {
         vid_mem[i*2] = str[i];
-        vid_mem[(i*2)+1] = 0x0f;
+        vid_mem[(i*2)+1] = 0x1f;
     }
 }
 
 extern "C" void k_main(const void* multiboot_structure, unsigned int multiboot_magic) {
-    print("Hello world!!");
-    while(1);
+    print("HalideOS, an experimental OS by DSC KIIT");
+	while(1);
 }
