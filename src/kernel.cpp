@@ -13,7 +13,7 @@ extern "C" void call_ctors()
 
 extern "C" void k_main(const void *multiboot_structure, unsigned int multiboot_magic)
 {
-	FrameBuffer::Writer p(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::BLUE);
+	FrameBuffer::Writer p(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::GREEN);
 	p.print("HalideOS, an experimental OS by DSC KIIT");
 	while (1);
 }
