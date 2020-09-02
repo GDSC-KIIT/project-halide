@@ -2,7 +2,7 @@ compilerflags = -m32
 assemblerflags = --32
 linkerflags = -melf_i386
 
-objects = loader.o kernel.o
+objects = loader.o kernel.o frame_buffer.o
 
 %.o: %.cpp
 	g++ --std=c++17 $(compilerflags) -o $@ -c $<
