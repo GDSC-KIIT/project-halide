@@ -15,3 +15,9 @@ void FrameBuffer::Writer::print(char* str)
 		vid_mem[(i * 2) + 1] = ((bg & 0x0f) << 4) | (fg & 0x0f);
 	}
 }
+
+void FrameBuffer::Writer::colorTheme(const unsigned char &foreground, const unsigned char &background) 
+{
+	fg = foreground;
+	bg = background;
+}
