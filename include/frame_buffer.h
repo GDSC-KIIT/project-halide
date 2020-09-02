@@ -8,7 +8,8 @@ next 4 bits for the foreground colour and
 the next 4 bits for the background colour
 */
 
-#pragma once
+#ifndef FRAME_BUFFER_H
+#define FRAME_BUFFER_H
 
 namespace FrameBuffer
 {
@@ -57,3 +58,5 @@ namespace FrameBuffer
 		}
 	};
 } // namespace FrameBuffer
+
+#endif

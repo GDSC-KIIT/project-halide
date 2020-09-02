@@ -9,7 +9,7 @@ extern "C" void call_ctors()
 	}
 }
 
-#include "../include/frame_buffer.hpp"
+#include "../include/frame_buffer.h"
 
 extern "C" void k_main(const void *multiboot_structure, unsigned int multiboot_magic)
 {
