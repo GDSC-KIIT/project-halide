@@ -5,7 +5,7 @@ linkerflags = -melf_i386
 objects = loader.o kernel.o
 
 %.o: %.cpp
-	g++ $(compilerflags) -o $@ -c $<
+	g++ --std=c++17 $(compilerflags) -o $@ -c $<
 
 %.o: %.s
 	as $(assemblerflags) -o $@ $<
