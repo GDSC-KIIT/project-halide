@@ -14,9 +14,9 @@ namespace FrameBuffer
 {
 	namespace Colours
 	{
-		static const unsigned char BLUE = (unsigned char) 0x1;
-		static const unsigned char WHITE = (unsigned char) 0xf;
-	}
+		static const unsigned char BLUE = (unsigned char)0x1;
+		static const unsigned char WHITE = (unsigned char)0xf;
+	} // namespace Colours
 
 	class Writer
 	{
@@ -24,8 +24,10 @@ namespace FrameBuffer
 		char *START = (char *)0x0B8000;
 		unsigned char fg;
 		unsigned char bg;
+
 	public:
-		Writer(const unsigned char& foreground, const unsigned char& background) {
+		Writer(const unsigned char &foreground, const unsigned char &background)
+		{
 			fg = foreground;
 			bg = background;
 		}
@@ -40,4 +42,4 @@ namespace FrameBuffer
 			}
 		}
 	};
-} // namespace FrameBuffer
+}
