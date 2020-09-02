@@ -7,16 +7,7 @@ extern "C" void call_ctors() {
     }
 }
 
-void print(char* str) {
-    char* vid_mem = (char*)0x0B8000;
-    for (int i = 0; str[i]!='\0'; i++)
-    {
-        vid_mem[i*2] = str[i];
-        vid_mem[(i*2)+1] = 0x1f;
-    }
-}
-
 extern "C" void k_main(const void* multiboot_structure, unsigned int multiboot_magic) {
-    print("HalideOS, an experimental OS by DSC KIIT");
+    //print("HalideOS, an experimental OS by DSC KIIT", string(0x0F));
 	while(1);
 }
