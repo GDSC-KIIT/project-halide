@@ -3,7 +3,7 @@
 #include "../include/system.h"
 
 extern unsigned char inportb(unsigned short _port);
-static FrameBuffer::Writer p(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::BLUE);
+static FrameBuffer::Writer p;
 
 char *KEYBOARD_DRIVER::readInput()
 {

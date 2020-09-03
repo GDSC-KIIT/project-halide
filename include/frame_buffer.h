@@ -33,35 +33,33 @@ namespace FrameBuffer
 		static const unsigned char WHITE = (unsigned char)0xf;
 	} // namespace Colours
 
+
 	class Writer
 	{
 	private:
 		char *START = (char *)0xB8000;
-		unsigned char fg;
-		unsigned char bg;
+		static unsigned char fg, bg;
 		static int cursorX, cursorY;
-		const unsigned char s_width = 80,s_height = 25,sd = 2; 
-		int color = 0x0F;
+		const unsigned char s_width = 80, s_height = 25, sd = 2;
 
 	public:
-		Writer(const unsigned char &foreground, const unsigned char &background);
+		
 		void print(char *str);
 		// Implimenting new functions (testing)
-		void printHex(unsigned char key);
-		void updateCursor(); // For some reason both the emulators and the vb are not showing the cursor by default
-		// Implimenting new functions (testing)
-		void colorTheme(const unsigned char &foreground, const unsigned char &background);
+
 
 		// Latest Functions
 
 		void clearLine();
 		void clearScreen();
-		void printChar();
-		void write(char *str);
+		void initScreen(const unsigned char &foreground, const unsigned char &background);
+		void setColorTheme(const unsigned char &foreground, const unsigned char &background);
+		void writeString(char *str);
+		void writeChar(char c);
 		void writeHex(unsigned char key);
-		void initScreen();
 		void scrolling();
-		//void updateCursor();
+		void clearCursor();
+		void updateCursor();
 	};
 } // namespace FrameBuffer
 
