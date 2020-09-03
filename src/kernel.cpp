@@ -32,5 +32,5 @@ extern "C" void k_main(const void *multiboot_structure, unsigned int multiboot_m
 	p.writeString("       \b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n");
 	KEYBOARD_DRIVER::readInput(p);
 
-	while (1); 
+	while (1);
 }
