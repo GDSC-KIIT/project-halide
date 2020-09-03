@@ -7,7 +7,7 @@ static FrameBuffer::Writer p(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::
 
 void KEYBOARD_DRIVER::readInput()
 {
-    int receiving = 20;
+    int receiving = 1;
     int i=0;
     while(receiving)
     {
@@ -305,7 +305,7 @@ void KEYBOARD_DRIVER::readInput()
                 break;                                 
 
         default: //p.print("~Unhandeled interrupt");
-                 receiving--;
+                 //receiving--;
                  break;
             }
         }
