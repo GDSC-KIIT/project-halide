@@ -3,10 +3,10 @@
 #include "../include/system.h"
 #include "../include/frame_buffer.h"
 
-unsigned char mouse_cycle=0;     //unsigned char
-signed char mouse_byte[3];    //signed char
-signed char mouse_x=0;         //signed char
-signed char mouse_y=0;         //signed char
+unsigned char mouse_cycle=0;   
+signed char mouse_byte[3];   
+signed char mouse_x=0;        
+signed char mouse_y=0;         
 
 //Mouse functions
 void mouse_handler() //struct regs *a_r (not used but just there)

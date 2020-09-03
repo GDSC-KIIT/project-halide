@@ -39,7 +39,7 @@ namespace FrameBuffer
 		char *START = (char *)0xB8000;
 		static unsigned char fg, bg;
 		static int cursorX, cursorY;
-		const unsigned char s_width = 80, s_height = 25, sd = 2;
+		const unsigned int s_width = 80, s_height = 25, sd = 2;
 
 	public:
 		Writer(const unsigned char &foreground, const unsigned char &background);
@@ -50,9 +50,7 @@ namespace FrameBuffer
 		void initScreen(const unsigned char &foreground, const unsigned char &background);
 		void setColorTheme(const unsigned char &foreground, const unsigned char &background);
 		void writeString(char *str);
-		void writeChar(char c);
 		void writeHex(unsigned char key);
-		void scrolling();
 		void clearCursor();
 		void updateCursor();
 	};
