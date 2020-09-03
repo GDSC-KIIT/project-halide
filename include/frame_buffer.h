@@ -39,7 +39,7 @@ namespace FrameBuffer
 		char *START = (char *)0xB8000;
 		unsigned char fg;
 		unsigned char bg;
-		int cursorX = 0, cursorY = 0;
+		static int cursorX, cursorY;
 		const unsigned char s_width = 80,s_height = 25,sd = 2; 
 		int color = 0x0F;
 
