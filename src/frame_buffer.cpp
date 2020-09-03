@@ -1,26 +1,18 @@
 #include "../include/frame_buffer.h"
 #include "../include/system.h"
 
+int FrameBuffer::Writer::cursorX=0;
+int FrameBuffer::Writer::cursorY=0;
+
 FrameBuffer::Writer::Writer(const unsigned char &foreground, const unsigned char &background)
 {
     fg = foreground;
 	bg = background;
-
-    
 }
 
 // Implementation need to be done so that when we write new data it begin with cursor position
 void FrameBuffer::Writer::print(char* str)
 {
-    /* char *vid_mem = START;
-	for (int i = 0; str[i] != '\0'; i++)
-	{
-		vid_mem[i * 2] = str[i];
-		vid_mem[(i * 2) + 1] = ((bg & 0x0f) << 4) | (fg & 0x0f);
-		cursorX++;
-	}
-	updateCursor(); */
-
     // Experimental implementation
     char* vid_mem=START;
     for (int i = 0; str[i] != '\0'; i++)
@@ -93,6 +85,3 @@ void FrameBuffer::Writer::updateCursor()
     vid_mem[(cursorY*s_width + cursorX)*2] = '_';
     vid_mem[(cursorY*s_width + cursorX)*2 + 1] = (((unsigned char)0x0 & 0x0f) << 4) | ((unsigned char)0xf & 0x0f);
 }
-
-int FrameBuffer::Writer::cursorX=0;
-int FrameBuffer::Writer::cursorY=0;

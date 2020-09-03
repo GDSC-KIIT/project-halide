@@ -51,6 +51,17 @@ namespace FrameBuffer
 		void updateCursor(); // For some reason both the emulators and the vb are not showing the cursor by default
 		// Implimenting new functions (testing)
 		void colorTheme(const unsigned char &foreground, const unsigned char &background);
+
+		// Latest Functions
+
+		void clearLine();
+		void clearScreen();
+		void printChar();
+		void write(char *str);
+		void writeHex(unsigned char key);
+		void initScreen();
+		void scrolling();
+		//void updateCursor();
 	};
 } // namespace FrameBuffer
 
