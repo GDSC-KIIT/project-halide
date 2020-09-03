@@ -8,14 +8,13 @@ static FrameBuffer::Writer p(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::
 void KEYBOARD_DRIVER::readInput()
 {
     int receiving = 20;
-    p.print("Test with any 10 key strikes : ");
     while(receiving)
     {
         if(inportb(0x64) & 0x1)                 
         {
             switch(inportb(0x60))
             {
-                default: p.printHex(inportb(0x60));
+                default: p.print((char*)inportb(0x60));
                          receiving--;
                          break;
             }
