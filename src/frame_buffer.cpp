@@ -7,54 +7,6 @@ int FrameBuffer::Writer::cursorY = 0;
 unsigned char FrameBuffer::Writer::fg = FrameBuffer::Colours::BLACK;
 unsigned char FrameBuffer::Writer::bg = FrameBuffer::Colours::WHITE;
 
-// Implementation need to be done so that when we write new data it begin with cursor position
-void FrameBuffer::Writer::print(char *str)
-{
-	// Experimental implementation
-	char *vid_mem = START;
-	for (int i = 0; str[i] != '\0'; i++)
-	{
-		if (cursorY >= 25)
-		{
-			cursorX = 0;
-			cursorY = 0;
-			break;
-		}
-		if (str[i] == '\n')
-		{
-			// If possible i woud like to reduce these two lines
-			vid_mem[((cursorY * s_width) + cursorX) * 2] = ' ';
-			vid_mem[((cursorY * s_width) + cursorX) * 2 + 1] = (((unsigned char)bg & 0x0f) << 4) | ((unsigned char)fg & 0x0f);
-			// If possible i woud like to reduce these two lines
-			cursorY += 1;
-			cursorX = 0;
-		}
-		else if (str[i] == '\r')
-		{
-			cursorX -= 1;
-			vid_mem[(cursorY * s_width + cursorX) * 2] = 0;
-			// If possible i woud like to reduce these two lines
-			vid_mem[((cursorY * s_width) + cursorX + 1) * 2] = ' ';
-			vid_mem[((cursorY * s_width) + cursorX + 1) * 2 + 1] = (((unsigned char)bg & 0x0f) << 4) | ((unsigned char)fg & 0x0f);
-		}
-		else
-		{
-			vid_mem[(cursorY * s_width + cursorX) * 2] = str[i];
-			vid_mem[(cursorY * s_width + cursorX) * 2 + 1] = ((bg & 0x0f) << 4) | (fg & 0x0f);
-
-			cursorX++;
-		}
-		if (cursorX >= s_width)
-		{
-			cursorY++;
-			cursorX = 0;
-		}
-	}
-	updateCursor();
-}
-
-// New Functions
-
 FrameBuffer::Writer::Writer(const unsigned char &foreground, const unsigned char &background)
 {
 	FrameBuffer::Writer::initScreen(foreground, background);
@@ -116,8 +68,7 @@ void FrameBuffer::Writer::writeString(char *str)
 		// if screen ends
 		if (cursorY >= 24)
 		{
-			cursorX = 0;
-			cursorY = 0;
+			FrameBuffer::Writer::clearScreen();
 			break;
 		}
 
@@ -162,8 +113,9 @@ void FrameBuffer::Writer::writeHex(unsigned char key)
 	char *hex = "0123456789ABCDEF";
 	x[0] = hex[(key >> 4) & 0xF];
 	x[1] = hex[key & 0xF];
-	FrameBuffer::Writer::print(x);
+	FrameBuffer::Writer::writeString(x);
 }
+
 
 // Clears the current cursorX and cursorY
 void FrameBuffer::Writer::clearCursor()
