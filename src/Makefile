@@ -1,8 +1,8 @@
-compilerflags = -m32 
+compilerflags = -c -ffreestanding -fno-stack-protector -m32 -Iinclude -fno-use-cxa-atexit -nostdlib -fno-builtin -fno-rtti -fno-exceptions -fno-leading-underscore -Wno-write-strings
 assemblerflags = --32
 linkerflags = -melf_i386
 
-objects = loader.o kernel.o frame_buffer.o system.o keyboard.o
+objects = loader.o kernel.o frame_buffer.o system.o keyboard.o utils.o
 
 %.o: %.cpp
 	g++ --std=c++17 $(compilerflags) -o $@ -c $<
