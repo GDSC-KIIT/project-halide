@@ -6,7 +6,7 @@ FrameBuffer::Writer::Writer(const unsigned char &foreground, const unsigned char
     fg = foreground;
 	bg = background;
 
-    
+    initFrame_Buffer();
 }
 
 // Implementation need to be done so that when we write new data it begin with cursor position
@@ -25,7 +25,7 @@ void FrameBuffer::Writer::print(char* str)
     char* vid_mem=START;
     for (int i = 0; str[i] != '\0'; i++)
     {
-        if(cursorY>=24) {
+        if(cursorY>=25) {
             cursorX=0;
             cursorY=0;
             break;
@@ -33,7 +33,7 @@ void FrameBuffer::Writer::print(char* str)
         if(str[i] == '\n') {
             // If possible i woud like to reduce these two lines
             vid_mem[((cursorY*s_width) + cursorX)*2] = ' ';
-            vid_mem[((cursorY*s_width) + cursorX)*2 + 1] = (((unsigned char)0x0 & 0x0f) << 4) | ((unsigned char)0xf & 0x0f);
+            vid_mem[((cursorY*s_width) + cursorX)*2 + 1] = ((bg & 0x0f) << 4) | (fg & 0x0f);
             // If possible i woud like to reduce these two lines
             cursorY+=1;
             cursorX=0;
@@ -43,7 +43,7 @@ void FrameBuffer::Writer::print(char* str)
             vid_mem[(cursorY*s_width + cursorX)*2] = 0;
             // If possible i woud like to reduce these two lines
             vid_mem[((cursorY*s_width) + cursorX+1)*2] = ' ';
-            vid_mem[((cursorY*s_width) + cursorX+1)*2 + 1] = (((unsigned char)0x0 & 0x0f) << 4) | ((unsigned char)0xf & 0x0f);
+            vid_mem[((cursorY*s_width) + cursorX+1)*2 + 1] = ((bg & 0x0f) << 4) | (fg & 0x0f);
         }
         else { 
             vid_mem[(cursorY*s_width + cursorX)*2] = str[i];
@@ -91,7 +91,30 @@ void FrameBuffer::Writer::updateCursor()
 
 	char *vid_mem = START;
     vid_mem[(cursorY*s_width + cursorX)*2] = '_';
-    vid_mem[(cursorY*s_width + cursorX)*2 + 1] = (((unsigned char)0x0 & 0x0f) << 4) | ((unsigned char)0xf & 0x0f);
+    vid_mem[(cursorY*s_width + cursorX)*2 + 1] = ((bg & 0x0f) << 4) | (fg & 0x0f);
+}
+
+void FrameBuffer::Writer::initFrame_Buffer() 
+{
+    // Implementing
+    char* vid_mem=START;
+    for (int i = 0; cursorY != 25; i++)
+    {
+        if(cursorY>=25) {
+            break;
+        }
+        else { 
+            vid_mem[(cursorY*s_width + cursorX)*2] = ' ';
+            vid_mem[(cursorY*s_width + cursorX)*2 + 1] = ((bg & 0x0f) << 4) | (fg & 0x0f);
+            
+            cursorX++;
+        }
+        if(cursorX >= s_width) {
+            cursorY++;
+            cursorX=0;
+        } 
+    }
+    print("Sacrifised");
 }
 
 int FrameBuffer::Writer::cursorX=0;
