@@ -45,6 +45,7 @@ namespace FrameBuffer
 
 	public:
 		Writer(const unsigned char &foreground, const unsigned char &background);
+		void initFrame_Buffer();
 		void print(char *str);
 		// Implimenting new functions (testing)
 		void printHex(unsigned char key);
