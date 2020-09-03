@@ -14,17 +14,10 @@ extern "C" void call_ctors()
 
 extern "C" void k_main(const void *multiboot_structure, unsigned int multiboot_magic)
 {
-	FrameBuffer::Writer p(FrameBuffer::Colours::BLACK, FrameBuffer::Colours::WHITE);
+	FrameBuffer::Writer p;
+	p.initScreen(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::BLUE);
 	p.print("HalideOS, an experimental OS by DSC KIIT\n");
-	p.print("HalideOS, an experimental OS by DSC KIIT\n");
-	p.print("HalideOS, an experimental OS by DSC KIIT\n");
-	p.print("HalideOS, an experimental OS by DSC KIIT\n");
-	p.print("HalideOS, an experimental OS by DSC KIIT\n");
-	p.print("HalideOS, an experimental OS by DSC KIIT\n");
-	char* input_buffer = KEYBOARD_DRIVER::readInput(p);
-	//p.colorTheme(FrameBuffer::Colours::BLACK, FrameBuffer::Colours::WHITE);
-	//p.print("echoed ");
-	//p.print(input_buffer);
+	KEYBOARD_DRIVER::readInput(p);
 	
 	while (1);
 }
