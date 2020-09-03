@@ -5,7 +5,7 @@
 
 extern unsigned char inportb(unsigned short _port);
 
-char* KEYBOARD_DRIVER::readInput(FrameBuffer::Writer p)
+char *KEYBOARD_DRIVER::readInput(FrameBuffer::Writer &p)
 {
 	int receiving = 1;
 	int i = 0;

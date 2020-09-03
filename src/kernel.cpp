@@ -17,6 +17,6 @@ extern "C" void k_main(const void *multiboot_structure, unsigned int multiboot_m
 	FrameBuffer::Writer p(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::BLUE);
 	p.print("HalideOS, an experimental OS by DSC KIIT\n");
 	KEYBOARD_DRIVER::readInput(p);
-	
+
 	while (1);
 }

@@ -55,10 +55,10 @@ void FrameBuffer::Writer::print(char *str)
 
 // New Functions
 
-FrameBuffer::Writer::Writer(const unsigned char &foreground, const unsigned char &background) {
+FrameBuffer::Writer::Writer(const unsigned char &foreground, const unsigned char &background)
+{
 	FrameBuffer::Writer::initScreen(foreground, background);
 }
-
 
 // clear out line and move the cursor to the start of the line
 void FrameBuffer::Writer::clearLine()
@@ -126,7 +126,7 @@ void FrameBuffer::Writer::writeString(char *str)
 		{
 			vid_mem[((cursorY * s_width) + cursorX) * 2] = ' ';
 			vid_mem[((cursorY * s_width) + cursorX) * 2 + 1] = (((unsigned char)bg & 0x0f) << 4) | ((unsigned char)fg & 0x0f);
-			
+
 			cursorY += 1;
 			cursorX = 0;
 		}
@@ -156,8 +156,8 @@ void FrameBuffer::Writer::writeString(char *str)
 	updateCursor();
 }
 
-
-void FrameBuffer::Writer::writeHex(unsigned char key){
+void FrameBuffer::Writer::writeHex(unsigned char key)
+{
 	char *x = "00";
 	char *hex = "0123456789ABCDEF";
 	x[0] = hex[(key >> 4) & 0xF];

@@ -3,8 +3,9 @@
 
 #include "../include/frame_buffer.h"
 
-namespace KEYBOARD_DRIVER {
-    char* readInput(FrameBuffer::Writer p);
+namespace KEYBOARD_DRIVER
+{
+	char *readInput(FrameBuffer::Writer &p);
 }
 
 #endif

@@ -33,7 +33,6 @@ namespace FrameBuffer
 		static const unsigned char WHITE = (unsigned char)0xf;
 	} // namespace Colours
 
-
 	class Writer
 	{
 	private:
