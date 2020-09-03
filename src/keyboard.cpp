@@ -17,74 +17,74 @@ char *KEYBOARD_DRIVER::readInput(FrameBuffer::Writer &p)
 			switch (inportb(0x60))
 			{
 				/*case 1:
-                p.print("(char)27);           Escape button Dont use it please
+                p.writeString("(char)27);           Escape button Dont use it please
                 buffstr[i] = 'c'ar)27;
                 i++;
                 break;*/
 			case 2:
-				p.print("1");
+				p.writeString("1");
 				buffstr[i] = '1';
 				i++;
 				break;
 			case 3:
-				p.print("2");
+				p.writeString("2");
 				buffstr[i] = '2';
 				i++;
 				break;
 			case 4:
-				p.print("3");
+				p.writeString("3");
 				buffstr[i] = '3';
 				i++;
 				break;
 			case 5:
-				p.print("4");
+				p.writeString("4");
 				buffstr[i] = '4';
 				i++;
 				break;
 			case 6:
-				p.print("5");
+				p.writeString("5");
 				buffstr[i] = '5';
 				i++;
 				break;
 			case 7:
-				p.print("6");
+				p.writeString("6");
 				buffstr[i] = '6';
 				i++;
 				break;
 			case 8:
-				p.print("7");
+				p.writeString("7");
 				buffstr[i] = '7';
 				i++;
 				break;
 			case 9:
-				p.print("8");
+				p.writeString("8");
 				buffstr[i] = '8';
 				i++;
 				break;
 			case 10:
-				p.print("9");
+				p.writeString("9");
 				buffstr[i] = '9';
 				i++;
 				break;
 			case 11:
-				p.print("0");
+				p.writeString("0");
 				buffstr[i] = '0';
 				i++;
 				break;
 			case 12:
-				p.print("-");
+				p.writeString("-");
 				buffstr[i] = '-';
 				i++;
 				break;
 			case 13:
-				p.print("=");
+				p.writeString("=");
 				buffstr[i] = '=';
 				i++;
 				break;
 			case 14:
 				if (i > 0)
 				{
-					p.print("\r");
+					p.writeString("\r");
 				}
 				i--;
 				if (i < 0)
@@ -95,208 +95,208 @@ char *KEYBOARD_DRIVER::readInput(FrameBuffer::Writer &p)
 				buffstr[i] = ';';
 				break;
 			case 15:
-				p.print("\t"); //Tab button
+				p.writeString("\t"); //Tab button
 				buffstr[i] = '\t';
 				i++;
 				break;
 			case 16:
-				p.print("q");
+				p.writeString("q");
 				buffstr[i] = 'q';
 				i++;
 				break;
 			case 17:
-				p.print("w");
+				p.writeString("w");
 				buffstr[i] = 'w';
 				i++;
 				break;
 			case 18:
-				p.print("e");
+				p.writeString("e");
 				buffstr[i] = 'e';
 				i++;
 				break;
 			case 19:
-				p.print("r");
+				p.writeString("r");
 				buffstr[i] = 'r';
 				i++;
 				break;
 			case 20:
-				p.print("t");
+				p.writeString("t");
 				buffstr[i] = 't';
 				i++;
 				break;
 			case 21:
-				p.print("y");
+				p.writeString("y");
 				buffstr[i] = 'y';
 				i++;
 				break;
 			case 22:
-				p.print("u");
+				p.writeString("u");
 				buffstr[i] = 'u';
 				i++;
 				break;
 			case 23:
-				p.print("i");
+				p.writeString("i");
 				buffstr[i] = 'i';
 				i++;
 				break;
 			case 24:
-				p.print("o");
+				p.writeString("o");
 				buffstr[i] = 'o';
 				i++;
 				break;
 			case 25:
-				p.print("p");
+				p.writeString("p");
 				buffstr[i] = 'p';
 				i++;
 				break;
 			case 26:
-				p.print("[");
+				p.writeString("[");
 				buffstr[i] = '[';
 				i++;
 				break;
 			case 27:
-				p.print("]");
+				p.writeString("]");
 				buffstr[i] = ']';
 				i++;
 				break;
 			case 28: // Case for return key
-				p.print("\n");
+				p.writeString("\n");
 				buffstr[i] = '\0';
 				i++;
 				receiving = 1;
 				break;
 			case 29:
-				p.print("Left Ctrl"); //Left Control
+				p.writeString("Left Ctrl"); //Left Control
 				buffstr[i] = 'q';
 				i++;
 				break;
 			case 30:
-				p.print("a");
+				p.writeString("a");
 				buffstr[i] = 'a';
 				i++;
 				break;
 			case 31:
-				p.print("s");
+				p.writeString("s");
 				buffstr[i] = 's';
 				i++;
 				break;
 			case 32:
-				p.print("d");
+				p.writeString("d");
 				buffstr[i] = 'd';
 				i++;
 				break;
 			case 33:
-				p.print("f");
+				p.writeString("f");
 				buffstr[i] = 'f';
 				i++;
 				break;
 			case 34:
-				p.print("g");
+				p.writeString("g");
 				buffstr[i] = 'g';
 				i++;
 				break;
 			case 35:
-				p.print("h");
+				p.writeString("h");
 				buffstr[i] = 'h';
 				i++;
 				break;
 			case 36:
-				p.print("j");
+				p.writeString("j");
 				buffstr[i] = 'j';
 				i++;
 				break;
 			case 37:
-				p.print("k");
+				p.writeString("k");
 				buffstr[i] = 'k';
 				i++;
 				break;
 			case 38:
-				p.print("l");
+				p.writeString("l");
 				buffstr[i] = 'l';
 				i++;
 				break;
 			case 39:
-				p.print(";");
+				p.writeString(";");
 				buffstr[i] = ';';
 				i++;
 				break;
 			case 40:
-				p.print((char *)(char)44); //   Single quote (")
+				p.writeString((char *)(char)44); //   Single quote (")
 				buffstr[i] = '\'';
 				i++;
 				break;
 			case 41:
-				p.print((char *)(char)44); // Back tick (`)
+				p.writeString((char *)(char)44); // Back tick (`)
 				buffstr[i] = '`';
 				i++;
 				break;
 				/*   case 43:                                 \ (< for somekeyboards)   
-                p.print((char)92);
+                p.writeString((char)92);
                 buffstr[i] = 'q';
                 i++;
                 break;*/
 			case 44:
-				p.print("z");
+				p.writeString("z");
 				buffstr[i] = 'z';
 				i++;
 				break;
 			case 45:
-				p.print("x");
+				p.writeString("x");
 				buffstr[i] = 'x';
 				i++;
 				break;
 			case 46:
-				p.print("c");
+				p.writeString("c");
 				buffstr[i] = 'c';
 				i++;
 				break;
 			case 47:
-				p.print("v");
+				p.writeString("v");
 				buffstr[i] = 'v';
 				i++;
 				break;
 			case 48:
-				p.print("b");
+				p.writeString("b");
 				buffstr[i] = 'b';
 				i++;
 				break;
 			case 49:
-				p.print("n");
+				p.writeString("n");
 				buffstr[i] = 'n';
 				i++;
 				break;
 			case 50:
-				p.print("m");
+				p.writeString("m");
 				buffstr[i] = 'm';
 				i++;
 				break;
 			case 51:
-				p.print(",");
+				p.writeString(",");
 				buffstr[i] = ',';
 				i++;
 				break;
 			case 52:
-				p.print(".");
+				p.writeString(".");
 				buffstr[i] = '.';
 				i++;
 				break;
 			case 53:
-				p.print("/");
+				p.writeString("/");
 				buffstr[i] = '/';
 				i++;
 				break;
 			case 54:
-				p.print(".");
+				p.writeString(".");
 				buffstr[i] = '.';
 				i++;
 				break;
 			case 55:
-				p.print("/");
+				p.writeString("/");
 				buffstr[i] = '/';
 				i++;
 				break;
 			case 57:
-				p.print(" ");
+				p.writeString(" ");
 				buffstr[i] = ' ';
 				i++;
 				break;
@@ -306,7 +306,7 @@ char *KEYBOARD_DRIVER::readInput(FrameBuffer::Writer &p)
 			case 42: // Left shift
 				break;
 
-			default: //p.print("~Unhandeled interrupt");
+			default: //p.writeString("~Unhandeled interrupt");
 				//receiving--;
 				break;
 			}
