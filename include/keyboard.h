@@ -2,7 +2,7 @@
 #define __KEYBOARD_H
 
 namespace KEYBOARD_DRIVER {
-    void readInput();
+    char* readInput();
 }
 
 #endif

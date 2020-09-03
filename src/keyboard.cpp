@@ -5,10 +5,11 @@
 extern unsigned char inportb (unsigned short _port);
 static FrameBuffer::Writer p(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::BLUE);
 
-void KEYBOARD_DRIVER::readInput()
+char* KEYBOARD_DRIVER::readInput()
 {
     int receiving = 1;
     int i=0;
+    //char* buffstr = (char*)malloc(200);
     while(receiving)
     {
         if(inportb(0x64) & 0x1)                 
@@ -22,7 +23,7 @@ void KEYBOARD_DRIVER::readInput()
                 break;*/
         case 2:
                 p.print("1");
-                //buffstr[i] = "1";
+                //buffstr[i] = '1';
                 i++;
                 break;
         case 3:
@@ -310,4 +311,6 @@ void KEYBOARD_DRIVER::readInput()
             }
         }
     }
+
+    return nullptr;
 }

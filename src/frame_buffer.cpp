@@ -31,6 +31,10 @@ void FrameBuffer::Writer::print(char* str)
             break;
         }
         if(str[i] == '\n') {
+            // If possible i woud like to reduce these two lines
+            vid_mem[((cursorY*s_width) + cursorX)*2] = ' ';
+            vid_mem[((cursorY*s_width) + cursorX)*2 + 1] = (((unsigned char)0x0 & 0x0f) << 4) | ((unsigned char)0xf & 0x0f);
+            // If possible i woud like to reduce these two lines
             cursorY+=1;
             cursorX=0;
         }
