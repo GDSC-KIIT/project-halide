@@ -66,7 +66,7 @@ void FrameBuffer::Writer::writeString(char *str)
 	for (int i = 0; str[i] != '\0'; i++)
 	{
 		// if screen ends
-		if (cursorY >= 24)
+		if (cursorY >= 25)
 		{
 			FrameBuffer::Writer::clearScreen();
 			break;
