@@ -15,7 +15,7 @@ void KEYBOARD_DRIVER::readInput()
         {
             switch(inportb(0x60))
             {
-                default: p.print((char*)receiving);
+                default: p.printHex(inportb(0x60));
                          receiving--;
                          break;
             }
