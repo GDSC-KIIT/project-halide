@@ -36,14 +36,21 @@ namespace FrameBuffer
 	class Writer
 	{
 	private:
-		char *START = (char *)0x0B8000;
+		char *START = (char *)0xB8000;
 		unsigned char fg;
 		unsigned char bg;
+		int cursorX = 0, cursorY = 0;
+		const unsigned char s_width = 80,s_height = 25,sd = 2; 
+		int color = 0x0F;
 
 	public:
 		Writer(const unsigned char &foreground, const unsigned char &background);
-
 		void print(char *str);
+		// Implimenting new functions (testing)
+		void printHex(unsigned char key);
+		void updateCursor(); // For some reason both the emulators and the vb are not showing the cursor by default
+		// Implimenting new functions (testing)
+		void colorTheme(const unsigned char &foreground, const unsigned char &background);
 	};
 } // namespace FrameBuffer
 
