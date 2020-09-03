@@ -18,12 +18,7 @@ extern "C" void k_main(const void *multiboot_structure, unsigned int multiboot_m
 	p.print("HalideOS, an experimental OS by DSC KIIT\n");
 	char* input_buffer = KEYBOARD_DRIVER::readInput();
 	p.colorTheme(FrameBuffer::Colours::BLACK, FrameBuffer::Colours::WHITE);
-	p.print("HalideOS, an experimental OS by DSC KIITT\r\n");
-	p.print("HalideOS, an experimental OS by DSC KIIT\n");
-	p.print("HalideOS, an experimental OS by DSC KIIT\n");
-	p.print("HalideOS, an experimental OS by DSC KIIT\n");
-	p.print("HalideOS, an experimental OS by DSC KIIT\n");
-	p.print("HalideOS, an experimental OS by DSC KIIT\n");
+	p.print("echoed ");
 	p.print(input_buffer);
 	
 	while (1);

@@ -161,7 +161,7 @@ char* KEYBOARD_DRIVER::readInput()
                 break;
         case 28:                                                // Case for return key
                p.print("\n");
-               //buffstr[i] = '\'";
+               buffstr[i] = '\0';
                 i++;
                 receiving = 0;
                 break;
@@ -222,7 +222,7 @@ char* KEYBOARD_DRIVER::readInput()
                 break;
         case 40:
                 p.print((char*)(char)44);               //   Single quote (")
-                buffstr[i] = '"';
+                buffstr[i] = '\'';
                 i++;
                 break;
         case 41:
