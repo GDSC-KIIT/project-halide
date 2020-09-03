@@ -12,9 +12,12 @@ extern "C" void call_ctors()
 	}
 }
 
+extern void mouse_install();
+
 extern "C" void k_main(const void *multiboot_structure, unsigned int multiboot_magic)
 {
 	FrameBuffer::Writer p(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::BLUE);
+	mouse_install();
 	p.print("HalideOS, an experimental OS by DSC KIIT\n");
 	KEYBOARD_DRIVER::readInput(p);
 
