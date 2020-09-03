@@ -4,9 +4,8 @@
 #include "../include/utils.h"
 
 extern unsigned char inportb (unsigned short _port);
-static FrameBuffer::Writer p(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::BLUE);
 
-char* KEYBOARD_DRIVER::readInput()
+char* KEYBOARD_DRIVER::readInput(FrameBuffer::Writer p)
 {
     int receiving = 1;
     int i=0;
@@ -163,7 +162,7 @@ char* KEYBOARD_DRIVER::readInput()
                p.print("\n");
                buffstr[i] = '\0';
                 i++;
-                receiving = 0;
+                receiving = 1;
                 break;
        case 29:
                 p.print("Left Ctrl");           //Left Control
