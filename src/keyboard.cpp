@@ -82,7 +82,7 @@ void KEYBOARD_DRIVER::readInput()
                 break;
         case 14:
                 if(i>0) {
-                        p.print("\b");
+                        p.print("\r");
                 }
                 i--;
                 if(i<0)
