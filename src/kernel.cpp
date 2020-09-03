@@ -14,9 +14,36 @@ extern "C" void call_ctors()
 
 extern "C" void k_main(const void *multiboot_structure, unsigned int multiboot_magic)
 {
-	FrameBuffer::Writer p(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::BLUE);
-	p.writeString("HalideOS, an experimental OS by DSC KIIT\n");
+	FrameBuffer::Writer p(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::BLACK);
+
+	// p.writeString("\n\n\n\n\n\n");
+	// p.writeString("       \b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n");
+	// p.writeString("       \b  \b\b\b\b  \b\b\b\b\b\b\b\b\b  \b\b\b\b\b\b\b\b\b  \b\b\b\b\b\b\b\b\b\b\b    \b\b\b\b\b      \b\b\n");
+	// p.writeString("       \b  \b\b\b\b  \b\b\b\b\b\b\b\b\b  \b\b\b\b\b\b\b\b\b  \b\b\b\b\b\b\b\b\b\b  \b\b  \b\b\b  \b\b\b\b  \b\n");
+	// p.writeString("       \b  \b\b\b\b  \b\b\b\b\b\b\b\b\b  \b\b\b\b\b\b\b\b\b  \b\b\b\b\b\b\b\b\b  \b\b\b\b  \b\b  \b\b\b\b  \b\n");
+	// p.writeString("       \b  \b\b\b\b  \b\b\b   \b\b\b  \b\b  \b\b\b\b\b  \b\b\b   \b\b\b  \b\b\b\b  \b\b\b  \b\b\b\b\b\b\n");
+	// p.writeString("       \b        \b\b  \b  \b\b  \b\b\b\b\b\b\b    \b\b  \b  \b\b  \b\b\b\b  \b\b\b\b\b  \b\b\b\b\n");
+	// p.writeString("       \b  \b\b\b\b  \b\b\b\b\b  \b\b  \b\b  \b\b  \b  \b\b     \b\b  \b\b\b\b  \b\b\b\b\b\b\b  \b\b\n");
+	// p.writeString("       \b  \b\b\b\b  \b\b\b    \b\b  \b\b  \b\b  \b  \b\b  \b\b\b\b\b  \b\b\b\b  \b\b  \b\b\b\b  \b\n");
+	// p.writeString("       \b  \b\b\b\b  \b\b  \b  \b\b  \b\b  \b\b  \b  \b\b  \b  \b\b\b  \b\b  \b\b\b  \b\b\b\b  \b\n");
+	// p.writeString("       \b  \b\b\b\b  \b\b\b    \b\b  \b\b  \b\b\b    \b\b\b   \b\b\b\b\b    \b\b\b\b\b      \b\b\n");
+	// p.writeString("       \b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n");
+
+	p.writeString("\n\n\n\n\n\n");
+	p.writeString("       \f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\n");
+	p.writeString("       \f  \f\f\f\f  \f\f\f\f\f\f\f\f\f  \f\f\f\f\f\f\f\f\f  \f\f\f\f\f\f\f\f\f\f\f    \f\f\f\f\f      \f\f\n");
+	p.writeString("       \f  \f\f\f\f  \f\f\f\f\f\f\f\f\f  \f\f\f\f\f\f\f\f\f  \f\f\f\f\f\f\f\f\f\f  \f\f  \f\f\f  \f\f\f\f  \f\n");
+	p.writeString("       \f  \f\f\f\f  \f\f\f\f\f\f\f\f\f  \f\f\f\f\f\f\f\f\f  \f\f\f\f\f\f\f\f\f  \f\f\f\f  \f\f  \f\f\f\f  \f\n");
+	p.writeString("       \f  \f\f\f\f  \f\f\f   \f\f\f  \f\f  \f\f\f\f\f  \f\f\f   \f\f\f  \f\f\f\f  \f\f\f  \f\f\f\f\f\f\n");
+	p.writeString("       \f        \f\f  \f  \f\f  \f\f\f\f\f\f\f    \f\f  \f  \f\f  \f\f\f\f  \f\f\f\f\f  \f\f\f\f\n");
+	p.writeString("       \f  \f\f\f\f  \f\f\f\f\f  \f\f  \f\f  \f\f  \f  \f\f     \f\f  \f\f\f\f  \f\f\f\f\f\f\f  \f\f\n");
+	p.writeString("       \f  \f\f\f\f  \f\f\f    \f\f  \f\f  \f\f  \f  \f\f  \f\f\f\f\f  \f\f\f\f  \f\f  \f\f\f\f  \f\n");
+	p.writeString("       \f  \f\f\f\f  \f\f  \f  \f\f  \f\f  \f\f  \f  \f\f  \f  \f\f\f  \f\f  \f\f\f  \f\f\f\f  \f\n");
+	p.writeString("       \f  \f\f\f\f  \f\f\f    \f\f  \f\f  \f\f\f    \f\f\f   \f\f\f\f\f    \f\f\f\f\f      \f\f\n");
+	p.writeString("       \f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\n");
+
 	KEYBOARD_DRIVER::readInput(p);
 
-	while (1);
+	while (1)
+		;
 }
