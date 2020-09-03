@@ -55,6 +55,11 @@ void FrameBuffer::Writer::print(char *str)
 
 // New Functions
 
+FrameBuffer::Writer::Writer(const unsigned char &foreground, const unsigned char &background) {
+	FrameBuffer::Writer::initScreen(foreground, background);
+}
+
+
 // clear out line and move the cursor to the start of the line
 void FrameBuffer::Writer::clearLine()
 {

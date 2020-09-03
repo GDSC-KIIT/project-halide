@@ -43,12 +43,8 @@ namespace FrameBuffer
 		const unsigned char s_width = 80, s_height = 25, sd = 2;
 
 	public:
-		
+		Writer(const unsigned char &foreground, const unsigned char &background);
 		void print(char *str);
-		// Implimenting new functions (testing)
-
-
-		// Latest Functions
 
 		void clearLine();
 		void clearScreen();
