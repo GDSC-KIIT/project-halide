@@ -1,6 +1,8 @@
 #include "../include/keyboard.h"
 #include "../include/frame_buffer.h"
 
+#define USE_BOOT_SCREEN_1 1
+
 typedef void (*ctor)();
 extern "C" ctor begin_constructors;
 extern "C" ctor end_constructors;
@@ -18,19 +20,15 @@ extern "C" void k_main(const void *multiboot_structure, unsigned int multiboot_m
 {
 	FrameBuffer::Writer p(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::BLACK);
 
-	p.writeString("\n\n\n\n\n\n");
-	p.writeString("       \b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n");
-	p.writeString("       \b  \b\b\b\b  \b\b\b\b\b\b\b\b\b  \b\b\b\b\b\b\b\b\b  \b\b\b\b\b\b\b\b\b\b\b    \b\b\b\b\b      \b\b\n");
-	p.writeString("       \b  \b\b\b\b  \b\b\b\b\b\b\b\b\b  \b\b\b\b\b\b\b\b\b  \b\b\b\b\b\b\b\b\b\b  \b\b  \b\b\b  \b\b\b\b  \b\n");
-	p.writeString("       \b  \b\b\b\b  \b\b\b\b\b\b\b\b\b  \b\b\b\b\b\b\b\b\b  \b\b\b\b\b\b\b\b\b  \b\b\b\b  \b\b  \b\b\b\b  \b\n");
-	p.writeString("       \b  \b\b\b\b  \b\b\b   \b\b\b  \b\b  \b\b\b\b\b  \b\b\b   \b\b\b  \b\b\b\b  \b\b\b  \b\b\b\b\b\b\n");
-	p.writeString("       \b        \b\b  \b  \b\b  \b\b\b\b\b\b\b    \b\b  \b  \b\b  \b\b\b\b  \b\b\b\b\b  \b\b\b\b\n");
-	p.writeString("       \b  \b\b\b\b  \b\b\b\b\b  \b\b  \b\b  \b\b  \b  \b\b     \b\b  \b\b\b\b  \b\b\b\b\b\b\b  \b\b\n");
-	p.writeString("       \b  \b\b\b\b  \b\b\b    \b\b  \b\b  \b\b  \b  \b\b  \b\b\b\b\b  \b\b\b\b  \b\b  \b\b\b\b  \b\n");
-	p.writeString("       \b  \b\b\b\b  \b\b  \b  \b\b  \b\b  \b\b  \b  \b\b  \b  \b\b\b  \b\b  \b\b\b  \b\b\b\b  \b\n");
-	p.writeString("       \b  \b\b\b\b  \b\b\b    \b\b  \b\b  \b\b\b    \b\b\b   \b\b\b\b\b    \b\b\b\b\b      \b\b\n");
-	p.writeString("       \b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n");
+	#if USE_BOOT_SCREEN_1
+		#include "../include/bootscreen1.h"
+	#else
+		#include "../include/bootscreen2.h"
+	#endif
+	
 	KEYBOARD_DRIVER::readInput(p);
 
 	while (1);
 }
+
+                                                                                  
