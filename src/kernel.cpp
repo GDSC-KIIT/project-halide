@@ -1,5 +1,6 @@
 #include "../include/keyboard.h"
 #include "../include/frame_buffer.h"
+
 #include "../include/exp/types.h"
 #include "../include/exp/gdt.h"
 #include "../include/exp/interrupts.h"
@@ -14,8 +15,6 @@ using namespace myos;
 using namespace myos::common;
 using namespace myos::drivers;
 using namespace myos::hardwarecommunication;
-// using namespace myos::gui;
-// using namespace myos::net;
 
 typedef void (*ctor)();
 extern "C" ctor begin_constructors;
@@ -27,54 +26,6 @@ extern "C" void call_ctors()
 		(*i)();
 	}
 }
-
-//extern void mouse_install();
-
-/* void printf(char* str)
-{
-    static uint16_t* VideoMemory = (uint16_t*)0xb8000;
-
-    static uint8_t x=0,y=0;
-
-    for(int i = 0; str[i] != '\0'; ++i)
-    {
-        switch(str[i])
-        {
-            case '\n':
-                x = 0;
-                y++;
-                break;
-            default:
-                VideoMemory[80*y+x] = (VideoMemory[80*y+x] & 0xFF00) | str[i];
-                x++;
-                break;
-        }
-
-        if(x >= 80)
-        {
-            x = 0;
-            y++;
-        }
-
-        if(y >= 25)
-        {
-            for(y = 0; y < 25; y++)
-                for(x = 0; x < 80; x++)
-                    VideoMemory[80*y+x] = (VideoMemory[80*y+x] & 0xFF00) | ' ';
-            x = 0;
-            y = 0;
-        }
-    }
-}
-
-void printfHex(uint8_t key)
-{
-    char* foo = "00";
-    char* hex = "0123456789ABCDEF";
-    foo[0] = hex[(key >> 4) & 0xF];
-    foo[1] = hex[key & 0xF];
-    printf(foo);
-} */
 
 class MouseToConsole : public MouseEventHandler
 {
@@ -114,6 +65,7 @@ public:
 
 extern "C" void k_main(const void *multiboot_structure, unsigned int multiboot_magic)
 {
+    // Imported section
     GlobalDescriptorTable gdt;
     TaskManager taskManager;
     InterruptManager interrupts(0x20, &gdt, &taskManager);
@@ -123,6 +75,7 @@ extern "C" void k_main(const void *multiboot_structure, unsigned int multiboot_m
     drvManager.AddDriver(&mouse);
     drvManager.ActivateAll();
     interrupts.Activate();
+    // Imported section
 
 	FrameBuffer::Writer p(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::BLACK);
 
