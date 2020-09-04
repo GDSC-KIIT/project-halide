@@ -33,5 +33,8 @@ kernel.iso: kernel.bin
 run: kernel.iso
 	qemu-system-i386 -boot d -cdrom kernel.iso
 
+run-full-screen: kernel.iso
+	qemu-system-i386 -boot d -cdrom kernel.iso -full-screen
+
 clean:
 	rm ./objs/*.o *.iso *.bin
