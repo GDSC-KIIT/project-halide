@@ -2,7 +2,7 @@ compilerflags = -c -ffreestanding -fno-stack-protector -m32 -Iinclude -fno-use-c
 assemblerflags = --32
 linkerflags = -melf_i386
 
-objects = loader.o kernel.o frame_buffer.o system.o keyboard.o utils.o mouse.o
+objects = loader.o interruptstubs.o kernel.o frame_buffer.o system.o keyboard.o utils.o mouse.o gdt.o port.o interrupts.o multitasking.o driver.o
 
 %.o: %.cpp
 	g++ --std=c++17 $(compilerflags) -o $@ -c $<
