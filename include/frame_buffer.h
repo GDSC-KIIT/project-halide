@@ -40,7 +40,7 @@ namespace FrameBuffer
 	private:
 		char *START = (char *)0xB8000;
 		unsigned char fg, bg;
-		int cursorX=0, cursorY=0;
+		static int cursorX, cursorY;
 		const unsigned int s_width = 80, s_height = 25, sd = 2;
 		int x_min, x_max, y_upper, y_lower;
 		bool framesDrawn=false; // & Used for preventing buffer_clearing when initializing window

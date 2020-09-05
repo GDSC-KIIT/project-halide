@@ -11,6 +11,10 @@
 #include "../include/system.h"
 #include "../include/windows.h"
 
+//initializing static data members of the Writer class
+int FrameBuffer::Writer::cursorX=0;
+int FrameBuffer::Writer::cursorY=0;
+
 // Todo : Add coords for implementing windows
 FrameBuffer::Writer::Writer(const unsigned char &foreground, const unsigned char &background, Window win) // ! Add more new args for windows implimentation
 {
