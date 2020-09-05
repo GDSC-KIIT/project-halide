@@ -35,8 +35,8 @@ public:
     MouseToConsole()
     {
         uint16_t* VideoMemory = (uint16_t*)0xb8000;
-        x = 40;
-        y = 12;
+        x = -1;
+        y = -1;
         VideoMemory[80*y+x] = (VideoMemory[80*y+x] & 0x0F00) << 4
                             | (VideoMemory[80*y+x] & 0xF000) >> 4
                             | (VideoMemory[80*y+x] & 0x00FF);        
@@ -44,6 +44,7 @@ public:
     
     virtual void OnMouseMove(int xoffset, int yoffset)
     {
+        
         static uint16_t* VideoMemory = (uint16_t*)0xb8000;
         VideoMemory[80*y+x] = (VideoMemory[80*y+x] & 0x0F00) << 4
                             | (VideoMemory[80*y+x] & 0xF000) >> 4
