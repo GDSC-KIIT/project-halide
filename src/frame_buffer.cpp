@@ -159,12 +159,13 @@ void FrameBuffer::Writer::writeString(char *str)
         if(str[i] == '\n') {
             vidmem[((cursorY * s_width) + cursorX) * 2] = ' ';
 			vidmem[((cursorY * s_width) + cursorX) * 2 + 1] = (((unsigned char)bg & 0x0f) << 4) | ((unsigned char)fg & 0x0f);
-
-			cursorY += 1;
 			cursorX = 0;
+			cursorY += 1;
         }
 		if(cursorY>=25) {
             clearLine(0, 25);
+			vidmem[0] = '\t';
+			vidmem[1] = (((unsigned char)fg & 0x0f) << 4 | ((unsigned char)bg) & 0x0F); // * It needs inverting of current color
             cursorX=1;
             cursorY=0;
             break;
@@ -221,7 +222,6 @@ void FrameBuffer::Writer::updateCursor()
 	outportb(0x3D4, 15);
 	outportb(0x3D5, position);
 
-	// TODO : Later remove this code and enable cursor from assembly
 	char *vid_mem = START;
 	vid_mem[(cursorY * s_width + cursorX) * 2] = '_';
 	vid_mem[(cursorY * s_width + cursorX) * 2 + 1] = ((bg & 0x0f) << 4) | (fg & 0x0f);

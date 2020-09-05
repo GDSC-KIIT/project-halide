@@ -9,7 +9,7 @@
 #include "../include/exp/driver.h"
 #include "../include/exp/port.h"
 
-#define USE_BOOT_SCREEN_1 1
+#define USE_BOOT_SCREEN_1 0
 
 using namespace myos;
 using namespace myos::common;
@@ -91,4 +91,5 @@ extern "C" void k_main(const void *multiboot_structure, unsigned int multiboot_m
 	while (1);
 }
 
+                                                                                  
                                                                                   
