@@ -1,7 +1,7 @@
 #include "../include/keyboard.h"
 #include "../include/frame_buffer.h"
 
-#define USE_BOOT_SCREEN_1 1
+#define USE_BOOT_SCREEN_1 0
 
 typedef void (*ctor)();
 extern "C" ctor begin_constructors;
@@ -13,8 +13,6 @@ extern "C" void call_ctors()
 		(*i)();
 	}
 }
-
-extern void mouse_install();
 
 extern "C" void k_main(const void *multiboot_structure, unsigned int multiboot_magic)
 {
@@ -31,4 +29,5 @@ extern "C" void k_main(const void *multiboot_structure, unsigned int multiboot_m
 	while (1);
 }
 
+                                                                                  
                                                                                   

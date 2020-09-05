@@ -94,11 +94,11 @@ char *KEYBOARD_DRIVER::readInput(FrameBuffer::Writer &p)
 				//buffstr[i+1] = 0;
 				buffstr[i] = ';';
 				break;
-			case 15:
+			/* case 15:
 				p.writeString("\t"); //Tab button
 				buffstr[i] = '\t';
 				i++;
-				break;
+				break; */
 			case 16:
 				p.writeString("q");
 				buffstr[i] = 'q';
@@ -159,11 +159,12 @@ char *KEYBOARD_DRIVER::readInput(FrameBuffer::Writer &p)
 				buffstr[i] = ']';
 				i++;
 				break;
-			case 28: // Case for return key
+			case 28: 											   // Case for return key
 				p.writeString("\n");
 				buffstr[i] = '\0';
 				i++;
 				receiving = 1;
+				i=0;
 				break;
 			case 29:
 				p.writeString("Left Ctrl"); //Left Control
