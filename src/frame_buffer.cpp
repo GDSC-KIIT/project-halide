@@ -11,15 +11,14 @@
 #include "../include/system.h"
 #include "../include/windows.h"
 
-// initialising cursor positions, foreground and background colours
-int FrameBuffer::Writer::cursorX = 0;
-int FrameBuffer::Writer::cursorY = 0;
-unsigned char FrameBuffer::Writer::fg = FrameBuffer::Colours::BLACK;
-unsigned char FrameBuffer::Writer::bg = FrameBuffer::Colours::WHITE;
-
 // Todo : Add coords for implementing windows
-FrameBuffer::Writer::Writer(const unsigned char &foreground, const unsigned char &background) // ! Add more new args for windows implimentation
+FrameBuffer::Writer::Writer(const unsigned char &foreground, const unsigned char &background, Window win) // ! Add more new args for windows implimentation
 {
+	//current_window = &win;
+	x_min = win.m_x1;
+	x_max = win.m_x2;
+	y_upper = win.m_y1;
+	y_lower = win.m_y2;
 	FrameBuffer::Writer::initScreen(foreground, background);
 }
 
@@ -59,6 +58,20 @@ void FrameBuffer::Writer::clearLine(unsigned char from,unsigned char to)
     updateCursor();
 }
 
+void FrameBuffer::Writer::fillRemeaning(char* fill_character, bool n_line)
+{
+	for (int i = cursorX; i < 79; i++)
+	{
+		writeString(fill_character);
+	}
+	//(n_line) ? writeString("\n") : void();
+	if(n_line) {
+		writeString("\n");
+	}
+	else {
+		framesDrawn=true;
+	}
+}
 
 // Will clear the entire screen
 // * Old implementation of clearScreen function
@@ -83,7 +96,7 @@ void FrameBuffer::Writer::clearLine(unsigned char from,unsigned char to)
 
 // ~ New implementation of clearScreen function
 void FrameBuffer::Writer::clearScreen() {
-    clearLine(0, 24);
+    clearLine(y_upper, y_lower);
     updateCursor();
 }
 
@@ -151,6 +164,18 @@ void FrameBuffer::Writer::setColorTheme(const unsigned char &foreground, const u
 	updateCursor();
 } */
 
+void FrameBuffer::Writer::write_at_index(int x)
+{
+	int temp = cursorX;
+	int temp1 = cursorY;
+	cursorY = x;
+	updateCursor();
+	fillRemeaning("=", false);
+	cursorX = temp;
+	cursorY = temp1;
+	updateCursor();
+}
+
 // ~ New implemention of writeString furnction
 void FrameBuffer::Writer::writeString(char *str)
 {
@@ -163,13 +188,14 @@ void FrameBuffer::Writer::writeString(char *str)
 			cursorX = 0;
 			cursorY += 1;
         }
-		if(cursorY>=25) {
-            clearLine(0, 25);
-			vidmem[0] = '\t';
-			vidmem[1] = (((unsigned char)fg & 0x0f) << 4 | ((unsigned char)bg) & 0x0F); // * It needs inverting of current color
-            cursorX=1;
-            cursorY=0;
-            break;
+		// Case when we reach bottom of the current window
+		if(cursorY >= y_lower-1 && framesDrawn) {
+            clearLine(y_upper+1, y_lower-1);
+			// vidmem[0] = '\t';
+			// vidmem[1] = (((unsigned char)fg & 0x0f) << 4 | ((unsigned char)bg) & 0x0F); // * It needs inverting of current color
+            cursorX=0;
+            cursorY=y_upper+1;
+			//break;
         }
         if(str[i] == '\r') {
             cursorX-=1;
