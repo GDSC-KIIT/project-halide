@@ -11,6 +11,8 @@ the next 4 bits for the background colour
 #ifndef FRAME_BUFFER_H
 #define FRAME_BUFFER_H
 
+#include "windows.h"
+
 namespace FrameBuffer
 {
 	namespace Colours
@@ -37,21 +39,26 @@ namespace FrameBuffer
 	{
 	private:
 		char *START = (char *)0xB8000;
-		static unsigned char fg, bg;
-		static int cursorX, cursorY;
+		unsigned char fg, bg;
+		int cursorX=0, cursorY=0;
 		const unsigned int s_width = 80, s_height = 25, sd = 2;
+		int x_min, x_max, y_upper, y_lower;
+		bool framesDrawn=false;
 
 	public:
-		Writer(const unsigned char &foreground, const unsigned char &background);
+		Writer(const unsigned char &foreground, const unsigned char &background, Window);
 		void print(char *str);
 
 		// void clearLine();// & New implementation made for this function iin transalation file
+		Window* current_window;
 		void clearLine(unsigned char from,unsigned char to);
 		void clearScreen();
 		void initScreen(const unsigned char &foreground, const unsigned char &background);
 		void setColorTheme(const unsigned char &foreground, const unsigned char &background);
 		void writeString(char *str);
 		void writeHex(unsigned char key);
+		void fillRemeaning(char*, bool);
+		void write_at_index(int);
 		void clearCursor();
 		void updateCursor();
 	};
