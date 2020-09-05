@@ -45,7 +45,8 @@ namespace FrameBuffer
 		Writer(const unsigned char &foreground, const unsigned char &background);
 		void print(char *str);
 
-		void clearLine();
+		// void clearLine();// & New implementation made for this function iin transalation file
+		void clearLine(unsigned char from,unsigned char to);
 		void clearScreen();
 		void initScreen(const unsigned char &foreground, const unsigned char &background);
 		void setColorTheme(const unsigned char &foreground, const unsigned char &background);
