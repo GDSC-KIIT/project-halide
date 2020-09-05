@@ -43,7 +43,7 @@ namespace FrameBuffer
 		int cursorX=0, cursorY=0;
 		const unsigned int s_width = 80, s_height = 25, sd = 2;
 		int x_min, x_max, y_upper, y_lower;
-		bool framesDrawn=false;
+		bool framesDrawn=false; // & Used for preventing buffer_clearing when initializing window
 
 	public:
 		Writer(const unsigned char &foreground, const unsigned char &background, Window);

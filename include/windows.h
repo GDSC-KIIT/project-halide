@@ -1,6 +1,10 @@
 #ifndef __WINDOWS_H
 #define __WINDOWS_H
 
+/*
+ ^ Overview of class window 
+ ^ has 4 coords and one title thats it
+*/
 class Window {
     public:
     int m_x1, m_x2, m_y1, m_y2;
