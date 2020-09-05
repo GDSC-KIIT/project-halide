@@ -1,3 +1,12 @@
+// ^ Comment legend for this file
+// ? Doubtful or buggy code
+// ! Needs implementation (Urgently)
+// * Old implmentation of function
+// ~ New implementation of code
+// TODO : for todos
+// & To indicate you are working on something new that shoud not be touched by other contributors
+// Normal comments
+
 #include "../include/frame_buffer.h"
 #include "../include/system.h"
 
@@ -7,13 +16,15 @@ int FrameBuffer::Writer::cursorY = 0;
 unsigned char FrameBuffer::Writer::fg = FrameBuffer::Colours::BLACK;
 unsigned char FrameBuffer::Writer::bg = FrameBuffer::Colours::WHITE;
 
-FrameBuffer::Writer::Writer(const unsigned char &foreground, const unsigned char &background)
+// Todo : Add coords for implementing windows
+FrameBuffer::Writer::Writer(const unsigned char &foreground, const unsigned char &background) // ! Add more new args for windows implimentation
 {
 	FrameBuffer::Writer::initScreen(foreground, background);
 }
 
 // clear out line and move the cursor to the start of the line
-void FrameBuffer::Writer::clearLine()
+// * Old implimentation of clear line
+/* void FrameBuffer::Writer::clearLine()
 {
 	char *vid_mem = (char *)START;
 
@@ -25,10 +36,32 @@ void FrameBuffer::Writer::clearLine()
 
 	cursorX = 0;
 	updateCursor();
+} */
+
+
+// ~ New implementation of clean line
+void FrameBuffer::Writer::clearLine(unsigned char from,unsigned char to)
+{
+    unsigned int i = s_width * from * sd;
+    char* vidmem=(char*)0xb8000;
+    for(i;i<(s_width*to*sd);i++)
+    {
+        vidmem[(i / 2)*2 + 1 ] = 0x0F ;
+        vidmem[(i / 2)*2 ] = 0;
+    }
+    // for (uint32 i = 0; i < 79*24*2; i++)
+    // {
+    //     vidmem[(cursorY*s_width) + (i*2)] = 0x00;
+    // }
+    cursorX=0;
+    cursorY=from;
+    updateCursor();
 }
 
+
 // Will clear the entire screen
-void FrameBuffer::Writer::clearScreen()
+// * Old implementation of clearScreen function
+/* void FrameBuffer::Writer::clearScreen()
 {
 	char *vid_mem = (char *)START;
 	cursorY = 0;
@@ -44,7 +77,15 @@ void FrameBuffer::Writer::clearScreen()
 	cursorY = 0;
 	cursorX = 0;
 	updateCursor();
+} */
+
+
+// ~ New implementation of clearScreen function
+void FrameBuffer::Writer::clearScreen() {
+    clearLine(0, 24);
+    updateCursor();
 }
+
 
 void FrameBuffer::Writer::initScreen(const unsigned char &foreground, const unsigned char &background)
 {
@@ -59,7 +100,9 @@ void FrameBuffer::Writer::setColorTheme(const unsigned char &foreground, const u
 	bg = background;
 }
 
-void FrameBuffer::Writer::writeString(char *str)
+// ! Needs some bug fxes
+// * Old implemention of writeString furnction
+/* void FrameBuffer::Writer::writeString(char *str)
 {
 	char *vid_mem = START;
 
@@ -105,8 +148,49 @@ void FrameBuffer::Writer::writeString(char *str)
 	}
 
 	updateCursor();
+} */
+
+// ~ New implemention of writeString furnction
+void FrameBuffer::Writer::writeString(char *str)
+{
+	char* vidmem=(char*)0x000B8000;
+    for (int i = 0; str[i] != '\0'; i++)
+    {
+        if(str[i] == '\n') {
+            vidmem[((cursorY * s_width) + cursorX) * 2] = ' ';
+			vidmem[((cursorY * s_width) + cursorX) * 2 + 1] = (((unsigned char)bg & 0x0f) << 4) | ((unsigned char)fg & 0x0f);
+
+			cursorY += 1;
+			cursorX = 0;
+        }
+		if(cursorY>=25) {
+            clearLine(0, 25);
+            cursorX=1;
+            cursorY=0;
+            break;
+        }
+        if(str[i] == '\r') {
+            cursorX-=1;
+            vidmem[(cursorY*s_width + cursorX)*2] = 0;
+			
+			char *vid_mem = START;
+			vid_mem[(cursorY * s_width + cursorX+1) * 2] = ' ';
+			vid_mem[(cursorY * s_width + cursorX+1) * 2 + 1] = ((bg & 0x0f) << 4) | (fg & 0x0f);
+        }
+        else { 
+            vidmem[(cursorY*s_width + cursorX)*2] = str[i];
+            vidmem[(cursorY*s_width + cursorX)*2 + 1] = ((bg & 0x0f) << 4) | (fg & 0x0f);
+            cursorX++;
+        }
+        if(cursorX >= s_width) {
+            cursorY++;
+            cursorX=1;
+        } 
+    }
+    updateCursor();
 }
 
+// We use this function of debugging interrupts codes
 void FrameBuffer::Writer::writeHex(unsigned char key)
 {
 	char *x = "00";
@@ -137,6 +221,7 @@ void FrameBuffer::Writer::updateCursor()
 	outportb(0x3D4, 15);
 	outportb(0x3D5, position);
 
+	// TODO : Later remove this code and enable cursor from assembly
 	char *vid_mem = START;
 	vid_mem[(cursorY * s_width + cursorX) * 2] = '_';
 	vid_mem[(cursorY * s_width + cursorX) * 2 + 1] = ((bg & 0x0f) << 4) | (fg & 0x0f);
