@@ -1,12 +1,11 @@
 
 #include "../include/exp/mouse.h"
-
+#include "../include/frame_buffer.h"
 
 using namespace myos::common;
 using namespace myos::drivers;
 using namespace myos::hardwarecommunication;
-
-
+FrameBuffer::Writer p(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::BLACK);
 void printf(char*);
 
     MouseEventHandler::MouseEventHandler()
@@ -88,9 +87,12 @@ void printf(char*);
             {
                 if((buffer[0] & (0x1<<i)) != (buttons & (0x1<<i)))
                 {
-                    if(buttons & (0x1<<i))
+                    if(buttons & (0x1<<i)) {
+                        p.writeString("Mouse Up");
                         handler->OnMouseUp(i+1);
+                    }
                     else
+                        p.writeString("Mouse Down");
                         handler->OnMouseDown(i+1);
                 }
             }
