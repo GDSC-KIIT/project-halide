@@ -9,6 +9,7 @@
 
 #include "../include/frame_buffer.h"
 #include "../include/system.h"
+#include "../include/windows.h"
 
 // initialising cursor positions, foreground and background colours
 int FrameBuffer::Writer::cursorX = 0;

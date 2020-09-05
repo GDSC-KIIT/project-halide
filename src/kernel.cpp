@@ -1,5 +1,6 @@
 #include "../include/keyboard.h"
 #include "../include/frame_buffer.h"
+#include "../include/windows.h"
 
 #define USE_BOOT_SCREEN_1 2
 
@@ -16,6 +17,7 @@ extern "C" void call_ctors()
 
 extern "C" void k_main(const void *multiboot_structure, unsigned int multiboot_magic)
 {
+	Window win1(10,70,5,20);
 	FrameBuffer::Writer p(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::BLACK);
 
 	#if USE_BOOT_SCREEN_1 == 1
@@ -24,6 +26,7 @@ extern "C" void k_main(const void *multiboot_structure, unsigned int multiboot_m
 		#include "../include/bootscreen2.h"
 	#endif
 	
+	p.writeString("HalideOS, a experimental OS by dsc kiit");
 	KEYBOARD_DRIVER::readInput(p);
 
 	while (1);
