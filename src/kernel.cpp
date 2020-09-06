@@ -61,24 +61,25 @@ extern "C" void k_main(const void *multiboot_structure, unsigned int multiboot_m
 	#elif USE_BOOT_SCREEN_1 == 0
 		#include "../include/bootscreen2.h"
 	#endif
-	
-	p.switchWindow(p);
-	while(true)
-	{
-	char* input_buffer = KEYBOARD_DRIVER::readInput(p);
-	//p.writeString(input_buffer);	
-	}
-	p1.switchWindow(p1);
-	while(true)
-	{
-	char* input_buffer = KEYBOARD_DRIVER::readInput(p);
-	//p.writeString(input_buffer);	
-	}
-	p2.switchWindow(p2);
-	while(true)
-	{
-	char* input_buffer = KEYBOARD_DRIVER::readInput(p);
-	//p.writeString(input_buffer);	
+	while(true) {
+		p.switchWindow(p);
+		while(true)
+		{
+		char* input_buffer = KEYBOARD_DRIVER::readInput(p);
+		break;
+		}
+		p1.switchWindow(p1);
+		while(true)
+		{
+		char* input_buffer = KEYBOARD_DRIVER::readInput(p1);
+		break;
+		}
+		p2.switchWindow(p2);
+		while(true)
+		{
+		char* input_buffer = KEYBOARD_DRIVER::readInput(p2);
+		break;
+		}
 	}
 
 	
