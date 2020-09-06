@@ -11,9 +11,12 @@
 #include "../include/system.h"
 #include "../include/windows.h"
 
+
 //initializing static data members of the Writer class
 int FrameBuffer::Writer::cursorX=0;
 int FrameBuffer::Writer::cursorY=0;
+
+#include "../include/utils.h"
 
 // Todo : Add coords for implementing windows
 FrameBuffer::Writer::Writer(const unsigned char &foreground, const unsigned char &background, Window win) // ! Add more new args for windows implimentation
@@ -50,8 +53,8 @@ void FrameBuffer::Writer::clearLine(unsigned char from,unsigned char to)
     char* vidmem=(char*)0xb8000;
     for(i;i<(s_width*to*sd);i++)
     {
-        vidmem[(i / 2)*2 + 1 ] = 0x0F ;
-        vidmem[(i / 2)*2 ] = 0;
+        vidmem[(i / 2)*2 + 1 ] =  (((unsigned char)bg & 0x0f) << 4) | ((unsigned char)fg & 0x0f);
+        vidmem[(i / 2)*2 ] = ' ';
     }
     // for (uint32 i = 0; i < 79*24*2; i++)
     // {
@@ -178,6 +181,7 @@ void FrameBuffer::Writer::write_at_index(int x)
 	cursorX = temp;
 	cursorY = temp1;
 	updateCursor();
+	writeString("halideos $ ");
 }
 
 // ~ New implemention of writeString furnction
@@ -241,6 +245,24 @@ void FrameBuffer::Writer::clearCursor()
 	vid_mem[(cursorY * s_width + cursorX) * 2 + 1] = ((bg & 0x0f) << 4) | (fg & 0x0f);
 }
 
+// & Shift cursor (impliment arrow keys) Make append functions for that
+char* localStorage = (char*)mem_alloc(200);
+int pointer=0;
+void FrameBuffer::Writer::shiftCursor(int axis, char* buffer) {
+	int y = axis;
+	char *vid_mem = START;
+	if(axis == -1) {
+		cursorX-=1;
+		vid_mem[(cursorY * s_width + cursorX+1) * 2 + 1] = ((bg & 0x0f) << 4) | (fg & 0x0f);
+		updateCursor();
+	}
+	else if (axis == 1) {
+		cursorX+=1;
+		vid_mem[(cursorY * s_width + cursorX-1) * 2 + 1] = ((bg & 0x0f) << 4) | (fg & 0x0f);
+		updateCursor();
+	}
+}
+
 // Move the cursor to the current cursorX and cursorY
 void FrameBuffer::Writer::updateCursor()
 {
@@ -254,6 +276,6 @@ void FrameBuffer::Writer::updateCursor()
 	outportb(0x3D5, position);
 
 	char *vid_mem = START;
-	vid_mem[(cursorY * s_width + cursorX) * 2] = '_';
-	vid_mem[(cursorY * s_width + cursorX) * 2 + 1] = ((bg & 0x0f) << 4) | (fg & 0x0f);
+	//vid_mem[(cursorY * s_width + cursorX) * 2] = '_';
+	vid_mem[(cursorY * s_width + cursorX) * 2 + 1] = ((fg & 0x0f) << 4) | (bg & 0x0f);
 }

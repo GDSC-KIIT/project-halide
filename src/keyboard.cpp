@@ -8,11 +8,11 @@ extern unsigned char inportb(unsigned short _port);
 char *KEYBOARD_DRIVER::readInput(FrameBuffer::Writer &p)
 {
 	int receiving = 1;
-	int i = 0;
+	int i = 0, max_limit;
 	bool shift=false;
 	char *buffstr = (char *)mem_alloc(200);
 	while (receiving)
-	{
+	{;
 		if (inportb(0x64) & 0x1)
 		{
 			switch (inportb(0x60))
@@ -242,17 +242,17 @@ char *KEYBOARD_DRIVER::readInput(FrameBuffer::Writer &p)
 				break;
 			case 28: 											   // Case for return key
 				p.writeString("\n");
-				buffstr[i] = '\n';
-				buffstr[i+1] = '\0';
+				buffstr[i] = '\0';
+				// buffstr[i+1] = '\0';
 				i++;
 				receiving = 0;
 				i=0;
 				break;
-			case 29:
-				p.writeString("Left Ctrl"); //Left Control
+			/* case 29:
+				p.writeString(""); //Left Control
 				buffstr[i] = 'q';
 				i++;
-				break;
+				break; */
 			case 30:
 				p.writeString("a");
 				buffstr[i] = 'a';
@@ -390,6 +390,22 @@ char *KEYBOARD_DRIVER::readInput(FrameBuffer::Writer &p)
 				break;
 
 			case 0xAA: shift = false;
+				break;
+
+			case 0x4B: if(i>0) {
+					char* newMem = (char*)mem_alloc(200);
+					newMem[0] = (buffstr[i]);
+					p.shiftCursor(-1, newMem);
+					i--;
+				}
+				break;
+
+			case 0x4D: if(i>=0) {
+					char* newMem = (char*)mem_alloc(200);
+					newMem[0] = (buffstr[i]);
+					p.shiftCursor(1, newMem);
+					i++;
+				}
 				break;
 
 			default: //p.writeHex(inportb(0x60));
