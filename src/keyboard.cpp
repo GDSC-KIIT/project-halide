@@ -8,10 +8,11 @@ extern unsigned char inportb(unsigned short _port);
 char *KEYBOARD_DRIVER::readInput(FrameBuffer::Writer &p)
 {
 	int receiving = 1;
-	int i = 0;
+	int i = 0, max_limit;
+	bool shift=false;
 	char *buffstr = (char *)mem_alloc(200);
 	while (receiving)
-	{
+	{;
 		if (inportb(0x64) & 0x1)
 		{
 			switch (inportb(0x60))
@@ -22,53 +23,133 @@ char *KEYBOARD_DRIVER::readInput(FrameBuffer::Writer &p)
                 i++;
                 break;*/
 			case 2:
-				p.writeString("1");
-				buffstr[i] = '1';
+				if (shift == true)
+				{
+					p.writeString("!");
+					buffstr[i] = '!';
+				}
+				else
+				{
+					p.writeString("1");
+					buffstr[i] = '1';
+				}
 				i++;
 				break;
 			case 3:
-				p.writeString("2");
-				buffstr[i] = '2';
+				if (shift == true)
+				{
+					p.writeString("@");
+					buffstr[i] = '@';
+				}
+				else
+				{
+					p.writeString("2");
+					buffstr[i] = '2';
+				}
 				i++;
 				break;
 			case 4:
-				p.writeString("3");
-				buffstr[i] = '3';
+				if (shift == true)
+				{
+					p.writeString("#");
+					buffstr[i] = '#';
+				}
+				else
+				{
+					p.writeString("3");
+					buffstr[i] = '3';
+				}
 				i++;
 				break;
 			case 5:
-				p.writeString("4");
-				buffstr[i] = '4';
+				if (shift == true)
+				{
+					p.writeString("$");
+					buffstr[i] = '$';
+				}
+				else
+				{
+					p.writeString("4");
+					buffstr[i] = '4';
+				}
 				i++;
 				break;
 			case 6:
-				p.writeString("5");
-				buffstr[i] = '5';
+				if (shift == true)
+				{
+					p.writeString("%");
+					buffstr[i] = '%';
+				}
+				else
+				{
+					p.writeString("5");
+					buffstr[i] = '5';
+				}
 				i++;
 				break;
 			case 7:
-				p.writeString("6");
-				buffstr[i] = '6';
+				if (shift == true)
+				{
+					p.writeString("^");
+					buffstr[i] = '^';
+				}
+				else
+				{
+					p.writeString("6");
+					buffstr[i] = '6';
+				}
 				i++;
 				break;
 			case 8:
-				p.writeString("7");
-				buffstr[i] = '7';
+				if (shift == true)
+				{
+					p.writeString("&");
+					buffstr[i] = '&';
+				}
+				else
+				{
+					p.writeString("7");
+					buffstr[i] = '7';
+				}
 				i++;
 				break;
 			case 9:
-				p.writeString("8");
-				buffstr[i] = '8';
+				if (shift == true)
+				{
+					p.writeString("*");
+					buffstr[i] = '*';
+				}
+				else
+				{
+					p.writeString("8");
+					buffstr[i] = '8';
+				}
 				i++;
 				break;
 			case 10:
-				p.writeString("9");
-				buffstr[i] = '9';
+				if (shift == true)
+				{
+					p.writeString("(");
+					buffstr[i] = '(';
+				}
+				else
+				{
+					p.writeString("9");
+					buffstr[i] = '9';
+				}
 				i++;
 				break;
 			case 11:
-				p.writeString("0");
-				buffstr[i] = '0';
+				if (shift == true)
+				{
+					p.writeString(")");
+					buffstr[i] = ')';
+				}
+				else
+				{
+					p.writeString("0");
+					buffstr[i] = '0';
+				}
 				i++;
 				break;
 			case 12:
@@ -162,15 +243,16 @@ char *KEYBOARD_DRIVER::readInput(FrameBuffer::Writer &p)
 			case 28: 											   // Case for return key
 				p.writeString("\n");
 				buffstr[i] = '\0';
+				// buffstr[i+1] = '\0';
 				i++;
-				receiving = 1;
+				receiving = 0;
 				i=0;
 				break;
-			case 29:
-				p.writeString("Left Ctrl"); //Left Control
+			/* case 29:
+				p.writeString(""); //Left Control
 				buffstr[i] = 'q';
 				i++;
-				break;
+				break; */
 			case 30:
 				p.writeString("a");
 				buffstr[i] = 'a';
@@ -304,10 +386,29 @@ char *KEYBOARD_DRIVER::readInput(FrameBuffer::Writer &p)
 				//}
 
 			// Implementing shift
-			case 42: // Left shift
+			case 42: shift=true;
 				break;
 
-			default: //p.writeString("~Unhandeled interrupt");
+			case 0xAA: shift = false;
+				break;
+
+			case 0x4B: if(i>0) {
+					char* newMem = (char*)mem_alloc(200);
+					newMem[0] = (buffstr[i]);
+					p.shiftCursor(-1, newMem);
+					i--;
+				}
+				break;
+
+			case 0x4D: if(i>=0) {
+					char* newMem = (char*)mem_alloc(200);
+					newMem[0] = (buffstr[i]);
+					p.shiftCursor(1, newMem);
+					i++;
+				}
+				break;
+
+			default: //p.writeHex(inportb(0x60));
 				//receiving--;
 				break;
 			}
