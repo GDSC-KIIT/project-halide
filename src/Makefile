@@ -2,6 +2,8 @@ compilerflags = -c -ffreestanding -fno-stack-protector -m32 -Iinclude -fno-use-c
 assemblerflags = --32
 linkerflags = -melf_i386
 
+args = `arg="$(filter-out $@,$(MAKECMDGOALS))" && echo $${arg:-${1}}`
+
 objects = loader.o kernel.o frame_buffer.o system.o keyboard.o utils.o mouse.o
 
 %.o: %.cpp
@@ -35,6 +37,19 @@ run: kernel.iso
 
 run-full-screen: kernel.iso
 	qemu-system-i386 -boot d -cdrom kernel.iso -full-screen
+
+archive:
+	mkdir -p ../Archives/${args}
+	cp ../include/ ../Archives/${args} -rf
+	cp ../src/ ../Archives/${args} -rf
+	cp ../.gitignore ../Archives/${args} -rf
+	cp ../LICENSE ../Archives/${args} -rf
+	cp ../README.md ../Archives/${args} -rf
+	@echo Saved current copy of os in Archives/${args}
+
+cleararchives:
+	rm ../Archives/* -rf
+	@echo removed all saved archives
 
 clean:
 	rm ./objs/*.o *.iso *.bin
