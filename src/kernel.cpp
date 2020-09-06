@@ -30,8 +30,11 @@ extern "C" void k_main(const void *multiboot_structure, unsigned int multiboot_m
 	p.writeString(win1.m_title);
 	p.fillRemeaning("=", true);
 	p.write_at_index(x);
-	KEYBOARD_DRIVER::readInput(p);
-
+	while(true)
+	{
+	char* input_buffer = KEYBOARD_DRIVER::readInput(p);
+	p.writeString(input_buffer);	
+	}
 	while (1);
 }
 
