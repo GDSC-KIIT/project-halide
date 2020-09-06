@@ -263,6 +263,12 @@ void FrameBuffer::Writer::shiftCursor(int axis, char* buffer) {
 	}
 }
 
+void FrameBuffer::Writer::switchWindow(FrameBuffer::Writer& p)
+{
+	p.cursorX = 0;
+	p.cursorY = p.y_upper+1;
+	p.updateCursor();
+}
 // Move the cursor to the current cursorX and cursorY
 void FrameBuffer::Writer::updateCursor()
 {
