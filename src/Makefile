@@ -4,7 +4,7 @@ linkerflags = -melf_i386
 
 args = `arg="$(filter-out $@,$(MAKECMDGOALS))" && echo $${arg:-${1}}`
 
-objects = loader.o kernel.o frame_buffer.o system.o keyboard.o utils.o mouse.o
+objects = loader.o kernel.o frame_buffer.o system.o keyboard.o utils.o mouse.o halidestdlib.o
 
 %.o: %.cpp
 	g++ --std=c++17 $(compilerflags) -o $@ -c $<
