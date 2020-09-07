@@ -12,6 +12,7 @@ the next 4 bits for the background colour
 #define FRAME_BUFFER_H
 
 #include <windows.h>
+#include <console.h>
 
 namespace FrameBuffer {
 	namespace Colours {
@@ -58,6 +59,8 @@ namespace FrameBuffer {
 		void clearCursor();
 		void shiftCursor(int, char *);
 		void updateCursor();
+
+		friend void init_console(FrameBuffer::Writer&);
 	};
 } // namespace FrameBuffer
 
