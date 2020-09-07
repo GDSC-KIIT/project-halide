@@ -53,7 +53,7 @@ namespace FrameBuffer {
 		void writeString(char *str);
 		void writeHex(unsigned char key);
 		void fillRemeaning(char *, bool);
-		void write_at_index(int);
+		void writeAtIndex(int);
 		void switchWindow(Writer &);
 		void clearCursor();
 		void shiftCursor(int, char *);

@@ -22,7 +22,7 @@ static void initScreen(FrameBuffer::Writer& p, Window& win)
 	x=win.m_y2-1;
 	p.writeString(win.m_title);
 	p.fillRemeaning("=", true);
-	p.write_at_index(x);
+	p.writeAtIndex(x);
 }
 
 extern "C" void k_main(const void *multiboot_structure, unsigned int multiboot_magic)
