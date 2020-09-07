@@ -3,6 +3,7 @@
 
 namespace hldstd {
     int stringCompare(char*, char*);
+    int stringLength(char*);
 }
 
 #endif
