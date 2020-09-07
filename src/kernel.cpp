@@ -39,11 +39,14 @@ void setup_memmgr(unsigned int *multiboot) {
 	new_mem_mgr(*memupper, 64 * 1048576);
 }
 
-extern "C" void k_main(unsigned int multiboot) {
-	// window_t *wnd = window(desktop, "Hello world", 12, 10, 1000, 600);
-	// wnd->border_color = 0xff000000;
-	// wnd->background_color = 0xff00ffff;
-	// wnd->draw(wnd);
+extern "C" void k_main(unsigned int* multiboot) {
+	set_framebuffer(multiboot);
+	setup_memmgr(multiboot);
+
+	window_t *wnd = window(nullptr, "Hello world", 12, 10, 1000, 600);
+	wnd->border_color = 0xff000000;
+	wnd->background_color = 0xff00ffff;
+	wnd->draw(wnd);
 
 	// // * instantiate globaldescriptortable here
 	// GLOBAL_DESCRIPTOR_TABLE::GlobalDescriptorTable globaldescriptortable;
