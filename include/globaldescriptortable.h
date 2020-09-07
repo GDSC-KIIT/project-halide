@@ -29,6 +29,6 @@ namespace GLOBAL_DESCRIPTOR_TABLE {
 		unsigned short codeSegment();
 		unsigned short dataSegment();
 	};
-} // namespace GLOBAL_DESCRIPTOR_TABLE
+}
 
 #endif

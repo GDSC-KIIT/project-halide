@@ -1,3 +1,4 @@
+#include <globaldescriptortable.h>
 #include <frame_buffer.h>
 #include <halidestdlib.h>
 #include <keyboard.h>
@@ -23,6 +24,9 @@ static void initScreen(FrameBuffer::Writer &p, Window &win) {
 }
 
 extern "C" void k_main(const void *multiboot_structure, unsigned int multiboot_magic) {
+
+	// * instantiate globaldescriptortable here
+	GLOBAL_DESCRIPTOR_TABLE::GlobalDescriptorTable globaldescriptortable;
 	{
 		Window win;
 		FrameBuffer::Writer p(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::BLUE, win);
