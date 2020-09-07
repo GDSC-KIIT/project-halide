@@ -1,33 +1,47 @@
-
+/* The bootloader will look at this image and start execution at the symbol
+   designated at the entry point. */
 ENTRY(loader)
-OUTPUT_FORMAT(elf32-i386)
-OUTPUT_ARCH(i386:i386)
 
+/* Tell where the various sections of the object files will be put in the final
+   kernel image. */
 SECTIONS
 {
-  . = 0x0100000;
+	/* Begin putting sections at 1 MiB, a conventional place for kernels to be
+	   loaded at by the bootloader. */
+	. = 1M;
 
-  .text :
-  {
-    *(.multiboot)
-    *(.text*)
-    *(.rodata)
-  }
+	/* First put the multiboot header, as it is required to be put very early
+	   early in the image or the bootloader won't recognize the file format.
+	   Next we'll put the .text section. */
+	.text BLOCK(4K) : ALIGN(4K)
+	{
+		*(.multiboot)
+		*(.text)
+	}
 
-  .data  :
-  {
+	/* Read-only data. */
+	.rodata BLOCK(4K) : ALIGN(4K)
+	{
+		*(.rodata)
+	}
+
+	/* Read-write data (initialized) */
+	.data BLOCK(4K) : ALIGN(4K)
+	{
     begin_constructors = .;
     KEEP(*( .init_array ));
     KEEP(*(SORT_BY_INIT_PRIORITY( .init_array.* )));
     end_constructors = .;
+		*(.data)
+	}
 
-    *(.data)
-  }
+	/* Read-write data (uninitialized) and stack */
+	.bss BLOCK(4K) : ALIGN(4K)
+	{
+		*(COMMON)
+		*(.bss)
+	}
 
-  .bss  :
-  {
-    *(.bss)
-  }
-
-  /DISCARD/ : { *(.fini_array*) *(.comment) }
+	/* The compiler may produce other sections, put them in the proper place in
+	   in this file, if you'd like to include them in the final kernel. */
 }
