@@ -8,6 +8,9 @@
 #include <mem.h>
 #include <vesa_drivers/window.h>
 
+#include <vesa_drivers/text.h>
+#include <vesa_drivers/video-tty.h>
+
 #define USE_BOOT_SCREEN_1 1
 
 typedef void (*ctor)();
@@ -30,26 +33,43 @@ static void initScreen(FrameBuffer::Writer &p, Window &win) {
 extern struct mem_mgr *new_mem_mgr(unsigned long start, unsigned long sz);
 extern void set_framebuffer(unsigned int*);
 
+void setup_terminal(uint32_t *multiboot)
+{
+	set_framebuffer(multiboot);
+	terminal_initialize();
+}
+
 void setup_memmgr(unsigned int *multiboot)
 {
 	unsigned int* memupper = (unsigned int*)multiboot[2];
 	new_mem_mgr(*memupper, 64*1048576);
 }
 
+static void print_string(char* string)
+{
+	for (int i = 0; string[i] != '\0'; i++)
+	{
+		terminal_putchar(string[i]);
+	}
+	
+}
+
 extern "C" void k_main(unsigned int *multiboot) {
 
-	set_framebuffer(multiboot);
-	setup_memmgr(multiboot);
+	setup_terminal(multiboot);
+	// set_framebuffer(multiboot);
+	// setup_memmgr(multiboot);
+	print_string("Successfully imported text");
 
-	window_t *desktop = window(nullptr, "", 0, 0, 1024, 768);
-	desktop->border_color = 0xffffffff;
-	desktop->background_color = 0xffffffff;
-	desktop->draw(desktop);
+	// window_t *desktop = window(nullptr, "", 0, 0, 1024, 768);
+	// desktop->border_color = 0xffffffff;
+	// desktop->background_color = 0xffffffff;
+	// desktop->draw(desktop);
 
-	window_t *wnd = window(desktop, "", 10, 10, 128, 100);
-	wnd->border_color = 0xff000000;
-	wnd->background_color = 0xff00ffff;
-	wnd->draw(wnd);
+	// window_t *wnd = window(desktop, "Hello world", 12, 10, 1000, 600);
+	// wnd->border_color = 0xff000000;
+	// wnd->background_color = 0xff00ffff;
+	// wnd->draw(wnd);
 	
 	// // * instantiate globaldescriptortable here
 	// GLOBAL_DESCRIPTOR_TABLE::GlobalDescriptorTable globaldescriptortable;

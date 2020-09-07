@@ -7,10 +7,10 @@
 extern "C" {
 #endif
 
-typedef struct argb
+typedef struct __attribute__((packed)) argb
 {
 	uint8_t a, r, g, b;
-} argb_t __attribute__((packed));
+} argb_t;
 
 uint32_t argb_to_color(argb_t *);
 uint32_t vga_to_color(uint8_t);
