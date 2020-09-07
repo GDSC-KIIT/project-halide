@@ -18,10 +18,10 @@ namespace GLOBAL_DESCRIPTOR_TABLE {
             unsigned int Base();
             unsigned int Limit();
         }__attribute__((packed));
-        SegmentDescriptor null; // ^ (0, 0, 0)
-        SegmentDescriptor unused; // ^ (0, 0, 0)
-        SegmentDescriptor code; // ^ (0, 64*1024*1024, 0x9A)
-        SegmentDescriptor data; // ^ (0, 64*1024*1024, 0x92)
+        SegmentDescriptor null;
+        SegmentDescriptor unused;
+        SegmentDescriptor code;
+        SegmentDescriptor data;
         public:
         GlobalDescriptorTable();
         ~GlobalDescriptorTable();
