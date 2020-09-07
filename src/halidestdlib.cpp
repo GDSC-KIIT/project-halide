@@ -57,7 +57,7 @@ hldstd::string::string(int x) {
 }
 
 hldstd::string::string(double x, int digits_after_point) {
-	int int_part = (int) x;
+	int int_part = (int)x;
 	double decimal_part = x - (double)int_part;
 
 	int x_int_len = 0;
@@ -70,7 +70,7 @@ hldstd::string::string(double x, int digits_after_point) {
 
 	int size = x_int_len + 1 + digits_after_point + 1;
 	m_data = (char *)mem_alloc(size);
-	m_data[size-1] = '\0';
+	m_data[size - 1] = '\0';
 
 	for (int i = x_int_len - 1; i >= 0; i--) {
 		m_data[i] = (char)48 + int_part % 10;
@@ -79,19 +79,18 @@ hldstd::string::string(double x, int digits_after_point) {
 
 	m_data[x_int_len] = '.';
 
-	for(int i=x_int_len+1; i<size-1; i++){
+	for (int i = x_int_len + 1; i < size - 1; i++) {
 		decimal_part = decimal_part * 10;
-		int k = (int) decimal_part;
+		int k = (int)decimal_part;
 		m_data[i] = (char)48 + k;
 
-		if(i == size-2)
-			m_data[i] = (char)48+k+1;
+		if (i == size - 2) m_data[i] = (char)48 + k + 1;
 
 		double t = decimal_part - k;
 		decimal_part = t;
 	}
 
-	m_data[size-1] = '\0';
+	m_data[size - 1] = '\0';
 }
 
 hldstd::string::string(bool val) {
