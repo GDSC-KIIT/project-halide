@@ -65,15 +65,18 @@ extern "C" void k_main(unsigned int *multiboot) {
 	print_string("Successfully imported text\n");
 	print_string("Successfully imported text\n");
 
-	// window_t *desktop = window(nullptr, "", 0, 0, 1024, 768);
-	// desktop->border_color = 0xffffffff;
-	// desktop->background_color = 0xffffffff;
-	// desktop->draw(desktop);
+	window_t *desktop = window(nullptr, "", 0, 0, 1024, 768);
+	desktop->border_color = 0xffffffff;
+	desktop->background_color = 0xffffffff;
+	desktop->draw(desktop);
 
-	// window_t *wnd = window(desktop, "Hello world", 12, 10, 1000, 600);
-	// wnd->border_color = 0xff000000;
-	// wnd->background_color = 0xff00ffff;
-	// wnd->draw(wnd);
+	window_t *wnd = window(desktop, "Hello world", 12, 10, 1000, 600);
+	wnd->border_color = 0xff000000;
+	wnd->background_color = 0xff00ffff;
+	wnd->draw(wnd);
+
+	wnd = moveWindow(wnd, "Hello", 13, 80);
+	wnd->draw(wnd);
 	
 	// // * instantiate globaldescriptortable here
 	// GLOBAL_DESCRIPTOR_TABLE::GlobalDescriptorTable globaldescriptortable;

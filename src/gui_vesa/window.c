@@ -35,6 +35,18 @@ window_t *window(window_t *parent, char * text, int x, int y, int w, int h)
 	self->draw = draw_window;
 }
 
+window_t *moveWindow(window_t* parent, char* text, int x, int y)
+{
+	window_t *self = (window_t *) kalloc(sizeof(window_t));
+	self->parent = parent;
+	self->title = text;
+	self->x = x;
+	self->y = y;
+	self->w = parent->w;
+	self->h = parent->h;
+	self->draw = draw_window;
+}
+
 window_t *button(window_t *parent, char * text, int x, int y, int w, int h)
 {
 
