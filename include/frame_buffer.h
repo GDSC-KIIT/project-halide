@@ -46,7 +46,7 @@ namespace FrameBuffer
 		bool framesDrawn=false; // & Used for preventing buffer_clearing when initializing window
 
 	public:
-		Writer(const unsigned char &foreground, const unsigned char &background, Window);
+		Writer(const unsigned char &foreground, const unsigned char &background, Window=Window());
 		void print(char *str);
 
 		// void clearLine();// & New implementation made for this function iin transalation file
