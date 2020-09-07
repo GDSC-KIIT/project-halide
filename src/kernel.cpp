@@ -55,20 +55,20 @@ extern "C" void k_main(const void *multiboot_structure, unsigned int multiboot_m
 		} */
 	}
 
-	Window win1(10, 70, 0, 9, (char *)"Basic window title v.0.2 instance 1 instance_id(a.0.1)");
-	FrameBuffer::Writer p(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::RED, win1);
+	Window win1(10, 70, 0, 25, (char *)"Basic window title v.0.2 instance 1 instance_id(a.0.1)");
+	FrameBuffer::Writer p(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::BLUE, win1);
 
 	initScreen(p, win1);
 
-	Window win2(10, 70, 9, 16, (char *)"Basic window title v.0.2 instance 2 instance_id(b.0.1)");
-	FrameBuffer::Writer p1(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::BLUE, win2);
+	// Window win2(10, 70, 9, 16, (char *)"Basic window title v.0.2 instance 2 instance_id(b.0.1)");
+	// FrameBuffer::Writer p1(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::BLUE, win2);
 
-	initScreen(p1, win2);
+	// initScreen(p1, win2);
 
-	Window win3(10, 70, 16, 25, (char *)"Basic window title v.0.2 instance 3 instance_id(c.0.1)");
-	FrameBuffer::Writer p2(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::GREEN, win3);
+	// Window win3(10, 70, 16, 25, (char *)"Basic window title v.0.2 instance 3 instance_id(c.0.1)");
+	// FrameBuffer::Writer p2(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::GREEN, win3);
 
-	initScreen(p2, win3);
+	// initScreen(p2, win3);
 	while (true) {
 		p.switchWindow(p);
 		while (true) {
@@ -76,16 +76,16 @@ extern "C" void k_main(const void *multiboot_structure, unsigned int multiboot_m
 			char *input_buffer = KEYBOARD_DRIVER::readInput(p);
 			break;
 		}
-		p1.switchWindow(p1);
-		while (true) {
-			char *input_buffer = KEYBOARD_DRIVER::readInput(p1);
-			break;
-		}
-		p2.switchWindow(p2);
-		while (true) {
-			char *input_buffer = KEYBOARD_DRIVER::readInput(p2);
-			break;
-		}
+		// p1.switchWindow(p1);
+		// while (true) {
+		// 	char *input_buffer = KEYBOARD_DRIVER::readInput(p1);
+		// 	break;
+		// }
+		// p2.switchWindow(p2);
+		// while (true) {
+		// 	char *input_buffer = KEYBOARD_DRIVER::readInput(p2);
+		// 	break;
+		// }
 	}
 
 	while (1)

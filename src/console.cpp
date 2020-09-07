@@ -4,7 +4,7 @@
 static void writeString_man();
 
 void init_console(FrameBuffer::Writer &p) {
-	p.writeString("\nNow running console instance : \n\n");
+	p.writeString("Now running console instance : \n\n");
 	/* p.writeString("root", (string)0x76);
 	p.writeString("@", (string)0x0a);
 	p.writeString("night_os ", (string)0x0a); */
@@ -22,7 +22,7 @@ void init_console(FrameBuffer::Writer &p) {
 			writeString_man();
          }
          else if(hldstd::stringCompare(command, "clear")) {
-			p.clearLine(1, 8);
+			p.clearLine(1, 24);
          }
          else if(hldstd::stringCompare(command, "greet")) {
 			p.writeString("Hello World\n");
