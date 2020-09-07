@@ -59,7 +59,11 @@ extern "C" void k_main(unsigned int *multiboot) {
 	setup_terminal(multiboot);
 	// set_framebuffer(multiboot);
 	// setup_memmgr(multiboot);
-	print_string("Successfully imported text");
+	print_string("Successfully imported text\n");
+	print_string("Successfully imported text\n");
+	print_string("Successfully imported text\n");
+	print_string("Successfully imported text\n");
+	print_string("Successfully imported text\n");
 
 	// window_t *desktop = window(nullptr, "", 0, 0, 1024, 768);
 	// desktop->border_color = 0xffffffff;
