@@ -182,7 +182,7 @@ void FrameBuffer::Writer::write_at_index(int x)
 	cursorX = temp;
 	cursorY = temp1;
 	updateCursor();
-	writeString("halideos $ ");
+	// writeString("halideos $ ");
 }
 
 // ~ New implemention of writeString furnction
