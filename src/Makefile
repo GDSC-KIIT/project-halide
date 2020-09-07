@@ -1,16 +1,17 @@
 compilerflags = -c -I../include/ -ffreestanding -fno-stack-protector -m32 -Iinclude -fno-use-cxa-atexit -nostdlib -fno-builtin -fno-rtti -fno-exceptions -fno-leading-underscore -Wno-write-strings
 assemblerflags = --32
+nasm-flags = -f elf32
 linkerflags = -melf_i386
 
 args = `arg="$(filter-out $@,$(MAKECMDGOALS))" && echo $${arg:-${1}}`
 
-objects = loader.o kernel.o frame_buffer.o system.o keyboard.o utils.o mouse.o halidestdlib.o
+objects = load.o kernel.o frame_buffer.o system.o keyboard.o utils.o mouse.o halidestdlib.o
 
 %.o: %.cpp
 	g++ --std=c++17 $(compilerflags) -o $@ -c $<
 
-%.o: %.s
-	as $(assemblerflags) -o $@ $<
+%.o: %.asm
+	nasm $(nasm-flags) -o $@ $<
 
 kernel.bin: linker.ld $(objects)
 	ld $(linkerflags) -T $< -o $@ $(objects)
