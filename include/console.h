@@ -3,7 +3,8 @@
 
 #include <frame_buffer.h>
 #include <keyboard.h>
+#include <windows.h>
 
-void init_console(FrameBuffer::Writer&);
+int init_console(FrameBuffer::Writer&, Window&);
 
 #endif

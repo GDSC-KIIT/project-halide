@@ -1,14 +1,14 @@
 #include <console.h>
 #include <halidestdlib.h>
-
 static void writeString_man();
 
-void init_console(FrameBuffer::Writer &p) {
+int init_console(FrameBuffer::Writer &p, Window& win) {
 	p.writeString("Now running console instance : \n");
 	/* p.writeString("root", (string)0x76);
 	p.writeString("@", (string)0x0a);
 	p.writeString("night_os ", (string)0x0a); */
 	unsigned int loop = 1;
+	int _id = 0;
 	char *command;
 	while (loop) {
 
@@ -22,10 +22,13 @@ void init_console(FrameBuffer::Writer &p) {
 			writeString_man();
          }
          else if(hldstd::stringCompare(command, "clear")) {
-			p.clearLine(1, 24);
+			p.clearLine(win.m_y1+1, win.m_y2-1);
          }
 		 else if(hldstd::stringCompare(command, "switch console")) {
-			p.clearLine(1, 24);
+			p.writeString("Implementing console switch");
+			_id = 1;
+			loop = 0;
+
          }
          else if(hldstd::stringCompare(command, "greet")) {
 			p.writeString("Hello World\n");
@@ -38,6 +41,7 @@ void init_console(FrameBuffer::Writer &p) {
          }
 	}
 	p.writeString("Exiting console");
+	return _id;
 }
 
 void writeString_man() {}
