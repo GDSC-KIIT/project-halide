@@ -2,8 +2,8 @@
 #define __HALIDE_STD_LIB
 
 namespace hldstd {
-    int stringCompare(char*, char*);
-    int stringLength(char*);
-}
+	int stringCompare(char *, char *);
+	int stringLength(char *);
+} // namespace hldstd
 
 #endif
