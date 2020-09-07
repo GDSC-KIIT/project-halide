@@ -5,13 +5,6 @@
 #include <keyboard.h>
 #include <windows.h>
 
-#include "../include/vesa_drivers/vesa.h"
-#include <mem.h>
-#include <vesa_drivers/window.h>
-
-#include <vesa_drivers/text.h>
-#include <vesa_drivers/video-tty.h>
-
 #define USE_BOOT_SCREEN_1 1
 
 typedef void (*ctor)();
@@ -31,20 +24,18 @@ static void initScreen(FrameBuffer::Writer &p, Window &win) {
 	p.writeAtIndex(x);
 }
 
-extern struct mem_mgr *new_mem_mgr(unsigned long start, unsigned long sz);
-extern void set_framebuffer(unsigned int*);
-
+extern "C" void k_main() {
 	// * instantiate globaldescriptortable here
 	GLOBAL_DESCRIPTOR_TABLE::GlobalDescriptorTable globaldescriptortable;
 	{
 		Window win;
 		FrameBuffer::Writer p(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::LIGHT_BLUE, win);
 		initScreen(p, win);
-		#if USE_BOOT_SCREEN_1 == 1
-		#include "../include/bootscreen1.h"
-		#elif USE_BOOT_SCREEN_1 == 0
-		#include "../include/bootscreen2.h"
-		#endif
+#if USE_BOOT_SCREEN_1 == 1
+#include "../include/bootscreen1.h"
+#elif USE_BOOT_SCREEN_1 == 0
+#include "../include/bootscreen2.h"
+#endif
 		p.writeString((char *)"\n\n\n\n\nEnter password : ");
 		while (true) {
 			char *input_buffer = KEYBOARD_DRIVER::readInput(p, 0);
@@ -68,12 +59,8 @@ extern void set_framebuffer(unsigned int*);
 
 	initScreen(p, win1);
 
-void setup_memmgr(unsigned int *multiboot)
-{
-	unsigned int* memupper = (unsigned int*)multiboot[2];
-	new_mem_mgr(*memupper, 64*1048576);
-}
-
+	Window win2(10, 70, 0, 9, (char *)"Basic window title v.0.2 instance 1 instance_id(a.0.1)");
+	FrameBuffer::Writer p1(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::LIGHT_BLUE, win2);
 	initScreen(p1, win2);
 
 	Window win3(10, 70, 16, 25, (char *)"Basic window title v.0.2 instance 3 instance_id(c.0.1)");
@@ -83,8 +70,7 @@ void setup_memmgr(unsigned int *multiboot)
 	while (true) {
 		p.switchWindow(p);
 		int x = init_console(p, win1);
-		if(x == 1)
-		{
+		if (x == 1) {
 			p1.switchWindow(p1);
 			int y = init_console(p1, win2);
 			p2.switchWindow(p2);
@@ -109,7 +95,7 @@ void setup_memmgr(unsigned int *multiboot)
 	// wnd->border_color = 0xff000000;
 	// wnd->background_color = 0xff00ffff;
 	// wnd->draw(wnd);
-	
+
 	// // * instantiate globaldescriptortable here
 	// GLOBAL_DESCRIPTOR_TABLE::GlobalDescriptorTable globaldescriptortable;
 	// {
@@ -138,37 +124,37 @@ void setup_memmgr(unsigned int *multiboot)
 	// 		timer--;
 	// 	} */
 	// }
-// 
+	//
 	// Window win1(10, 70, 0, 9, (char *)"Basic window title v.0.2 instance 1 instance_id(a.0.1)");
 	// FrameBuffer::Writer p(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::RED, win1);
-// 
+	//
 	// initScreen(p, win1);
 	// /* int x = win1.m_y2;
 	// x=win1.m_y2-1;
 	// p.writeString(win1.m_title);
 	// p.fillRemeaning("=", true);
 	// p.write_at_index(x); */
-// 
+	//
 	// Window win2(10, 70, 9, 16, (char *)"Basic window title v.0.2 instance 2 instance_id(b.0.1)");
 	// FrameBuffer::Writer p1(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::BLUE, win2);
-// 
+	//
 	// initScreen(p1, win2);
 	// /* int y = win2.m_y2;
 	// y=win2.m_y2-1;
 	// p1.writeString(win2.m_title);
 	// p1.fillRemeaning("=", true);
 	// p1.write_at_index(y); */
-// 
+	//
 	// Window win3(10, 70, 16, 25, (char *)"Basic window title v.0.2 instance 3 instance_id(c.0.1)");
 	// FrameBuffer::Writer p2(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::GREEN, win3);
-// 
+	//
 	// initScreen(p2, win3);
 	// /* int z = win3.m_y2;
 	// z=win3.m_y2-1;
 	// p2.writeString(win3.m_title);
 	// p2.fillRemeaning("=", true);
 	// p2.write_at_index(z); */
-// 
+	//
 	// /* #if USE_BOOT_SCREEN_1 == 1
 	// 	#include "../include/bootscreen1.h"
 	// #elif USE_BOOT_SCREEN_1 == 0
@@ -191,5 +177,6 @@ void setup_memmgr(unsigned int *multiboot)
 	// 		break;
 	// 	}
 	// }
-	while (1);
+	while (1)
+		;
 }
