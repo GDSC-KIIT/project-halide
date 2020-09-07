@@ -817,5 +817,6 @@ char *KEYBOARD_DRIVER::readInput(FrameBuffer::Writer &p, int mode)
 		}
 	}
 
+	
 	return buffstr;
 }
