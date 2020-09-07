@@ -70,12 +70,12 @@ void FrameBuffer::Writer::writeAtIndex(int x) {
 	FrameBuffer::Writer::updateCursor();
 }
 
-void FrameBuffer::Writer::writeString(char *str) {
+void FrameBuffer::Writer::writeString(char *str, unsigned char textColor) {
 	char *vidmem = (char *)0x000B8000;
 	for (int i = 0; str[i] != '\0'; i++) {
 		if (str[i] == '\n') {
 			vidmem[((cursorY * s_width) + cursorX) * 2] = ' ';
-			vidmem[((cursorY * s_width) + cursorX) * 2 + 1] = (((unsigned char)bg & 0x0f) << 4) | ((unsigned char)fg & 0x0f);
+			vidmem[((cursorY * s_width) + cursorX) * 2 + 1] = (((unsigned char)bg & 0x0f) << 4) | ((unsigned char)textColor & 0x0f);
 			cursorX = 0;
 			cursorY += 1;
 		}
@@ -93,10 +93,10 @@ void FrameBuffer::Writer::writeString(char *str) {
 
 			char *vid_mem = START;
 			vid_mem[(cursorY * s_width + cursorX + 1) * 2] = ' ';
-			vid_mem[(cursorY * s_width + cursorX + 1) * 2 + 1] = ((bg & 0x0f) << 4) | (fg & 0x0f);
+			vid_mem[(cursorY * s_width + cursorX + 1) * 2 + 1] = ((bg & 0x0f) << 4) | (textColor & 0x0f);
 		} else {
 			vidmem[(cursorY * s_width + cursorX) * 2] = str[i];
-			vidmem[(cursorY * s_width + cursorX) * 2 + 1] = ((bg & 0x0f) << 4) | (fg & 0x0f);
+			vidmem[(cursorY * s_width + cursorX) * 2 + 1] = ((bg & 0x0f) << 4) | (textColor & 0x0f);
 			cursorX++;
 		}
 

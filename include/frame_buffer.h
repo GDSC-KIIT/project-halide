@@ -50,7 +50,7 @@ namespace FrameBuffer {
 		void clearScreen();
 		void initScreen(const unsigned char &foreground, const unsigned char &background);
 		void setColorTheme(const unsigned char &foreground, const unsigned char &background);
-		void writeString(char *str);
+		void writeString(char *str, unsigned char = FrameBuffer::Colours::WHITE);
 		void writeHex(unsigned char key);
 		void fillRemeaning(char *, bool);
 		void writeAtIndex(int);
