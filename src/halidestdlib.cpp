@@ -169,7 +169,7 @@ bool hldstd::string::operator==(const string &other) {
 	return true;
 }
 
-hldstd::string::~string() { delete[] m_data; }
+// hldstd::string::~string() { delete[] m_data; }
 
 // MATH FUNCTIONS
 
