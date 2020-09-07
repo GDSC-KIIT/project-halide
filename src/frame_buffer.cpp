@@ -27,31 +27,31 @@ void FrameBuffer::Writer::clearLine(unsigned char from, unsigned char to) {
 
 	cursorX = 0;
 	cursorY = from;
-	updateCursor();
+	FrameBuffer::Writer::updateCursor();
 }
 
 // Fills the next 80 characters with the passed string
 void FrameBuffer::Writer::fillRemeaning(char *fill_character, bool new_line) {
 	for (int i = cursorX; i < 79; i++) {
-		writeString(fill_character);
+		FrameBuffer::Writer::writeString(fill_character);
 	}
 
 	if (new_line) {
-		writeString("\n");
+		FrameBuffer::Writer::writeString("\n");
 	} else {
 		framesDrawn = true;
 	}
 }
 
 void FrameBuffer::Writer::clearScreen() {
-	clearLine(y_upper, y_lower);
-	updateCursor();
+	FrameBuffer::Writer::clearLine(y_upper, y_lower);
+	FrameBuffer::Writer::updateCursor();
 }
 
 void FrameBuffer::Writer::initScreen(const unsigned char &foreground, const unsigned char &background) {
 	fg = foreground;
 	bg = background;
-	clearScreen();
+	FrameBuffer::Writer::clearScreen();
 }
 
 void FrameBuffer::Writer::setColorTheme(const unsigned char &foreground, const unsigned char &background) {
@@ -63,11 +63,11 @@ void FrameBuffer::Writer::writeAtIndex(int x) {
 	int temp = cursorX;
 	int temp1 = cursorY;
 	cursorY = x;
-	updateCursor();
-	fillRemeaning("=", false);
+	FrameBuffer::Writer::updateCursor();
+	FrameBuffer::Writer::fillRemeaning("=", false);
 	cursorX = temp;
 	cursorY = temp1;
-	updateCursor();
+	FrameBuffer::Writer::updateCursor();
 }
 
 void FrameBuffer::Writer::writeString(char *str) {
@@ -81,8 +81,8 @@ void FrameBuffer::Writer::writeString(char *str) {
 		}
 		// Case when we reach bottom of the current window
 		if (cursorY >= y_lower - 1 && framesDrawn) {
-			clearLine(y_upper + 1, y_lower - 1);
-			
+			FrameBuffer::Writer::clearLine(y_upper + 1, y_lower - 1);
+
 			cursorX = 0;
 			cursorY = y_upper + 1;
 		}
@@ -99,13 +99,14 @@ void FrameBuffer::Writer::writeString(char *str) {
 			vidmem[(cursorY * s_width + cursorX) * 2 + 1] = ((bg & 0x0f) << 4) | (fg & 0x0f);
 			cursorX++;
 		}
-		
+
 		if (cursorX >= s_width) {
 			cursorY++;
 			cursorX = 1;
 		}
 	}
-	updateCursor();
+
+	FrameBuffer::Writer::updateCursor();
 }
 
 // Writes the hex value to the screen
@@ -131,11 +132,11 @@ void FrameBuffer::Writer::shiftCursor(int axis, char *buffer) {
 	if (axis == -1) {
 		cursorX -= 1;
 		vid_mem[(cursorY * s_width + cursorX + 1) * 2 + 1] = ((bg & 0x0f) << 4) | (fg & 0x0f);
-		updateCursor();
+		FrameBuffer::Writer::updateCursor();
 	} else if (axis == 1) {
 		cursorX += 1;
 		vid_mem[(cursorY * s_width + cursorX - 1) * 2 + 1] = ((bg & 0x0f) << 4) | (fg & 0x0f);
-		updateCursor();
+		FrameBuffer::Writer::updateCursor();
 	}
 }
 
