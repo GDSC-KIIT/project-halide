@@ -59,9 +59,9 @@ extern "C" void k_main(unsigned int *multiboot) {
 	setup_terminal(multiboot);
 	// set_framebuffer(multiboot);
 	// setup_memmgr(multiboot);
-	hldstd::string a = "apples";
-	hldstd::string b = "test";
-	print_string(a+b);
+	double x = 1243.12314;
+	hldstd::string s(x, 5);
+	print_string(s.c_ptr());
 	print_string("Successfully imported text\n");
 	print_string("Successfully imported text\n");
 	print_string("Successfully imported text\n");

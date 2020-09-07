@@ -9,7 +9,7 @@ namespace hldstd {
 
 	public:
 		string(int x);
-		string(double x);
+		string(double x, int digits_after_point);
 		string(char *str);
 		string(bool val);
 		string(string &other);
