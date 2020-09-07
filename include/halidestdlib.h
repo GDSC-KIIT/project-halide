@@ -2,19 +2,35 @@
 #define __HALIDE_STD_LIB
 
 namespace hldstd {
+	class string {
+	private:
+		char *m_data = nullptr;
+		int m_size = 0;
+
+	public:
+		string(int x);
+		string(double x);
+		string(char *str);
+		string(bool val);
+		string(string &other);
+
+		int size();
+		char *c_ptr();
+		int to_int();
+		double to_double();
+
+		bool operator==(const string &other);
+
+		~string();
+	};
+
 	int stringCompare(char *, char *);
 	int stringLength(char *);
-	char *to_string(int);
-	char *to_string(double);
-
-	int to_int(char *str);
-	double to_double(char *str);
-	bool to_bool(char *str);
 
 	namespace math {
 		double pow(double x, int y); // x^y
-		int abs(int x); // |x|
-	} // namespace math
+		int abs(int x);				 // |x|
+	}								 // namespace math
 
 } // namespace hldstd
 

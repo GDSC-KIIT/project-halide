@@ -1,6 +1,8 @@
 #include <halidestdlib.h>
 #include <utils.h>
 
+// STRING FUNCTIONS
+
 int hldstd::stringLength(char *str) {
 	int len = 0;
 	while (str[len++])
@@ -21,37 +23,71 @@ int hldstd::stringCompare(char *s1, char *s2) {
 	return result;
 }
 
-char* hldstd::to_string(int x) {
+// STRING CLASS SPECIFICATION
+
+hldstd::string::string(char *str) {
+	int len = 0;
+	while (str[len++])
+		;
+
+	m_size = len; // includes the \0
+	m_data = (char *)mem_alloc(m_size);
+
+	for (int i = 0; i < m_size; i++) {
+		m_data[i] = str[i];
+	}
+}
+
+hldstd::string::string(int x) {
 	int x_len = 0;
 	int t = x;
 
-	while(t != 0){
+	while (t != 0) {
 		x_len++;
-		t = t/10;
+		t = t / 10;
 	}
 
-	char* str = (char*) mem_alloc(x_len + 1);
-	str[x_len] = '\0';
+	m_data = (char *)mem_alloc(x_len + 1);
+	m_data[x_len] = '\0';
 
-	for(int i=x_len-1; i>=0; i--){
-		str[i] = (char) 48 + x%10;
-		x = x/10;
+	for (int i = x_len - 1; i >= 0; i--) {
+		m_data[i] = (char)48 + x % 10;
+		x = x / 10;
 	}
-
-	return str;
 }
 
+hldstd::string::string(double x) {}
 
-char* hldstd::to_string(double x) {}
+hldstd::string::string(bool val) {
+	if (val) {
+		m_size = 5;
+		m_data = (char *)mem_alloc(m_size);
+		m_data = "true";
+	} else {
+		m_size = 6;
+		m_data = (char *)mem_alloc(m_size);
+		m_data = "false";
+	}
+}
 
+hldstd::string::string(string &other) {
+	m_size = other.m_size;
 
+	for (int i = 0; i < m_size; i++) {
+		m_data[i] = other.m_data[i];
+	}
+}
 
-int hldstd::to_int(char *str) {
+int hldstd::string::size() { return m_size; }
+
+char *hldstd::string::c_ptr() { return m_data; }
+
+int hldstd::string::to_int() {
 	int val = 0;
 
-	for (int i = 0; str[i] != '\0'; i++) {
-		if ((str[i] <= 57) && (str[i] >= 48)) {
-			int t = str[i] - 48;
+	for (int i = 0; m_data[i] != '\0'; i++) {
+		if ((m_data[i] <= 57) && (m_data[i] >= 48)) {
+			int t = m_data[i] - 48;
 			val = val * 10 + t;
 		}
 	}
@@ -59,36 +95,48 @@ int hldstd::to_int(char *str) {
 	return val;
 }
 
-double hldstd::to_double(char *str) {
+double hldstd::string::to_double() {
 	double int_part = 0;
 	double decimal_part = 0;
 
 	int decimal_len = 0;
 
 	bool decimal = false;
-	
-	for (int i = 0; str[i] != '\0'; i++) {
-		if (str[i] == '.') {
+
+	for (int i = 0; m_data[i] != '\0'; i++) {
+		if (m_data[i] == '.') {
 			decimal = true;
 			continue;
 		}
 
 		if (decimal) {
-			int t = str[i] - 48;
+			int t = m_data[i] - 48;
 			decimal_part = decimal_part * 10 + t;
 			decimal_len++;
 		} else {
-			int t = str[i] - 48;
+			int t = m_data[i] - 48;
 			int_part = int_part * 10 + t;
 		}
 	}
 
 	decimal_part = decimal_part * hldstd::math::pow(10, -decimal_len);
 
-	return int_part+decimal_part;
+	return int_part + decimal_part;
 }
 
-bool hldstd::to_bool(char *str) { return (bool)hldstd::stringCompare(str, "true"); }
+bool hldstd::string::operator==(const string &other) {
+	if (m_size != other.m_size) return false;
+
+	for (int i = 0; i < m_size; i++) {
+		if (m_data[i] != other.m_data[i]) return false;
+	}
+
+	return true;
+}
+
+hldstd::string::~string() { delete[] m_data; }
+
+// MATH FUNCTIONS
 
 double hldstd::math::pow(double x, int y) {
 	if (y == 0) return 1.0;

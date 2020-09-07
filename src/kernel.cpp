@@ -59,18 +59,14 @@ extern "C" void k_main(unsigned int *multiboot) {
 	setup_terminal(multiboot);
 	// set_framebuffer(multiboot);
 	// setup_memmgr(multiboot);
+	hldstd::string a = "apples";
+	hldstd::string b = "test";
+	print_string(a+b);
 	print_string("Successfully imported text\n");
 	print_string("Successfully imported text\n");
 	print_string("Successfully imported text\n");
 	print_string("Successfully imported text\n");
 	print_string("Successfully imported text\n");
-	print_string(hldstd::to_string(100));
-
-	char arr[2];
-	arr[0] = (char) hldstd::to_int("67");
-	arr[1] = '\n';
-
-	print_string(arr);
 
 	// window_t *desktop = window(nullptr, "", 0, 0, 1024, 768);
 	// desktop->border_color = 0xffffffff;
