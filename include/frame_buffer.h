@@ -2,8 +2,8 @@
 Abstraction for console output using the framebuffer
 
 The framebuffer starts from address 0x0B8000
-Each word is 16 bits, 
-First byte is for the ASCII Character, 
+Each word is 16 bits,
+First byte is for the ASCII Character,
 next 4 bits for the foreground colour and
 the next 4 bits for the background colour
 */
@@ -11,12 +11,10 @@ the next 4 bits for the background colour
 #ifndef FRAME_BUFFER_H
 #define FRAME_BUFFER_H
 
-#include "windows.h"
+#include <windows.h>
 
-namespace FrameBuffer
-{
-	namespace Colours
-	{
+namespace FrameBuffer {
+	namespace Colours {
 		static const unsigned char BLACK = (unsigned char)0x0;
 		static const unsigned char BLUE = (unsigned char)0x1;
 		static const unsigned char GREEN = (unsigned char)0x2;
@@ -35,33 +33,30 @@ namespace FrameBuffer
 		static const unsigned char WHITE = (unsigned char)0xf;
 	} // namespace Colours
 
-	class Writer
-	{
+	class Writer {
 	private:
 		char *START = (char *)0xB8000;
 		unsigned char fg, bg;
 		static int cursorX, cursorY;
 		const unsigned int s_width = 80, s_height = 25, sd = 2;
 		int x_min, x_max, y_upper, y_lower;
-		bool framesDrawn=false; // & Used for preventing buffer_clearing when initializing window
+		bool framesDrawn = false; // & Used for preventing buffer_clearing when initializing window
 
 	public:
-		Writer(const unsigned char &foreground, const unsigned char &background, Window=Window());
-		void print(char *str);
+		Window *current_window;
 
-		// void clearLine();// & New implementation made for this function iin transalation file
-		Window* current_window;
-		void clearLine(unsigned char from,unsigned char to);
+		Writer(const unsigned char &foreground, const unsigned char &background, Window = Window());
+		void clearLine(unsigned char from, unsigned char to);
 		void clearScreen();
 		void initScreen(const unsigned char &foreground, const unsigned char &background);
 		void setColorTheme(const unsigned char &foreground, const unsigned char &background);
 		void writeString(char *str);
 		void writeHex(unsigned char key);
-		void fillRemeaning(char*, bool);
+		void fillRemeaning(char *, bool);
 		void write_at_index(int);
-		void switchWindow(Writer&);
+		void switchWindow(Writer &);
 		void clearCursor();
-		void shiftCursor(int, char*);
+		void shiftCursor(int, char *);
 		void updateCursor();
 	};
 } // namespace FrameBuffer
