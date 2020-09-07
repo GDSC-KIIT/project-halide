@@ -23,7 +23,7 @@ static void initScreen(FrameBuffer::Writer &p, Window &win) {
 	p.writeAtIndex(x);
 }
 
-extern "C" void k_main(const void *multiboot_structure, unsigned int multiboot_magic) {
+extern "C" void k_main(unsigned int *multiboot) {
 
 	// * instantiate globaldescriptortable here
 	GLOBAL_DESCRIPTOR_TABLE::GlobalDescriptorTable globaldescriptortable;
