@@ -32,6 +32,3 @@ namespace GLOBAL_DESCRIPTOR_TABLE {
 } // namespace GLOBAL_DESCRIPTOR_TABLE
 
 #endif
-
-// * Postfix is converting from eqn to stack eqvalent
-// * Opereator precendence > then prev pop
