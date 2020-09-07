@@ -3,6 +3,10 @@
 
 #include <stdint.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct argb
 {
 	uint8_t a, r, g, b;
@@ -27,5 +31,9 @@ void putpixeli (int, int, uint32_t);
 void putrectsi (int, int, int, int, uint32_t);
 void putrectfi (int, int, int, int, uint32_t);
 void putrectsfi(int, int, int, int, uint32_t, uint32_t);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
