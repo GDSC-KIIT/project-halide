@@ -5,4 +5,4 @@ IndentWidth: 4
 AccessModifierOffset: -4
 ColumnLimit: 200
 NamespaceIndentation: All
-AllowShortIfStatementsOnASingleLine: True
+AllowShortIfStatementsOnASingleLine: Always

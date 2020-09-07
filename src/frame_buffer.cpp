@@ -3,10 +3,11 @@
 #include <utils.h>
 #include <windows.h>
 
-// initializing static data members of the Writer class
+// initializing static positions of the cursor
 int FrameBuffer::Writer::cursorX = 0;
 int FrameBuffer::Writer::cursorY = 0;
 
+// Constructor, Initialises the screen with the given foreground and background
 FrameBuffer::Writer::Writer(const unsigned char &foreground, const unsigned char &background, Window win) {
 	x_min = win.m_x1;
 	x_max = win.m_x2;
@@ -15,6 +16,7 @@ FrameBuffer::Writer::Writer(const unsigned char &foreground, const unsigned char
 	FrameBuffer::Writer::initScreen(foreground, background);
 }
 
+// Clear the line between from and to
 void FrameBuffer::Writer::clearLine(unsigned char from, unsigned char to) {
 	unsigned int i = s_width * from * sd;
 	char *vidmem = (char *)0xb8000;
@@ -28,12 +30,13 @@ void FrameBuffer::Writer::clearLine(unsigned char from, unsigned char to) {
 	updateCursor();
 }
 
-void FrameBuffer::Writer::fillRemeaning(char *fill_character, bool n_line) {
+// Fills the next 80 characters with the passed string
+void FrameBuffer::Writer::fillRemeaning(char *fill_character, bool new_line) {
 	for (int i = cursorX; i < 79; i++) {
 		writeString(fill_character);
 	}
 
-	if (n_line) {
+	if (new_line) {
 		writeString("\n");
 	} else {
 		framesDrawn = true;
@@ -56,7 +59,7 @@ void FrameBuffer::Writer::setColorTheme(const unsigned char &foreground, const u
 	bg = background;
 }
 
-void FrameBuffer::Writer::write_at_index(int x) {
+void FrameBuffer::Writer::writeAtIndex(int x) {
 	int temp = cursorX;
 	int temp1 = cursorY;
 	cursorY = x;
@@ -65,7 +68,6 @@ void FrameBuffer::Writer::write_at_index(int x) {
 	cursorX = temp;
 	cursorY = temp1;
 	updateCursor();
-	// writeString("halideos $ ");
 }
 
 void FrameBuffer::Writer::writeString(char *str) {
@@ -80,13 +82,11 @@ void FrameBuffer::Writer::writeString(char *str) {
 		// Case when we reach bottom of the current window
 		if (cursorY >= y_lower - 1 && framesDrawn) {
 			clearLine(y_upper + 1, y_lower - 1);
-			// vidmem[0] = '\t';
-			// vidmem[1] = (((unsigned char)fg & 0x0f) << 4 | ((unsigned
-			// char)bg) & 0x0F); // * It needs inverting of current color
+			
 			cursorX = 0;
 			cursorY = y_upper + 1;
-			// break;
 		}
+
 		if (str[i] == '\r') {
 			cursorX -= 1;
 			vidmem[(cursorY * s_width + cursorX) * 2] = 0;
@@ -99,6 +99,7 @@ void FrameBuffer::Writer::writeString(char *str) {
 			vidmem[(cursorY * s_width + cursorX) * 2 + 1] = ((bg & 0x0f) << 4) | (fg & 0x0f);
 			cursorX++;
 		}
+		
 		if (cursorX >= s_width) {
 			cursorY++;
 			cursorX = 1;
@@ -107,7 +108,7 @@ void FrameBuffer::Writer::writeString(char *str) {
 	updateCursor();
 }
 
-// We use this function of debugging interrupts codes
+// Writes the hex value to the screen
 void FrameBuffer::Writer::writeHex(unsigned char key) {
 	char *x = "00";
 	char *hex = "0123456789ABCDEF";
