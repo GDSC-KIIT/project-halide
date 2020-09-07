@@ -5,13 +5,13 @@ linkerflags = -melf_i386
 
 args = `arg="$(filter-out $@,$(MAKECMDGOALS))" && echo $${arg:-${1}}`
 
-objects = load.o kernel.o frame_buffer.o system.o keyboard.o utils.o mouse.o halidestdlib.o
+objects = loader.o kernel.o frame_buffer.o system.o keyboard.o utils.o mouse.o halidestdlib.o
 
 %.o: %.cpp
 	g++ --std=c++17 $(compilerflags) -o $@ -c $<
 
-%.o: %.asm
-	nasm $(nasm-flags) -o $@ $<
+%.o: %.s
+	as $(assemblerflags) -o $@ $<
 
 kernel.bin: linker.ld $(objects)
 	ld $(linkerflags) -T $< -o $@ $(objects)

@@ -9,19 +9,16 @@ int hldstd::stringLength(char* str)
 
 int hldstd::stringCompare(char* s1, char* s2)
 {
-    bool eq=false;
-    if(stringLength(s1) != stringLength(s2))
-        eq = false;
-    for (int i = 0; s1[i] != '\0'; i++)
+    int result = 1;
+    int size = stringLength(s1);
+    if(size != stringLength(s2)) result =0;
+    else 
     {
-        if(s1[i] != s2[i]) {
-            eq= true;
-            break;
-        }
-        else {
-            eq = true;
+        int i = 0;
+        for(i;i<=size;i++)
+        {
+            if(s1[i] != s2[i]) result = 0;
         }
     }
-    
-    return (eq) ? 1 : 0;
+    return result;
 }

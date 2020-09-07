@@ -39,21 +39,22 @@ extern "C" void k_main(const void *multiboot_structure, unsigned int multiboot_m
 		p.writeString("\n\n\n\n\nEnter password : ");
 		while(true)
 			{
-			char* input_buffer = KEYBOARD_DRIVER::readInput(p, 0);
-			int access = hldstd::stringCompare(input_buffer, (char*)"dsc-kiit");
-			if(access == 1)
-				break;
-			else
-				p.writeString("Incorrect password enter again : \nEnter the password again : ");
+				char* input_buffer = KEYBOARD_DRIVER::readInput(p, 0);
+				int access = hldstd::stringCompare(input_buffer, (char*)"dsc-kiit");
+				if(access == 1) {
+					break;
+				}
+				else {
+					p.writeString("Incorrect password enter again : \nEnter the password again : ");
+				}
 			}
 		p.writeString("Loading OS ...");
-		int timer=1000000000;
+		/* int timer=1000000000;
 		while (timer)
 		{
 			timer--;
-		}
+		} */
 	}
-	
 
 	Window win1(10,70,0,9, (char*)"Basic window title v.0.2 instance 1 instance_id(a.0.1)");
 	FrameBuffer::Writer p(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::RED, win1);
