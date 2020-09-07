@@ -4,7 +4,7 @@
 static void writeString_man();
 
 void init_console(FrameBuffer::Writer &p) {
-	p.writeString("Now running console instance : \n\n");
+	p.writeString("Now running console instance : \n");
 	/* p.writeString("root", (string)0x76);
 	p.writeString("@", (string)0x0a);
 	p.writeString("night_os ", (string)0x0a); */
@@ -13,7 +13,7 @@ void init_console(FrameBuffer::Writer &p) {
 	while (loop) {
 
 		p.writeString("");
-		p.writeString("root");
+		p.writeString("root", FrameBuffer::Colours::BLACK);
 		p.writeString("@");
         p.writeString("halideOS $ ");
 
@@ -22,6 +22,9 @@ void init_console(FrameBuffer::Writer &p) {
 			writeString_man();
          }
          else if(hldstd::stringCompare(command, "clear")) {
+			p.clearLine(1, 24);
+         }
+		 else if(hldstd::stringCompare(command, "switch console")) {
 			p.clearLine(1, 24);
          }
          else if(hldstd::stringCompare(command, "greet")) {
