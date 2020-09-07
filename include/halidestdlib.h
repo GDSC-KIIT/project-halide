@@ -4,18 +4,17 @@
 namespace hldstd {
 	int stringCompare(char *, char *);
 	int stringLength(char *);
+	char *to_string(int);
+	char *to_string(double);
 
 	int to_int(char *str);
 	double to_double(char *str);
 	bool to_bool(char *str);
 
-	char* to_string(int);
-	char* to_string(float);
-
 	namespace math {
-		double pow(double x, int y);
-		int abs(int x);
-	}
+		double pow(double x, int y); // x^y
+		int abs(int x); // |x|
+	} // namespace math
 
 } // namespace hldstd
 

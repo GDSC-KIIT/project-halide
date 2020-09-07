@@ -1,4 +1,5 @@
 #include <halidestdlib.h>
+#include <utils.h>
 
 int hldstd::stringLength(char *str) {
 	int len = 0;
@@ -19,6 +20,31 @@ int hldstd::stringCompare(char *s1, char *s2) {
 	}
 	return result;
 }
+
+char* hldstd::to_string(int x) {
+	int x_len = 0;
+	int t = x;
+
+	while(t != 0){
+		x_len++;
+		t = t/10;
+	}
+
+	char* str = (char*) mem_alloc(x_len + 1);
+	str[x_len] = '\0';
+
+	for(int i=x_len-1; i>=0; i--){
+		str[i] = (char) 48 + x%10;
+		x = x/10;
+	}
+
+	return str;
+}
+
+
+char* hldstd::to_string(double x) {}
+
+
 
 int hldstd::to_int(char *str) {
 	int val = 0;

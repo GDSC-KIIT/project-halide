@@ -64,6 +64,7 @@ extern "C" void k_main(unsigned int *multiboot) {
 	print_string("Successfully imported text\n");
 	print_string("Successfully imported text\n");
 	print_string("Successfully imported text\n");
+	print_string(hldstd::to_string(100));
 
 	char arr[2];
 	arr[0] = (char) hldstd::to_int("67");
