@@ -1,8 +1,9 @@
 #include <keyboard.h>
 #include <frame_buffer.h>
 #include <windows.h>
+#include <halidestdlib.h>
 
-#define USE_BOOT_SCREEN_1 2
+#define USE_BOOT_SCREEN_1 1
 
 typedef void (*ctor)();
 extern "C" ctor begin_constructors;
@@ -26,6 +27,34 @@ static void initScreen(FrameBuffer::Writer& p, Window& win)
 
 extern "C" void k_main(const void *multiboot_structure, unsigned int multiboot_magic)
 {
+	{
+		Window win;
+		FrameBuffer::Writer p(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::RED, win);
+		initScreen(p, win);
+		#if USE_BOOT_SCREEN_1 == 1
+			#include "../include/bootscreen1.h"
+		#elif USE_BOOT_SCREEN_1 == 0
+			#include "../include/bootscreen2.h"
+		#endif
+		p.writeString("\n\n\n\n\nEnter password : ");
+		while(true)
+			{
+			char* input_buffer = KEYBOARD_DRIVER::readInput(p, 0);
+			int access = hldstd::stringCompare(input_buffer, (char*)"dsc-kiit");
+			if(access == 1)
+				break;
+			else
+				p.writeString("Incorrect password enter again : \nEnter the password again : ");
+			}
+		p.writeString("Loading OS ...");
+		int timer=1000000000;
+		while (timer)
+		{
+			timer--;
+		}
+	}
+	
+
 	Window win1(10,70,0,9, (char*)"Basic window title v.0.2 instance 1 instance_id(a.0.1)");
 	FrameBuffer::Writer p(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::RED, win1);
 
@@ -56,11 +85,11 @@ extern "C" void k_main(const void *multiboot_structure, unsigned int multiboot_m
 	p2.fillRemeaning("=", true);
 	p2.write_at_index(z); */
 
-	#if USE_BOOT_SCREEN_1 == 1
+	/* #if USE_BOOT_SCREEN_1 == 1
 		#include "../include/bootscreen1.h"
 	#elif USE_BOOT_SCREEN_1 == 0
 		#include "../include/bootscreen2.h"
-	#endif
+	#endif */
 	while(true) {
 		p.switchWindow(p);
 		while(true)
