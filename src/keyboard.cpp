@@ -3,134 +3,142 @@
 #include <system.h>
 #include <utils.h>
 
+#include "../include/vesa_drivers/vesa.h"
+#include <mem.h>
+#include <vesa_drivers/window.h>
+
+#include <vesa_drivers/text.h>
+#include <vesa_drivers/video-tty.h>
+
+
 extern unsigned char inportb(unsigned short _port);
 
-char *KEYBOARD_DRIVER::readInput(FrameBuffer::Writer &p, int mode) {
+char *KEYBOARD_DRIVER::readInput() {
 	int receiving = 1;
-	int i = 0, max_limit;
+	int i = 0, max_limit, mode = 1;
 	bool shift = false;
 	char *buffstr = (char *)mem_alloc(200);
 	while (receiving) {
 		if ((Port8Bit::Read8(0x64) & 0x1) && mode == 1) {
 			switch (Port8Bit::Read8(0x60)) {
 				/*case 1:
-				p.writeString("*char)27);           Escape button Dont use it please
+				put_char('*'har)27);           Escape button Dont use it please
 				buffstr[i] = 'c'ar)27;
 				i++;
 				break;*/
 			case 2:
 				if (shift == true) {
-					p.writeString("!");
+					put_char('!');
 					buffstr[i] = '!';
 				} else {
-					p.writeString("1");
+					put_char('1');
 					buffstr[i] = '1';
 				}
 				i++;
 				break;
 			case 3:
 				if (shift == true) {
-					p.writeString("@");
+					put_char('@');
 					buffstr[i] = '@';
 				} else {
-					p.writeString("2");
+					put_char('2');
 					buffstr[i] = '2';
 				}
 				i++;
 				break;
 			case 4:
 				if (shift == true) {
-					p.writeString("#");
+					put_char('#');
 					buffstr[i] = '#';
 				} else {
-					p.writeString("3");
+					put_char('3');
 					buffstr[i] = '3';
 				}
 				i++;
 				break;
 			case 5:
 				if (shift == true) {
-					p.writeString("$");
+					put_char('$');
 					buffstr[i] = '$';
 				} else {
-					p.writeString("4");
+					put_char('4');
 					buffstr[i] = '4';
 				}
 				i++;
 				break;
 			case 6:
 				if (shift == true) {
-					p.writeString("%");
+					put_char('%');
 					buffstr[i] = '%';
 				} else {
-					p.writeString("5");
+					put_char('5');
 					buffstr[i] = '5';
 				}
 				i++;
 				break;
 			case 7:
 				if (shift == true) {
-					p.writeString("^");
+					put_char('^');
 					buffstr[i] = '^';
 				} else {
-					p.writeString("6");
+					put_char('6');
 					buffstr[i] = '6';
 				}
 				i++;
 				break;
 			case 8:
 				if (shift == true) {
-					p.writeString("&");
+					put_char('&');
 					buffstr[i] = '&';
 				} else {
-					p.writeString("7");
+					put_char('7');
 					buffstr[i] = '7';
 				}
 				i++;
 				break;
 			case 9:
 				if (shift == true) {
-					p.writeString("*");
+					put_char('*');
 					buffstr[i] = '*';
 				} else {
-					p.writeString("8");
+					put_char('8');
 					buffstr[i] = '8';
 				}
 				i++;
 				break;
 			case 10:
 				if (shift == true) {
-					p.writeString("(");
+					put_char('(');
 					buffstr[i] = '(';
 				} else {
-					p.writeString("9");
+					put_char('9');
 					buffstr[i] = '9';
 				}
 				i++;
 				break;
 			case 11:
 				if (shift == true) {
-					p.writeString(")");
+					put_char(')');
 					buffstr[i] = ')';
 				} else {
-					p.writeString("0");
+					put_char('0');
 					buffstr[i] = '0';
 				}
 				i++;
 				break;
 			case 12:
-				p.writeString("-");
+				put_char('-');
 				buffstr[i] = '-';
 				i++;
 				break;
 			case 13:
-				p.writeString("=");
+				put_char('=');
 				buffstr[i] = '=';
 				i++;
 				break;
-			case 14:
+			case 14:									// Case for back space
 				if (i > 0) {
-					p.writeString("\r");
+					put_char('\r');
 				}
 				i--;
 				if (i < 0) {
@@ -140,72 +148,72 @@ char *KEYBOARD_DRIVER::readInput(FrameBuffer::Writer &p, int mode) {
 				buffstr[i] = ';';
 				break;
 			/* case 15:
-				p.writeString("\t"); //Tab button
+				put_char('\'"); //Tab button
 				buffstr[i] = '\t';
 				i++;
 				break; */
 			case 16:
-				p.writeString("q");
+				put_char('Q');
 				buffstr[i] = 'q';
 				i++;
 				break;
 			case 17:
-				p.writeString("w");
+				put_char('w');
 				buffstr[i] = 'w';
 				i++;
 				break;
 			case 18:
-				p.writeString("e");
+				put_char('e');
 				buffstr[i] = 'e';
 				i++;
 				break;
 			case 19:
-				p.writeString("r");
+				put_char('r');
 				buffstr[i] = 'r';
 				i++;
 				break;
 			case 20:
-				p.writeString("t");
+				put_char('t');
 				buffstr[i] = 't';
 				i++;
 				break;
 			case 21:
-				p.writeString("y");
+				put_char('y');
 				buffstr[i] = 'y';
 				i++;
 				break;
 			case 22:
-				p.writeString("u");
+				put_char('u');
 				buffstr[i] = 'u';
 				i++;
 				break;
 			case 23:
-				p.writeString("i");
+				put_char('i');
 				buffstr[i] = 'i';
 				i++;
 				break;
 			case 24:
-				p.writeString("o");
+				put_char('o');
 				buffstr[i] = 'o';
 				i++;
 				break;
 			case 25:
-				p.writeString("p");
+				put_char('p');
 				buffstr[i] = 'p';
 				i++;
 				break;
 			case 26:
-				p.writeString("[");
+				put_char('[');
 				buffstr[i] = '[';
 				i++;
 				break;
 			case 27:
-				p.writeString("]");
+				put_char(']');
 				buffstr[i] = ']';
 				i++;
 				break;
 			case 28: // Case for return key
-				p.writeString("\n");
+				put_char('\n');
 				buffstr[i] = '\0';
 				// buffstr[i+1] = '\0';
 				i++;
@@ -213,137 +221,137 @@ char *KEYBOARD_DRIVER::readInput(FrameBuffer::Writer &p, int mode) {
 				i = 0;
 				break;
 			/* case 29:
-				p.writeString(""); //Left Control
+				put_char('"'; //Left Control
 				buffstr[i] = 'q';
 				i++;
 				break; */
 			case 30:
-				p.writeString("a");
+				put_char('a');
 				buffstr[i] = 'a';
 				i++;
 				break;
 			case 31:
-				p.writeString("s");
+				put_char('s');
 				buffstr[i] = 's';
 				i++;
 				break;
 			case 32:
-				p.writeString("d");
+				put_char('d');
 				buffstr[i] = 'd';
 				i++;
 				break;
 			case 33:
-				p.writeString("f");
+				put_char('f');
 				buffstr[i] = 'f';
 				i++;
 				break;
 			case 34:
-				p.writeString("g");
+				put_char('g');
 				buffstr[i] = 'g';
 				i++;
 				break;
 			case 35:
-				p.writeString("h");
+				put_char('h');
 				buffstr[i] = 'h';
 				i++;
 				break;
 			case 36:
-				p.writeString("j");
+				put_char('j');
 				buffstr[i] = 'j';
 				i++;
 				break;
 			case 37:
-				p.writeString("k");
+				put_char('k');
 				buffstr[i] = 'k';
 				i++;
 				break;
 			case 38:
-				p.writeString("l");
+				put_char('l');
 				buffstr[i] = 'l';
 				i++;
 				break;
 			case 39:
-				p.writeString(";");
+				put_char(';');
 				buffstr[i] = ';';
 				i++;
 				break;
 			case 40:
-				p.writeString((char *)(char)44); //   Single quote (")
+				put_char((char)44); //   Single quote (")
 				buffstr[i] = '\'';
 				i++;
 				break;
 			case 41:
-				p.writeString((char *)(char)44); // Back tick (`)
+				put_char((char)44); // Back tick (`)
 				buffstr[i] = '`';
 				i++;
 				break;
 				/*   case 43:                                 \ (< for somekeyboards)
-				p.writeString((char)92);
+				put_char('c'ar)92);
 				buffstr[i] = 'q';
 				i++;
 				break;*/
 			case 44:
-				p.writeString("z");
+				put_char('z');
 				buffstr[i] = 'z';
 				i++;
 				break;
 			case 45:
-				p.writeString("x");
+				put_char('x');
 				buffstr[i] = 'x';
 				i++;
 				break;
 			case 46:
-				p.writeString("c");
+				put_char('c');
 				buffstr[i] = 'c';
 				i++;
 				break;
 			case 47:
-				p.writeString("v");
+				put_char('v');
 				buffstr[i] = 'v';
 				i++;
 				break;
 			case 48:
-				p.writeString("b");
+				put_char('b');
 				buffstr[i] = 'b';
 				i++;
 				break;
 			case 49:
-				p.writeString("n");
+				put_char('n');
 				buffstr[i] = 'n';
 				i++;
 				break;
 			case 50:
-				p.writeString("m");
+				put_char('m');
 				buffstr[i] = 'm';
 				i++;
 				break;
 			case 51:
-				p.writeString(",");
+				put_char(',');
 				buffstr[i] = ',';
 				i++;
 				break;
 			case 52:
-				p.writeString(".");
+				put_char('.');
 				buffstr[i] = '.';
 				i++;
 				break;
 			case 53:
-				p.writeString("/");
+				put_char('/');
 				buffstr[i] = '/';
 				i++;
 				break;
 			case 54:
-				p.writeString(".");
+				put_char('.');
 				buffstr[i] = '.';
 				i++;
 				break;
 			case 55:
-				p.writeString("/");
+				put_char('/');
 				buffstr[i] = '/';
 				i++;
 				break;
 			case 57:
-				p.writeString(" ");
+				put_char(' ');
 				buffstr[i] = ' ';
 				i++;
 				break;
@@ -362,7 +370,7 @@ char *KEYBOARD_DRIVER::readInput(FrameBuffer::Writer &p, int mode) {
 				if (i > 0) {
 					char *newMem = (char *)mem_alloc(200);
 					newMem[0] = (buffstr[i]);
-					p.shiftCursor(-1, newMem);
+					// p.shiftCursor(-1, newMem);
 					i--;
 				}
 				break;
@@ -371,7 +379,7 @@ char *KEYBOARD_DRIVER::readInput(FrameBuffer::Writer &p, int mode) {
 				if (i >= 0) {
 					char *newMem = (char *)mem_alloc(200);
 					newMem[0] = (buffstr[i]);
-					p.shiftCursor(1, newMem);
+					// p.shiftCursor(1, newMem);
 					i++;
 				}
 				break;
@@ -385,123 +393,123 @@ char *KEYBOARD_DRIVER::readInput(FrameBuffer::Writer &p, int mode) {
 			{
 				switch (inportb(0x60)) {
 					/*case 1:
-					p.writeString("(char)27);           Escape button Dont use it please
+					put_char('('har)27);           Escape button Dont use it please
 					buffstr[i] = 'c'ar)27;
 					i++;
 					break;*/
 				case 2:
 					if (shift == true) {
-						p.writeString("*");
+						put_char('*');
 						buffstr[i] = '!';
 					} else {
-						p.writeString("*");
+						put_char('*');
 						buffstr[i] = '1';
 					}
 					i++;
 					break;
 				case 3:
 					if (shift == true) {
-						p.writeString("*");
+						put_char('*');
 						buffstr[i] = '@';
 					} else {
-						p.writeString("*");
+						put_char('*');
 						buffstr[i] = '2';
 					}
 					i++;
 					break;
 				case 4:
 					if (shift == true) {
-						p.writeString("*");
+						put_char('*');
 						buffstr[i] = '#';
 					} else {
-						p.writeString("*");
+						put_char('*');
 						buffstr[i] = '3';
 					}
 					i++;
 					break;
 				case 5:
 					if (shift == true) {
-						p.writeString("*");
+						put_char('*');
 						buffstr[i] = '$';
 					} else {
-						p.writeString("*");
+						put_char('*');
 						buffstr[i] = '4';
 					}
 					i++;
 					break;
 				case 6:
 					if (shift == true) {
-						p.writeString("*");
+						put_char('*');
 						buffstr[i] = '%';
 					} else {
-						p.writeString("*");
+						put_char('*');
 						buffstr[i] = '5';
 					}
 					i++;
 					break;
 				case 7:
 					if (shift == true) {
-						p.writeString("*");
+						put_char('*');
 						buffstr[i] = '^';
 					} else {
-						p.writeString("*");
+						put_char('*');
 						buffstr[i] = '6';
 					}
 					i++;
 					break;
 				case 8:
 					if (shift == true) {
-						p.writeString("*");
+						put_char('*');
 						buffstr[i] = '&';
 					} else {
-						p.writeString("*");
+						put_char('*');
 						buffstr[i] = '7';
 					}
 					i++;
 					break;
 				case 9:
 					if (shift == true) {
-						p.writeString("*");
+						put_char('*');
 						buffstr[i] = '*';
 					} else {
-						p.writeString("*");
+						put_char('*');
 						buffstr[i] = '8';
 					}
 					i++;
 					break;
 				case 10:
 					if (shift == true) {
-						p.writeString("*");
+						put_char('*');
 						buffstr[i] = '(';
 					} else {
-						p.writeString("*");
+						put_char('*');
 						buffstr[i] = '9';
 					}
 					i++;
 					break;
 				case 11:
 					if (shift == true) {
-						p.writeString("*");
+						put_char('*');
 						buffstr[i] = ')';
 					} else {
-						p.writeString("*");
+						put_char('*');
 						buffstr[i] = '0';
 					}
 					i++;
 					break;
 				case 12:
-					p.writeString("*");
+					put_char('*');
 					buffstr[i] = '-';
 					i++;
 					break;
 				case 13:
-					p.writeString("*");
+					put_char('*');
 					buffstr[i] = '=';
 					i++;
 					break;
 				case 14:
 					if (i > 0) {
-						p.writeString("\r");
+						put_char('\r');
 					}
 					i--;
 					if (i < 0) {
@@ -511,72 +519,72 @@ char *KEYBOARD_DRIVER::readInput(FrameBuffer::Writer &p, int mode) {
 					buffstr[i] = ';';
 					break;
 				/* case 15:
-					p.writeString("*t"); //Tab button
+					put_char('*'"); //Tab button
 					buffstr[i] = '\t';
 					i++;
 					break; */
 				case 16:
-					p.writeString("*");
+					put_char('*');
 					buffstr[i] = 'q';
 					i++;
 					break;
 				case 17:
-					p.writeString("*");
+					put_char('*');
 					buffstr[i] = 'w';
 					i++;
 					break;
 				case 18:
-					p.writeString("*");
+					put_char('*');
 					buffstr[i] = 'e';
 					i++;
 					break;
 				case 19:
-					p.writeString("*");
+					put_char('*');
 					buffstr[i] = 'r';
 					i++;
 					break;
 				case 20:
-					p.writeString("*");
+					put_char('*');
 					buffstr[i] = 't';
 					i++;
 					break;
 				case 21:
-					p.writeString("*");
+					put_char('*');
 					buffstr[i] = 'y';
 					i++;
 					break;
 				case 22:
-					p.writeString("*");
+					put_char('*');
 					buffstr[i] = 'u';
 					i++;
 					break;
 				case 23:
-					p.writeString("*");
+					put_char('*');
 					buffstr[i] = 'i';
 					i++;
 					break;
 				case 24:
-					p.writeString("*");
+					put_char('*');
 					buffstr[i] = 'o';
 					i++;
 					break;
 				case 25:
-					p.writeString("*");
+					put_char('*');
 					buffstr[i] = 'p';
 					i++;
 					break;
 				case 26:
-					p.writeString("*");
+					put_char('*');
 					buffstr[i] = '[';
 					i++;
 					break;
 				case 27:
-					p.writeString("*");
+					put_char('*');
 					buffstr[i] = ']';
 					i++;
 					break;
 				case 28: // Case for return key
-					p.writeString("\n");
+					put_char('\n');
 					buffstr[i] = '\0';
 					// buffstr[i+1] = '\0';
 					i++;
@@ -584,137 +592,137 @@ char *KEYBOARD_DRIVER::readInput(FrameBuffer::Writer &p, int mode) {
 					i = 0;
 					break;
 				/* case 29:
-					p.writeString("*); //Left Control
+					put_char('*'; //Left Control
 					buffstr[i] = 'q';
 					i++;
 					break; */
 				case 30:
-					p.writeString("*");
+					put_char('*');
 					buffstr[i] = 'a';
 					i++;
 					break;
 				case 31:
-					p.writeString("*");
+					put_char('*');
 					buffstr[i] = 's';
 					i++;
 					break;
 				case 32:
-					p.writeString("*");
+					put_char('*');
 					buffstr[i] = 'd';
 					i++;
 					break;
 				case 33:
-					p.writeString("*");
+					put_char('*');
 					buffstr[i] = 'f';
 					i++;
 					break;
 				case 34:
-					p.writeString("*");
+					put_char('*');
 					buffstr[i] = 'g';
 					i++;
 					break;
 				case 35:
-					p.writeString("*");
+					put_char('*');
 					buffstr[i] = 'h';
 					i++;
 					break;
 				case 36:
-					p.writeString("*");
+					put_char('*');
 					buffstr[i] = 'j';
 					i++;
 					break;
 				case 37:
-					p.writeString("*");
+					put_char('*');
 					buffstr[i] = 'k';
 					i++;
 					break;
 				case 38:
-					p.writeString("*");
+					put_char('*');
 					buffstr[i] = 'l';
 					i++;
 					break;
 				case 39:
-					p.writeString("*");
+					put_char('*');
 					buffstr[i] = ';';
 					i++;
 					break;
 				case 40:
-					p.writeString("*"); //   Single quote (")
+					put_char('*'); //   Single quote (")
 					buffstr[i] = '\'';
 					i++;
 					break;
 				case 41:
-					p.writeString("*"); // Back tick (`)
+					put_char('*'); // Back tick (`)
 					buffstr[i] = '`';
 					i++;
 					break;
 					/*   case 43:                                 \ (< for somekeyboards)
-					p.writeString((*har)92);
+					put_char('*'ar)92);
 					buffstr[i] = 'q';
 					i++;
 					break;*/
 				case 44:
-					p.writeString("*");
+					put_char('*');
 					buffstr[i] = 'z';
 					i++;
 					break;
 				case 45:
-					p.writeString("*");
+					put_char('*');
 					buffstr[i] = 'x';
 					i++;
 					break;
 				case 46:
-					p.writeString("*");
+					put_char('*');
 					buffstr[i] = 'c';
 					i++;
 					break;
 				case 47:
-					p.writeString("*");
+					put_char('*');
 					buffstr[i] = 'v';
 					i++;
 					break;
 				case 48:
-					p.writeString("*");
+					put_char('*');
 					buffstr[i] = 'b';
 					i++;
 					break;
 				case 49:
-					p.writeString("*");
+					put_char('*');
 					buffstr[i] = 'n';
 					i++;
 					break;
 				case 50:
-					p.writeString("*");
+					put_char('*');
 					buffstr[i] = 'm';
 					i++;
 					break;
 				case 51:
-					p.writeString("*");
+					put_char('*');
 					buffstr[i] = ',';
 					i++;
 					break;
 				case 52:
-					p.writeString("*");
+					put_char('*');
 					buffstr[i] = '.';
 					i++;
 					break;
 				case 53:
-					p.writeString("*");
+					put_char('*');
 					buffstr[i] = '/';
 					i++;
 					break;
 				case 54:
-					p.writeString("*");
+					put_char('*');
 					buffstr[i] = '.';
 					i++;
 					break;
 				case 55:
-					p.writeString("*");
+					put_char('*');
 					buffstr[i] = '/';
 					i++;
 					break;
 				case 57:
-					p.writeString("*");
+					put_char('*');
 					buffstr[i] = ' ';
 					i++;
 					break;
@@ -733,7 +741,7 @@ char *KEYBOARD_DRIVER::readInput(FrameBuffer::Writer &p, int mode) {
 					if (i > 0) {
 						char *newMem = (char *)mem_alloc(200);
 						newMem[0] = (buffstr[i]);
-						p.shiftCursor(-1, newMem);
+						// p.shiftCursor(-1, newMem);
 						i--;
 					}
 					break;
@@ -742,7 +750,7 @@ char *KEYBOARD_DRIVER::readInput(FrameBuffer::Writer &p, int mode) {
 					if (i >= 0) {
 						char *newMem = (char *)mem_alloc(200);
 						newMem[0] = (buffstr[i]);
-						p.shiftCursor(1, newMem);
+						// p.shiftCursor(1, newMem);
 						i++;
 					}
 					break;

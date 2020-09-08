@@ -1,4 +1,4 @@
 cd gui_vesa
 ./build.sh
 cd ..
-make run
+make run-full-screen

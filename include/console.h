@@ -5,6 +5,6 @@
 #include <keyboard.h>
 #include <windows.h>
 
-int init_console(FrameBuffer::Writer&, Window&);
+int init_console();
 
 #endif

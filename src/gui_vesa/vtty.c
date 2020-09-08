@@ -14,7 +14,8 @@ int x2 = 0;
 int y = 0;
 
 uint32_t fg = 0xffffffff;
-uint32_t bg = 0xff272525;
+uint32_t bg = 0x00000000;
+// uint32_t bg = 0xff272525;
 
 void set_printing_coords(int dx, int dy)
 {
@@ -26,7 +27,7 @@ void set_printing_coords(int dx, int dy)
 // void print_ch(char c)
 // {
 // 	int lx; int ly;
-// 	uint8_t *bitmap = font8x8_basic[c % 95];
+// 	uint8_t *bitmap = font8x8_basic[c % 128];
 // 	for (lx = 0; lx < GLYPH_WIDTH; lx++) {
 // 		for (ly = 0; ly < GLYPH_HEIGHT; ly++) {
 // 			uint8_t row = bitmap[ly];
@@ -41,7 +42,7 @@ void set_printing_coords(int dx, int dy)
 void print_ch(char c)
 {
 	int lx; int ly;
-	uint8_t *bitmap = font8x8_basic[c % 255];
+	uint8_t *bitmap = font8x8_basic[c % 128];
 	for (lx = 0; lx < GLYPH_WIDTH; lx++) {
 		for (ly = 0; ly < GLYPH_HEIGHT; ly++) {
 			uint8_t row = bitmap[ly];
