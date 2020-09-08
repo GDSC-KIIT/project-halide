@@ -159,17 +159,7 @@ double hldstd::string::to_double() {
 	return int_part + decimal_part;
 }
 
-bool hldstd::string::operator==(const string &other) {
-	if (m_size != other.m_size) return false;
-
-	for (int i = 0; i < m_size; i++) {
-		if (m_data[i] != other.m_data[i]) return false;
-	}
-
-	return true;
-}
-
-// hldstd::string::~string() { delete[] m_data; }
+hldstd::string::~string() {}
 
 // MATH FUNCTIONS
 
