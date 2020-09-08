@@ -14,7 +14,7 @@ int x2 = 0;
 int y = 0;
 
 uint32_t fg = 0xffffffff;
-uint32_t bg = 0xff000000;
+uint32_t bg = 0xff272525;
 
 void set_printing_coords(int dx, int dy)
 {

@@ -34,8 +34,7 @@ static void initScreen(FrameBuffer::Writer &p, Window &win) {
 extern struct mem_mgr *new_mem_mgr(unsigned long start, unsigned long sz);
 extern void set_framebuffer(unsigned int *);
 
-void setup_terminal(uint32_t *multiboot)
-{
+void setup_terminal(uint32_t *multiboot) {
 	set_framebuffer(multiboot);
 	terminal_initialize();
 }
@@ -45,24 +44,24 @@ void setup_memmgr(unsigned int *multiboot) {
 	new_mem_mgr(*memupper, 64 * 1048576);
 }
 
-static void puts(char* string) {
-	for (int i = 0; string[i] != '\0'; i++)
-	{
+static void puts(char *string) {
+	for (int i = 0; string[i] != '\0'; i++) {
 		put_char(string[i]);
 	}
-	
 }
 
-extern "C" void k_main(unsigned int* multiboot) {
+extern "C" void k_main(unsigned int *multiboot) {
 	// set_framebuffer(multiboot);
 	setup_memmgr(multiboot);
-	setup_terminal(multiboot);
+	setup_terminal(multiboot); // Termial dimentions
 
-	puts("Hello world"); // ! Fix the ASCII mapping with new font table
-
-	for (int i = 0; i < 10; i++)
-	{
-		put_char(65);
+	put_char('\n');
+	// puts("Hello world"); // ! Fix the ASCII mapping with new font table
+	for (int i = 0; i < 58; i++) {
+		for (int i = 0; i < 79; i++) {
+			put_char(0);
+		}
+		put_char('\n');
 	}
 
 	// window_t *wnd = window(nullptr, "Hello world", 12, 10, 1024, 768);
