@@ -18,7 +18,7 @@ public:
 	Window(int x1, int x2, int y1, int y2, char *title) : m_x1(x1), m_x2(x2), m_y1(y1), m_y2(y2), m_title(title) { instances++; }
 	void storeBuffer(int y_upper, int y_lower) {
 		buffer_data[instances][0] = y_upper;
-		buffer_data[instances][1] = y_lower;
+		buffer_data[instances][1] = y_lower; 
 	}
 };
 
