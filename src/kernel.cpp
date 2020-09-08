@@ -49,8 +49,12 @@ extern "C" void k_main(unsigned int* multiboot) {
 	// set_framebuffer(multiboot);
 	setup_memmgr(multiboot);
 	setup_terminal(multiboot);
-	put_char('!');
 
+	for (int i = 0; i < 96; i++)
+	{
+		put_char(i);
+	}
+	
 	// window_t *wnd = window(nullptr, "Hello world", 12, 10, 1024, 768);
 	// wnd->border_color = 0x00000000;
 	// wnd->background_color = 0xffffffff;
