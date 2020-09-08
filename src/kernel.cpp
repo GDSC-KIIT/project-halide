@@ -45,16 +45,26 @@ void setup_memmgr(unsigned int *multiboot) {
 	new_mem_mgr(*memupper, 64 * 1048576);
 }
 
+static void puts(char* string) {
+	for (int i = 0; string[i] != '\0'; i++)
+	{
+		put_char(string[i]);
+	}
+	
+}
+
 extern "C" void k_main(unsigned int* multiboot) {
 	// set_framebuffer(multiboot);
 	setup_memmgr(multiboot);
 	setup_terminal(multiboot);
 
-	for (int i = 0; i < 96; i++)
+	puts("Hello world"); // ! Fix the ASCII mapping with new font table
+
+	for (int i = 0; i < 10; i++)
 	{
-		put_char(i);
+		put_char(65);
 	}
-	
+
 	// window_t *wnd = window(nullptr, "Hello world", 12, 10, 1024, 768);
 	// wnd->border_color = 0x00000000;
 	// wnd->background_color = 0xffffffff;
