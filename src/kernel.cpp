@@ -34,19 +34,32 @@ static void initScreen(FrameBuffer::Writer &p, Window &win) {
 extern struct mem_mgr *new_mem_mgr(unsigned long start, unsigned long sz);
 extern void set_framebuffer(unsigned int *);
 
+void setup_terminal(uint32_t *multiboot)
+{
+	set_framebuffer(multiboot);
+	terminal_initialize();
+}
+
 void setup_memmgr(unsigned int *multiboot) {
 	unsigned int *memupper = (unsigned int *)multiboot[2];
 	new_mem_mgr(*memupper, 64 * 1048576);
 }
 
 extern "C" void k_main(unsigned int* multiboot) {
-	set_framebuffer(multiboot);
+	// set_framebuffer(multiboot);
 	setup_memmgr(multiboot);
+	setup_terminal(multiboot);
+	put_char('!');
 
-	window_t *wnd = window(nullptr, "Hello world", 12, 10, 1000, 600);
-	wnd->border_color = 0xff000000;
-	wnd->background_color = 0xff00ffff;
-	wnd->draw(wnd);
+	// window_t *wnd = window(nullptr, "Hello world", 12, 10, 1024, 768);
+	// wnd->border_color = 0x00000000;
+	// wnd->background_color = 0xffffffff;
+	// wnd->draw(wnd);
+
+	// window_t *titlebar = window(wnd, "Hello world", 13, 11, 998, 100);
+	// wnd->border_color = 0xff0ff000;
+	// wnd->background_color = 0xffffffff;
+	// wnd->draw(titlebar);
 
 	// // * instantiate globaldescriptortable here
 	// GLOBAL_DESCRIPTOR_TABLE::GlobalDescriptorTable globaldescriptortable;
