@@ -41,7 +41,7 @@ void set_printing_coords(int dx, int dy)
 void print_ch(char c)
 {
 	int lx; int ly;
-	uint8_t *bitmap = font8x8_basic[c % 95];
+	uint8_t *bitmap = font8x8_basic[c % 255];
 	for (lx = 0; lx < GLYPH_WIDTH; lx++) {
 		for (ly = 0; ly < GLYPH_HEIGHT; ly++) {
 			uint8_t row = bitmap[ly];

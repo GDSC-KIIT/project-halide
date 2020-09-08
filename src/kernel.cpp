@@ -58,8 +58,8 @@ extern "C" void k_main(unsigned int *multiboot) {
 	put_char('\n');
 	// puts("Hello world"); // ! Fix the ASCII mapping with new font table
 	for (int i = 0; i < 58; i++) {
-		for (int i = 0; i < 79; i++) {
-			put_char(0);
+		for (int j = 0; j < 79; j++) {
+			(i!=10) ? put_char(i) : put_char(0);
 		}
 		put_char('\n');
 	}
