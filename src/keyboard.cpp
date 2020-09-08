@@ -129,11 +129,10 @@ char *KEYBOARD_DRIVER::readInput(FrameBuffer::Writer &p, int mode) {
 				i++;
 				break;
 			case 13:
-				if(shift) {
+				if (shift) {
 					p.writeString("+");
 					buffstr[i] = '+';
-				}
-				else {
+				} else {
 					p.writeString("=");
 					buffstr[i] = '=';
 				}
