@@ -56,11 +56,11 @@ extern "C" void k_main() {
 		} */
 	}
 
-	Window win1(10, 70, 0, 19, (char *)"Basic window title v.0.2 instance 1 instance_id(a.0.1)");
+	Window win1(10, 70, 0, 25, (char *)"Basic window title v.0.2 instance 1 instance_id(a.0.1)");
 	FrameBuffer::Writer p(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::BLACK, win1);
-	win1.storeBuffer(0, 9);
-
 	initScreen(p, win1);
+
+	win1.storeBuffer(0, 25);
 
 	// Window win2(10, 70, 9, 16, (char *)"Basic window title v.0.2 instance 2 instance_id(b.0.1)");
 	// FrameBuffer::Writer p1(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::LIGHT_RED, win2);

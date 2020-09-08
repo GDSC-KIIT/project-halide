@@ -73,7 +73,7 @@ inline void writeAbout(FrameBuffer::Writer &p) {
 
 inline void writeString_man(FrameBuffer::Writer &p) {
 	// ! Add new line protectors if man creates window over flow
-	p.writeString("List of commands :\ngreet\nclear\nswitch console\nexit\n", FrameBuffer::Colours::BLACK);
+	p.writeString("List of commands :\ngreet\nclear\nswitch console\nexit\n", FrameBuffer::Colours::WHITE);
 }
 
 void calculator(FrameBuffer::Writer &p, hldstd::string &expression) {
