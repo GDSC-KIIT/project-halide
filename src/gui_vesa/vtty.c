@@ -48,7 +48,7 @@ void print_ch(char c)
 			if ((row >> lx) & 1)
 				putpixeli(x-lx, y-ly, fg);
 			else
-				putpixeli(x-lx, y-ly, bg);
+				putpixeli(x-lx, y-ly, bg); 
 		}
 	}
 }
