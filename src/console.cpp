@@ -1,6 +1,7 @@
 #include <console.h>
 #include <halidestdlib.h>
 static void writeString_man(FrameBuffer::Writer &);
+static int checkWindowToDestroy(Window win);
 
 int init_console(FrameBuffer::Writer &p, Window &win) {
 	p.writeString("Now running console instance : \n");
@@ -33,6 +34,22 @@ int init_console(FrameBuffer::Writer &p, Window &win) {
 			p.writeString("Hello World\n");
 		} else if (hldstd::stringCompare(command, "exit")) {
 			loop = 0;
+		} else if (hldstd::stringCompare(command, "destroy window")) {
+			if (win.m_y1 > 1) {
+				p.writeString("Cannot call this command from base windows\n");
+				_id = 0;
+				break;
+			}
+			int x = checkWindowToDestroy(win);
+			if (x == 3) {
+				_id = 2;
+			} else if (x == 2) {
+				_id = 3;
+			} else {
+				p.clearLine(win.m_y1 + 1, win.m_y2 - 1);
+				p.writeString("Cannot terminate main window\n");
+			}
+			break;
 		} else {
 			p.writeString("Invalid command\n"); // For info on how to set color codes please visit that website
 		}
@@ -44,4 +61,14 @@ int init_console(FrameBuffer::Writer &p, Window &win) {
 inline void writeString_man(FrameBuffer::Writer &p) {
 	// ! Add new line protectors if man creates window over flow
 	p.writeString("List of commands :\ngreet\nclear\nswitch console\nexit\n", FrameBuffer::Colours::BLACK);
+}
+
+int checkWindowToDestroy(Window win) {
+	if (win.instances == 3) {
+		return 3;
+	} else if (win.instances == 2) {
+		return 2;
+	} else if (win.instances == 1) {
+		return 1;
+	}
 }
