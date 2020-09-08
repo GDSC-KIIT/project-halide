@@ -63,15 +63,15 @@ extern "C" void k_main() {
 	initScreen(p, win1);
 
 	Window win2(10, 70, 9, 16, (char *)"Basic window title v.0.2 instance 2 instance_id(b.0.1)");
-	FrameBuffer::Writer p1(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::BLUE, win2);
+	FrameBuffer::Writer p1(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::LIGHT_RED, win2);
 	initScreen(p1, win2);
 	win2.storeBuffer(9, 16);
 
 	Window win3(10, 70, 16, 25, (char *)"Basic window title v.0.2 instance 3 instance_id(c.0.1)");
-	FrameBuffer::Writer p2(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::LIGHT_GREEN, win3);
-	win3.storeBuffer(16, 25);
-
+	FrameBuffer::Writer p2(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::LIGHT_CYAN, win3);
 	initScreen(p2, win3);
+	win3.storeBuffer(16, 25);
+	
 	while (true) {
 		p.switchWindow(p);
 		int x = init_console(p, win1);
