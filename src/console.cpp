@@ -2,7 +2,7 @@
 #include <halidestdlib.h>
 static void writeString_man();
 
-int init_console(FrameBuffer::Writer &p, Window& win) {
+int init_console(FrameBuffer::Writer &p, Window &win) {
 	p.writeString("Now running console instance : \n");
 	/* p.writeString("root", (string)0x76);
 	p.writeString("@", (string)0x0a);
@@ -15,30 +15,26 @@ int init_console(FrameBuffer::Writer &p, Window& win) {
 		p.writeString("");
 		p.writeString("root", FrameBuffer::Colours::BLACK);
 		p.writeString("@");
-        p.writeString("halideOS $ ");
+		p.writeString("halideOS $ ");
 
-         command=KEYBOARD_DRIVER::readInput(p);
-        if(hldstd::stringCompare(command, "help")) {
+		command = KEYBOARD_DRIVER::readInput(p);
+		if (hldstd::stringCompare(command, "help")) {
 			writeString_man();
-         }
-         else if(hldstd::stringCompare(command, "clear")) {
-			p.clearLine(win.m_y1+1, win.m_y2-1);
-         }
-		 else if(hldstd::stringCompare(command, "switch console")) {
-			p.writeString("Implementing console switch");
+		} else if (hldstd::stringCompare(command, "clear")) {
+			p.clearLine(win.m_y1 + 1, win.m_y2 - 1);
+		} else if (hldstd::stringCompare(command, "switch console")) {
+			p.writeString("switchched console\n");
+			p.clearLine(win.m_y1 + 1, win.m_y2 - 1); // Use this line of code till we impliment local state storage
 			_id = 1;
 			loop = 0;
-
-         }
-         else if(hldstd::stringCompare(command, "greet")) {
+			break;
+		} else if (hldstd::stringCompare(command, "greet")) {
 			p.writeString("Hello World\n");
-         }
-         else if(hldstd::stringCompare(command, "exit")) {
+		} else if (hldstd::stringCompare(command, "exit")) {
 			loop = 0;
-         }
-         else {
+		} else {
 			p.writeString("Invalid command\n"); // For info on how to set color codes please visit that website
-         }
+		}
 	}
 	p.writeString("Exiting console");
 	return _id;

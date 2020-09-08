@@ -72,6 +72,7 @@ extern "C" void k_main() {
 		int x = init_console(p, win1);
 		if (x == 1) {
 			p1.switchWindow(p1);
+
 			int y = init_console(p1, win2);
 			p2.switchWindow(p2);
 			int z = init_console(p2, win3);
