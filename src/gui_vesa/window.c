@@ -32,7 +32,7 @@ window_t *window(window_t *parent, char * text, int x, int y, int w, int h)
 	self->y = y;
 	self->w = w;
 	self->h = h;
-	self->draw = draw_window;
+	self->draw = draw_textfield;
 }
 
 window_t *button(window_t *parent, char * text, int x, int y, int w, int h)
