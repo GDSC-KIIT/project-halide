@@ -149,7 +149,7 @@ void FrameBuffer::Writer::shiftCursor(int axis, char *buffer) {
 		vid_mem[(cursorY * s_width + cursorX - 1) * 2 + 1] = ((bg & 0x0f) << 4) | (fg & 0x0f);
 		FrameBuffer::Writer::updateCursor();
 	}
-}
+} 
 
 void FrameBuffer::Writer::switchWindow(FrameBuffer::Writer &p) {
 	p.cursorX = 0;
