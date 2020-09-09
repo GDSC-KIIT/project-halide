@@ -45,7 +45,7 @@ extern "C" void k_main(const void *multiboot_structure, unsigned int multiboot) 
 		while (true) {
 			char *input_buffer = KEYBOARD_DRIVER::readInput(p, 0);
 			int access = hldstd::stringCompare(input_buffer, (char *)"dsc-kiit");
-			if (access == 1 || true) {
+			if (access == 1) {
 				break;
 			} else {
 				p.writeString("Incorrect password enter again : \nEnter the password again : ");
