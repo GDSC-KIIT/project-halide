@@ -30,7 +30,7 @@ static void initScreen(FrameBuffer::Writer &p, Window &win) {
 extern "C" void k_main() {
 	// * instantiate globaldescriptortable here
 	GLOBAL_DESCRIPTOR_TABLE::GlobalDescriptorTable globaldescriptortable;
-	InterruptManager interrupts(0x20, &globaldescriptortable);
+	InterruptManager interrupts( &globaldescriptortable);
 	{
 		Window win;
 		FrameBuffer::Writer p(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::LIGHT_BLUE, &win);
@@ -102,7 +102,6 @@ extern "C" void k_main() {
 			consoleRunning = 0;
 		}
 	}
-	interrupts.Activate();
 	while (1)
 		;
 }
