@@ -30,7 +30,7 @@ static void initScreen(FrameBuffer::Writer &p, Window &win) {
 extern "C" void k_main() {
 	// * instantiate globaldescriptortable here
 	GLOBAL_DESCRIPTOR_TABLE::GlobalDescriptorTable globaldescriptortable;
-	InterruptManager interrupts( &globaldescriptortable);
+	InterruptManager interrupts(&globaldescriptortable);
 	{
 		Window win;
 		FrameBuffer::Writer p(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::LIGHT_BLUE, &win);
@@ -102,6 +102,15 @@ extern "C" void k_main() {
 			consoleRunning = 0;
 		}
 	}
+	interrupts.Activate();
 	while (1)
 		;
 }
+
+
+// ^ Assignmet 1
+// Write a program to imp0liment the following ops on a stack push pop and display(only impliment using push and pop)
+// ^ Assignment 2
+// Write a program to impliment the following opreation on a stack using linkedlist push pop display(only impliment using push and pop)
+// ^ Assignment 3
+// Write a program to impliment a stack ADT with opereations push pop and display

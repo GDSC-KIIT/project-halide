@@ -24,7 +24,11 @@ protected:
 
 	static void SetInterruptDescriptorTableEntry(unsigned char interruptNumber, unsigned short codeSegmentSelectorOffset, void (*handler)(), unsigned char DescriptorPrivilageLevel,
 												 unsigned char DescriptorType);
-
+	Port8BitSlow picMasterCommand;
+	Port8BitSlow picMasterData;
+	Port8BitSlow picSlaveCommand;
+	Port8BitSlow picSlaveData;
+	
 public:
 	InterruptManager(GLOBAL_DESCRIPTOR_TABLE::GlobalDescriptorTable *globalDescriptorTable);
 	~InterruptManager();
