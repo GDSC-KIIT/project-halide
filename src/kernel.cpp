@@ -2,6 +2,7 @@
 #include <windows.h>
 int Window::instances = 0;
 int Window::buffer_data[3][2];
+char *Window::name;
 #include <frame_buffer.h>
 #include <globaldescriptortable.h>
 #include <halidestdlib.h>
@@ -27,7 +28,7 @@ static void initScreen(FrameBuffer::Writer &p, Window &win) {
 	p.writeAtIndex(x);
 }
 
-extern "C" void k_main(const void* multiboot_structure, unsigned int multiboot) {
+extern "C" void k_main(const void *multiboot_structure, unsigned int multiboot) {
 	// * instantiate globaldescriptortable here
 	GLOBAL_DESCRIPTOR_TABLE::GlobalDescriptorTable globaldescriptortable;
 	InterruptManager interrupts(&globaldescriptortable);
@@ -40,11 +41,11 @@ extern "C" void k_main(const void* multiboot_structure, unsigned int multiboot) 
 #elif USE_BOOT_SCREEN_1 == 0
 #include "../include/bootscreen2.h"
 #endif
-		p.writeString((char *)"\n\n\n\n\nEnter password : ");
+		p.writeString((char *)"\n\n\n\nEnter password : ");
 		while (true) {
 			char *input_buffer = KEYBOARD_DRIVER::readInput(p, 0);
 			int access = hldstd::stringCompare(input_buffer, (char *)"dsc-kiit");
-			if (access == 1) {
+			if (access == 1 || true) {
 				break;
 			} else {
 				p.writeString("Incorrect password enter again : \nEnter the password again : ");
@@ -58,59 +59,34 @@ extern "C" void k_main(const void* multiboot_structure, unsigned int multiboot) 
 		} */
 	}
 
-	Window win1(10, 70, 0, 9, (char *)"Basic window title v.0.2 instance 1 instance_id(a.0.1)");
-	FrameBuffer::Writer p(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::LIGHT_BLUE, &win1);
-	win1.storeBuffer(0, 9);
+	Window win1(10, 70, 0, 25, (char *)"Window 1");
+	FrameBuffer::Writer p(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::BLACK, &win1);
 	initScreen(p, win1);
 
-	Window win2(10, 70, 9, 16, (char *)"Basic window title v.0.2 instance 2 instance_id(b.0.1)");
-	FrameBuffer::Writer p1(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::LIGHT_RED, &win2);
-	initScreen(p1, win2);
-	win2.storeBuffer(9, 16);
+	win1.storeBuffer(0, 25);
 
-	Window win3(10, 70, 16, 25, (char *)"Basic window title v.0.2 instance 3 instance_id(c.0.1)");
-	FrameBuffer::Writer p2(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::LIGHT_CYAN, &win3);
-	initScreen(p2, win3);
-	win3.storeBuffer(16, 25);
+	// Window win2(10, 70, 9, 16, (char *)"Basic window title v.0.2 instance 2 instance_id(b.0.1)");
+	// FrameBuffer::Writer p1(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::LIGHT_RED, win2);
+	// initScreen(p1, win2);
+	// win2.storeBuffer(9, 16);
 
-	int consoleRunning = 1;
+	// Window win3(10, 70, 16, 25, (char *)"Basic window title v.0.2 instance 3 instance_id(c.0.1)");
+	// FrameBuffer::Writer p2(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::LIGHT_CYAN, win3);
+	// initScreen(p2, win3);
+	// win3.storeBuffer(16, 25);
 
-	while (true && consoleRunning) {
+	while (true) {
 		p.switchWindow(p);
 		int x = init_console(p, win1);
-		if (x == 2) {
-			win3.DestroyWindow(&win2);
-			p1.Rerender(&win2);
-			x = 1;
-		}
-		if (x == 3) {
-			win2.DestroyWindow(&win1);
-			p.Rerender(&win1);
-			x = 1;
-		}
-		if (x == 1) {
-			if (win2.isDestroyed == false) {
-				p1.switchWindow(p1);
-				int y = init_console(p1, win2);
-			}
-			if ((win3.isDestroyed == false)) {
-				p2.switchWindow(p2);
-				int z = init_console(p2, win3);
-			}
-		}
-		if (x == 0) {
-			consoleRunning = 0;
-		}
+		// if (x == 1) {
+		// 	p1.switchWindow(p1);
+
+		// 	int y = init_console(p1, win2);
+		// 	p2.switchWindow(p2);
+		// 	int z = init_console(p2, win3);
+		// }
 	}
 	interrupts.Activate();
 	while (1)
 		;
 }
-
-
-// ^ Assignmet 1
-// Write a program to imp0liment the following ops on a stack push pop and display(only impliment using push and pop)
-// ^ Assignment 2
-// Write a program to impliment the following opreation on a stack using linkedlist push pop display(only impliment using push and pop)
-// ^ Assignment 3
-// Write a program to impliment a stack ADT with opereations push pop and display

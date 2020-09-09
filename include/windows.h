@@ -10,6 +10,7 @@ class Window {
 public:
 	// & New feature implementation
 	static int instances;
+	static char *name;
 	int lastCursorPosition[2];
 	static int buffer_data[3][2];
 	int m_x1, m_x2, m_y1, m_y2;
@@ -21,7 +22,9 @@ public:
 		buffer_data[instances][0] = y_upper;
 		buffer_data[instances][1] = y_lower;
 	}
-	void DestroyWindow(Window* window) {
+
+	
+	void DestroyWindow(Window *window) {
 		int temp, temp1;
 		temp = buffer_data[instances][0];
 		temp1 = buffer_data[instances][1];
@@ -35,7 +38,6 @@ public:
 		window->m_y2 = 25;
 		// m_y1 = buffer_data[instances][0];
 		// m_y2 = buffer_data[instances][1];
-		
 	}
 };
 
