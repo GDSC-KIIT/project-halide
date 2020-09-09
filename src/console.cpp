@@ -4,12 +4,14 @@
 void writeAbout(FrameBuffer::Writer &);
 void writeString_man(FrameBuffer::Writer &);
 void calculator(FrameBuffer::Writer &, hldstd::string &expression);
+static void writeString_man(FrameBuffer::Writer &);
+static int checkWindowToDestroy(Window win);
 
 int init_console(FrameBuffer::Writer &p, Window &win) {
 	p.writeString("Now running console instance : \n");
 	unsigned int loop = 1;
 	int _id = 0;
-	char *command;
+
 	while (loop) {
 
 		p.writeString("");
@@ -50,12 +52,24 @@ int init_console(FrameBuffer::Writer &p, Window &win) {
 			p.writeString(" Hello User, Welcome to HalideOS\n");
 		}
 
-		else if (hldstd::stringCompare(command.c_ptr(), "exit")) {
-			loop = 0;
-		}
-
-		else {
-			p.writeString(" Invalid command\n"); // For info on how to set color codes please visit that website
+		else if (hldstd::stringCompare(command.c_ptr(), "destroy window")) {
+			if (win.m_y1 > 1) {
+				p.writeString("Cannot call this command from base windows\n");
+				_id = 0;
+				break;
+			}
+			int x = checkWindowToDestroy(win);
+			if (x == 3) {
+				_id = 2;
+			} else if (x == 2) {
+				_id = 3;
+			} else {
+				p.clearLine(win.m_y1 + 1, win.m_y2 - 1);
+				p.writeString("Cannot terminate main window\n");
+			}
+			break;
+		} else {
+			p.writeString("Invalid command\n"); // For info on how to set color codes please visit that website
 		}
 	}
 	p.writeString("Exiting console\n");
@@ -203,5 +217,15 @@ void calculator(FrameBuffer::Writer &p, hldstd::string &expression) {
 
 	} else {
 		p.writeString("Invalid Expression\n");
+	}
+}
+
+int checkWindowToDestroy(Window win) {
+	if (win.instances == 3) {
+		return 3;
+	} else if (win.instances == 2) {
+		return 2;
+	} else if (win.instances == 1) {
+		return 1;
 	}
 }

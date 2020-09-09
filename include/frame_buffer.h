@@ -45,7 +45,7 @@ namespace FrameBuffer {
 	public:
 		Window *current_window;
 
-		Writer(const unsigned char &foreground, const unsigned char &background, Window = Window());
+		Writer(const unsigned char &foreground, const unsigned char &background, Window*);
 		void clearLine(unsigned char from, unsigned char to);
 		void clearScreen();
 		void initScreen(const unsigned char &foreground, const unsigned char &background);
@@ -58,6 +58,7 @@ namespace FrameBuffer {
 		void clearCursor();
 		void shiftCursor(int, char *);
 		void updateCursor();
+		void Rerender(Window*);
 	};
 } // namespace FrameBuffer
 

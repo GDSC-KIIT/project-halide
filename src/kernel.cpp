@@ -6,6 +6,7 @@ char *Window::name;
 #include <frame_buffer.h>
 #include <globaldescriptortable.h>
 #include <halidestdlib.h>
+#include <interrupts.h>
 #include <keyboard.h>
 
 #define USE_BOOT_SCREEN_1 1
@@ -27,12 +28,13 @@ static void initScreen(FrameBuffer::Writer &p, Window &win) {
 	p.writeAtIndex(x);
 }
 
-extern "C" void k_main() {
+extern "C" void k_main(const void *multiboot_structure, unsigned int multiboot) {
 	// * instantiate globaldescriptortable here
 	GLOBAL_DESCRIPTOR_TABLE::GlobalDescriptorTable globaldescriptortable;
+	InterruptManager interrupts(&globaldescriptortable);
 	{
 		Window win;
-		FrameBuffer::Writer p(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::LIGHT_BLUE, win);
+		FrameBuffer::Writer p(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::LIGHT_BLUE, &win);
 		initScreen(p, win);
 #if USE_BOOT_SCREEN_1 == 1
 #include "../include/bootscreen1.h"
@@ -60,7 +62,7 @@ extern "C" void k_main() {
 	}
 
 	Window win1(10, 70, 0, 25, (char *)"Window 1");
-	FrameBuffer::Writer p(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::BLACK, win1);
+	FrameBuffer::Writer p(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::BLACK, &win1);
 	initScreen(p, win1);
 
 	win1.storeBuffer(0, 25);
@@ -86,6 +88,7 @@ extern "C" void k_main() {
 		// 	int z = init_console(p2, win3);
 		// }
 	}
+	interrupts.Activate();
 	while (1)
 		;
 }

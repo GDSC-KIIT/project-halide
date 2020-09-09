@@ -8,11 +8,11 @@ int FrameBuffer::Writer::cursorX = 0;
 int FrameBuffer::Writer::cursorY = 0;
 
 // Constructor, Initialises the screen with the given foreground and background
-FrameBuffer::Writer::Writer(const unsigned char &foreground, const unsigned char &background, Window win) {
-	x_min = win.m_x1;
-	x_max = win.m_x2;
-	y_upper = win.m_y1;
-	y_lower = win.m_y2;
+FrameBuffer::Writer::Writer(const unsigned char &foreground, const unsigned char &background, Window *win) {
+	x_min = win->m_x1;
+	x_max = win->m_x2;
+	y_upper = win->m_y1;
+	y_lower = win->m_y2;
 	FrameBuffer::Writer::initScreen(foreground, background);
 }
 
@@ -125,6 +125,17 @@ void FrameBuffer::Writer::clearCursor() {
 	vid_mem[(cursorY * s_width + cursorX) * 2 + 1] = ((bg & 0x0f) << 4) | (fg & 0x0f);
 }
 
+void FrameBuffer::Writer::Rerender(Window* win) {
+	x_min = win->m_x1;
+	x_max = win->m_x2;
+	y_upper = win->m_y1;
+	y_lower = win->m_y2;
+	int x = win->m_y2;
+	fillRemeaning("=", true);
+	writeAtIndex(x);
+	initScreen(fg, bg);
+}
+
 // & Shift cursor (impliment arrow keys) Make append functions for that
 void FrameBuffer::Writer::shiftCursor(int axis, char *buffer) {
 	int y = axis;
@@ -138,7 +149,7 @@ void FrameBuffer::Writer::shiftCursor(int axis, char *buffer) {
 		vid_mem[(cursorY * s_width + cursorX - 1) * 2 + 1] = ((bg & 0x0f) << 4) | (fg & 0x0f);
 		FrameBuffer::Writer::updateCursor();
 	}
-}
+} 
 
 void FrameBuffer::Writer::switchWindow(FrameBuffer::Writer &p) {
 	p.cursorX = 0;
