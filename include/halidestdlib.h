@@ -16,6 +16,7 @@ namespace hldstd {
 		string(string &other);
 
 		int size();
+		char at(int i);
 		char *c_ptr();
 		int to_int();
 		double to_double();
@@ -54,7 +55,7 @@ namespace hldstd {
 
 template <typename T> hldstd::stack<T>::stack(int size, T x) {
 	hldstd::stack<T>::m_size = size;
-	stack_arr = mem_alloc(sizeof(T) * m_size);
+	stack_arr = (T*) mem_alloc(sizeof(T) * m_size);
 	stack_arr[0] = x;
 }
 
@@ -78,6 +79,6 @@ template <typename T> bool hldstd::stack<T>::push(T x) { // false for overflow, 
 
 template <typename T> T hldstd::stack<T>::top() { return stack_arr[m_top]; }
 
-template <typename T> bool hldstd::stack<T>::isEmpty() { return top == 0; }
+template <typename T> bool hldstd::stack<T>::isEmpty() { return m_top == 0; }
 
 #endif

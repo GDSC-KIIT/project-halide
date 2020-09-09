@@ -39,6 +39,13 @@ hldstd::string::string(char *str) {
 }
 
 hldstd::string::string(int x) {
+	bool positive = true;
+
+	if (x < 0) {
+		positive = false;
+		x = -x;
+	}
+
 	int x_len = 0;
 	int t = x;
 
@@ -47,12 +54,23 @@ hldstd::string::string(int x) {
 		t = t / 10;
 	}
 
-	m_data = (char *)mem_alloc(x_len + 1);
-	m_data[x_len] = '\0';
-
-	for (int i = x_len - 1; i >= 0; i--) {
-		m_data[i] = (char)48 + x % 10;
-		x = x / 10;
+	if (positive) {
+		m_data = (char *)mem_alloc(x_len + 1);
+		m_data[x_len] = '\0';
+		
+		for (int i = x_len - 1; i >= 0; i--) {
+			m_data[i] = (char)48 + x % 10;
+			x = x / 10;
+		}
+	} else {
+		m_data = (char *)mem_alloc(x_len + 2);
+		m_data[x_len + 1] = '\0';
+		m_data[0] = '-';
+		
+		for (int i = x_len; i >= 1; i--) {
+			m_data[i] = (char)48 + x % 10;
+			x = x / 10;
+		}
 	}
 }
 
@@ -114,6 +132,8 @@ hldstd::string::string(string &other) {
 }
 
 int hldstd::string::size() { return m_size; }
+
+char hldstd::string::at(int i) { return m_data[i]; }
 
 char *hldstd::string::c_ptr() { return m_data; }
 
