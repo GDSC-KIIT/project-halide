@@ -56,7 +56,7 @@ extern "C" void k_main() {
 		} */
 	}
 
-	Window win1(10, 70, 0, 25, (char *)"Basic window title v.0.2 instance 1 instance_id(a.0.1)");
+	Window win1(10, 70, 0, 25, (char *)"Window 1");
 	FrameBuffer::Writer p(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::BLACK, win1);
 	initScreen(p, win1);
 

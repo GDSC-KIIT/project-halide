@@ -13,7 +13,7 @@ int init_console(FrameBuffer::Writer &p, Window &win) {
 	while (loop) {
 
 		p.writeString("");
-		p.writeString(" root", FrameBuffer::Colours::WHITE);
+		p.writeString(" root", FrameBuffer::Colours::RED);
 		p.writeString("@");
 		p.writeString("halideOS $ ");
 
@@ -28,10 +28,9 @@ int init_console(FrameBuffer::Writer &p, Window &win) {
 		}
 
 		else if (hldstd::stringCompare(command.c_ptr(), "calculator")) {
-			p.writeString("\nHalideOS - Basic Calculator\n");
-			p.writeString("Enter an Expression (only +, -, *, /): ");
+			p.writeString(" HalideOS - Basic Calculator\n");
+			p.writeString(" Enter an Expression (only +, -, *, /): ");
 			hldstd::string c = KEYBOARD_DRIVER::readInput(p);
-			p.writeString("\n");
 			calculator(p, c);
 		}
 
@@ -48,7 +47,7 @@ int init_console(FrameBuffer::Writer &p, Window &win) {
 		}
 
 		else if (hldstd::stringCompare(command.c_ptr(), "greet")) {
-			p.writeString("Hello User, Welcome to HalideOS\n");
+			p.writeString(" Hello User, Welcome to HalideOS\n");
 		}
 
 		else if (hldstd::stringCompare(command.c_ptr(), "exit")) {
@@ -56,7 +55,7 @@ int init_console(FrameBuffer::Writer &p, Window &win) {
 		}
 
 		else {
-			p.writeString("Invalid command\n"); // For info on how to set color codes please visit that website
+			p.writeString(" Invalid command\n"); // For info on how to set color codes please visit that website
 		}
 	}
 	p.writeString("Exiting console\n");
@@ -64,15 +63,20 @@ int init_console(FrameBuffer::Writer &p, Window &win) {
 }
 
 inline void writeAbout(FrameBuffer::Writer &p) {
-	p.writeString("\n     Welcome to HalideOS v1.0 \n");
+	p.writeString("\n     HalideOS v1.0 \n", FrameBuffer::Colours::LIGHT_BLUE);
 	p.writeString("     An experimental OS by DSC KIIT \n");
 	p.writeString("     github.com/DSC-KIIT/project-halide \n", FrameBuffer::Colours::GREEN);
 	p.writeString("     Developed by Ujjwal Shekhawat and Junaid Rahim\n\n");
 }
 
 inline void writeString_man(FrameBuffer::Writer &p) {
-	// ! Add new line protectors if man creates window over flow
-	p.writeString("List of commands :\ngreet\nclear\nswitch console\nexit\n", FrameBuffer::Colours::WHITE);
+	p.writeString(" List of Commands: \n", FrameBuffer::Colours::GREEN);
+	p.writeString("    about\n", FrameBuffer::Colours::WHITE);
+	p.writeString("    help\n", FrameBuffer::Colours::WHITE);
+	p.writeString("    greet\n", FrameBuffer::Colours::WHITE);
+	p.writeString("    calculator\n", FrameBuffer::Colours::WHITE);
+	p.writeString("    clear\n", FrameBuffer::Colours::WHITE);
+	p.writeString("    switch console\n", FrameBuffer::Colours::WHITE);
 }
 
 int precedence(char c) {
@@ -181,7 +185,7 @@ void calculator(FrameBuffer::Writer &p, hldstd::string &expression) {
 					int val = a*b;
 					st2.push(val);
 				} else if (postfix[i] == '/') {
-					int val = a/b;
+					int val = b/a;
 					st2.push(val);
 				}
 
@@ -193,6 +197,7 @@ void calculator(FrameBuffer::Writer &p, hldstd::string &expression) {
 		}
 
 		hldstd::string ans = st2.top();
+		p.writeString(" Answer: ");
 		p.writeString(ans.c_ptr());
 		p.writeString("\n");
 
