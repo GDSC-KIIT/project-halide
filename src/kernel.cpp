@@ -5,6 +5,7 @@ int Window::buffer_data[3][2];
 #include <frame_buffer.h>
 #include <globaldescriptortable.h>
 #include <halidestdlib.h>
+#include <interrupts.h>
 #include <keyboard.h>
 
 #define USE_BOOT_SCREEN_1 1
@@ -29,6 +30,7 @@ static void initScreen(FrameBuffer::Writer &p, Window &win) {
 extern "C" void k_main() {
 	// * instantiate globaldescriptortable here
 	GLOBAL_DESCRIPTOR_TABLE::GlobalDescriptorTable globaldescriptortable;
+	InterruptManager interrupts(&globaldescriptortable);
 	{
 		Window win;
 		FrameBuffer::Writer p(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::LIGHT_BLUE, &win);
@@ -71,7 +73,9 @@ extern "C" void k_main() {
 	initScreen(p2, win3);
 	win3.storeBuffer(16, 25);
 
-	while (true) {
+	int consoleRunning = 1;
+
+	while (true && consoleRunning) {
 		p.switchWindow(p);
 		int x = init_console(p, win1);
 		if (x == 2) {
@@ -94,7 +98,19 @@ extern "C" void k_main() {
 				int z = init_console(p2, win3);
 			}
 		}
+		if (x == 0) {
+			consoleRunning = 0;
+		}
 	}
+	interrupts.Activate();
 	while (1)
 		;
 }
+
+
+// ^ Assignmet 1
+// Write a program to imp0liment the following ops on a stack push pop and display(only impliment using push and pop)
+// ^ Assignment 2
+// Write a program to impliment the following opreation on a stack using linkedlist push pop display(only impliment using push and pop)
+// ^ Assignment 3
+// Write a program to impliment a stack ADT with opereations push pop and display
