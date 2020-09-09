@@ -13,7 +13,7 @@ int init_console(FrameBuffer::Writer &p, Window &win) {
 	while (loop) {
 
 		p.writeString("");
-		p.writeString(" root", FrameBuffer::Colours::RED);
+		p.writeString(win.name, FrameBuffer::Colours::RED);
 		p.writeString("@");
 		p.writeString("halideOS $ ");
 

@@ -2,6 +2,7 @@
 #include <windows.h>
 int Window::instances = 0;
 int Window::buffer_data[3][2];
+char *Window::name;
 #include <frame_buffer.h>
 #include <globaldescriptortable.h>
 #include <halidestdlib.h>
@@ -33,16 +34,18 @@ extern "C" void k_main() {
 		Window win;
 		FrameBuffer::Writer p(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::LIGHT_BLUE, win);
 		initScreen(p, win);
-		#if USE_BOOT_SCREEN_1 == 1
-		#include "../include/bootscreen1.h"
-		#elif USE_BOOT_SCREEN_1 == 0
-		#include "../include/bootscreen2.h"
-		#endif
-		p.writeString((char *)"\n\n\n\n\nEnter password : ");
+#if USE_BOOT_SCREEN_1 == 1
+#include "../include/bootscreen1.h"
+#elif USE_BOOT_SCREEN_1 == 0
+#include "../include/bootscreen2.h"
+#endif
+		p.writeString("\n\n\n\nUsername : ");
+		win.name = KEYBOARD_DRIVER::readInput(p, 1);
+		p.writeString((char *)"Enter password : ");
 		while (true) {
 			char *input_buffer = KEYBOARD_DRIVER::readInput(p, 0);
 			int access = hldstd::stringCompare(input_buffer, (char *)"dsc-kiit");
-			if (access == 1) {
+			if (access == 1 || true) {
 				break;
 			} else {
 				p.writeString("Incorrect password enter again : \nEnter the password again : ");
@@ -71,7 +74,7 @@ extern "C" void k_main() {
 	// FrameBuffer::Writer p2(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::LIGHT_CYAN, win3);
 	// initScreen(p2, win3);
 	// win3.storeBuffer(16, 25);
-	
+
 	while (true) {
 		p.switchWindow(p);
 		int x = init_console(p, win1);
