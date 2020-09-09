@@ -59,32 +59,41 @@ extern "C" void k_main(const void *multiboot_structure, unsigned int multiboot) 
 		} */
 	}
 
-	Window win1(10, 70, 0, 25, (char *)"Window 1");
+	Window win1(10, 70, 0, 15, (char *)"Window 1");
 	FrameBuffer::Writer p(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::BLACK, &win1);
+	win1.storeBuffer(0, 15);
 	initScreen(p, win1);
 
-	win1.storeBuffer(0, 25);
+	Window win2(10, 70, 15, 20, (char *)"Window 2");
+	FrameBuffer::Writer p1(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::BLUE, &win2);
+	win2.storeBuffer(15, 20);
+	initScreen(p1, win2);
 
-	// Window win2(10, 70, 9, 16, (char *)"Basic window title v.0.2 instance 2 instance_id(b.0.1)");
-	// FrameBuffer::Writer p1(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::LIGHT_RED, win2);
-	// initScreen(p1, win2);
-	// win2.storeBuffer(9, 16);
-
-	// Window win3(10, 70, 16, 25, (char *)"Basic window title v.0.2 instance 3 instance_id(c.0.1)");
-	// FrameBuffer::Writer p2(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::LIGHT_CYAN, win3);
-	// initScreen(p2, win3);
-	// win3.storeBuffer(16, 25);
+	Window win3(10, 70, 20, 25, (char *)"Window 3");
+	FrameBuffer::Writer p2(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::RED, &win3);
+	win3.storeBuffer(20, 25);
+	initScreen(p2, win3);
 
 	while (true) {
 		p.switchWindow(p);
 		int x = init_console(p, win1);
-		// if (x == 1) {
-		// 	p1.switchWindow(p1);
-
-		// 	int y = init_console(p1, win2);
-		// 	p2.switchWindow(p2);
-		// 	int z = init_console(p2, win3);
-		// }
+		if (x == 2) {
+			win3.DestroyWindow(&win2);
+			p1.Rerender(&win2);
+		} else if (x == 3) {
+			win2.DestroyWindow(&win1);
+			p.Rerender(&win1);
+		}
+		if (x == 1) {
+			if (win2.isDestroyed == false) {
+				p1.switchWindow(p1);
+				int y = init_console(p1, win2);
+			}
+			if (win3.isDestroyed == false) {
+				p2.switchWindow(p2);
+				int z = init_console(p2, win3);
+			}
+		}
 	}
 	interrupts.Activate();
 	while (1)
