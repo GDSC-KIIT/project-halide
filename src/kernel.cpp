@@ -41,9 +41,7 @@ extern "C" void k_main(const void *multiboot_structure, unsigned int multiboot) 
 #elif USE_BOOT_SCREEN_1 == 0
 #include "../include/bootscreen2.h"
 #endif
-		p.writeString("\n\n\n\nUsername : ");
-		win.name = KEYBOARD_DRIVER::readInput(p, 1);
-		p.writeString((char *)"Enter password : ");
+		p.writeString((char *)"\n\n\n\nEnter password : ");
 		while (true) {
 			char *input_buffer = KEYBOARD_DRIVER::readInput(p, 0);
 			int access = hldstd::stringCompare(input_buffer, (char *)"dsc-kiit");
