@@ -37,11 +37,11 @@ extern "C" void k_main(const void *multiboot_structure, unsigned int multiboot) 
 		Window win;
 		FrameBuffer::Writer p(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::LIGHT_BLUE, &win);
 		initScreen(p, win);
-#if USE_BOOT_SCREEN_1 == 1
-#include "../include/bootscreen1.h"
-#elif USE_BOOT_SCREEN_1 == 0
-#include "../include/bootscreen2.h"
-#endif
+		#if USE_BOOT_SCREEN_1 == 1
+		#include "../include/bootscreen1.h"
+		#elif USE_BOOT_SCREEN_1 == 0
+		#include "../include/bootscreen2.h"
+		#endif
 		p.writeString((char *)"\n\n\n\nEnter user name : ");
 		char *user_name = KEYBOARD_DRIVER::readInput(p, 1);
 		for (int i = 0; user_name[i] != '\0'; i++) {
