@@ -12,10 +12,6 @@ char Window::name[] = {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' 
 
 #define USE_BOOT_SCREEN_1 1
 
-int Window::instances = 0;
-int Window::buffer_data[3][2];
-char *Window::name;
-
 typedef void (*ctor)();
 extern "C" ctor begin_constructors;
 extern "C" ctor end_constructors;
@@ -52,7 +48,6 @@ extern "C" void k_main(const void *multiboot_structure, unsigned int multiboot) 
 			win.name[i] = user_name[i];
 			win.name[i + 1] = '\0';
 		}
-		p.writeString(win.name);
 		p.writeString((char *)"Enter password : ");
 		while (true) {
 			char *input_buffer = KEYBOARD_DRIVER::readInput(p, 0);
