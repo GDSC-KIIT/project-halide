@@ -3,6 +3,6 @@ UseTab: Always
 TabWidth: 4
 IndentWidth: 4
 AccessModifierOffset: -4
-ColumnLimit: 200
+ColumnLimit: 150
 NamespaceIndentation: All
 AllowShortIfStatementsOnASingleLine: Always
