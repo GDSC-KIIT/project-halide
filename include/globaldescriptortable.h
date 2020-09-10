@@ -18,6 +18,7 @@ namespace GLOBAL_DESCRIPTOR_TABLE {
 			unsigned int Base();
 			unsigned int Limit();
 		} __attribute__((packed));
+
 		SegmentDescriptor null;
 		SegmentDescriptor unused;
 		SegmentDescriptor code;
@@ -25,10 +26,10 @@ namespace GLOBAL_DESCRIPTOR_TABLE {
 
 	public:
 		GlobalDescriptorTable();
-		~GlobalDescriptorTable();
 		unsigned short codeSegment();
 		unsigned short dataSegment();
+		~GlobalDescriptorTable();
 	};
-}
+} // namespace GLOBAL_DESCRIPTOR_TABLE
 
 #endif

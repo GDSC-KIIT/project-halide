@@ -8,8 +8,13 @@ char Window::name[] = {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' 
 #include <halidestdlib.h>
 #include <interrupts.h>
 #include <keyboard.h>
+#include <windows.h>
 
 #define USE_BOOT_SCREEN_1 1
+
+int Window::instances = 0;
+int Window::buffer_data[3][2];
+char *Window::name;
 
 typedef void (*ctor)();
 extern "C" ctor begin_constructors;

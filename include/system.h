@@ -21,7 +21,7 @@ public:
 
 	virtual unsigned char Read();
 	virtual void Write(unsigned char data);
-// ! Public for now
+	// ! Public for now
 public:
 	static inline unsigned char Read8(unsigned short _port) {
 		unsigned char result;
@@ -50,7 +50,7 @@ public:
 
 	virtual unsigned short Read();
 	virtual void Write(unsigned short data);
-// ! Public for now
+	// ! Public for now
 public:
 	static inline unsigned short Read16(unsigned short _port) {
 		unsigned short result;

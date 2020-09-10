@@ -36,10 +36,12 @@ namespace FrameBuffer {
 	class Writer {
 	private:
 		char *START = (char *)0xB8000;
+		const unsigned int s_width = 80, s_height = 25, sd = 2;
+		
 		unsigned char fg, bg;
 		static int cursorX, cursorY;
-		const unsigned int s_width = 80, s_height = 25, sd = 2;
 		int x_min, x_max, y_upper, y_lower;
+		
 		bool framesDrawn = false; // & Used for preventing buffer_clearing when initializing window
 
 	public:
