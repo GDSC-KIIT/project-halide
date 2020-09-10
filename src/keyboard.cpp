@@ -220,7 +220,6 @@ char *KEYBOARD_DRIVER::readInput(FrameBuffer::Writer &p, int mode) {
 				// buffstr[i+1] = '\0';
 				i++;
 				receiving = 0;
-				i = 0;
 				break;
 			/* case 29:
 				p.writeString(""); //Left Control
