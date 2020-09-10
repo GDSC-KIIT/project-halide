@@ -13,9 +13,7 @@ int init_console(FrameBuffer::Writer &p, Window &win) {
 	int _id = 0;
 
 	while (loop) {
-
-		p.writeString("");
-		p.writeString("root", FrameBuffer::Colours::RED);
+		p.writeString((char *)win.name, FrameBuffer::Colours::RED);
 		p.writeString("@");
 		p.writeString("halideOS $ ");
 
@@ -183,23 +181,22 @@ void calculator(FrameBuffer::Writer &p, hldstd::string &expression) {
 					st2.push(int_val.to_int());
 				}
 
-
 				int a = st2.top();
 				st2.pop();
 				int b = st2.top();
 				st2.pop();
 
 				if (postfix[i] == '+') {
-					int val = a+b;
+					int val = a + b;
 					st2.push(val);
 				} else if (postfix[i] == '-') {
-					int val = b-a;
+					int val = b - a;
 					st2.push(val);
 				} else if (postfix[i] == '*') {
-					int val = a*b;
+					int val = a * b;
 					st2.push(val);
 				} else if (postfix[i] == '/') {
-					int val = b/a;
+					int val = b / a;
 					st2.push(val);
 				}
 
