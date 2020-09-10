@@ -2,7 +2,7 @@
 #include <windows.h>
 int Window::instances = 0;
 int Window::buffer_data[3][2];
-char *Window::name;
+char Window::name[] = {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
 #include <frame_buffer.h>
 #include <globaldescriptortable.h>
 #include <halidestdlib.h>
@@ -41,12 +41,19 @@ extern "C" void k_main(const void *multiboot_structure, unsigned int multiboot) 
 #elif USE_BOOT_SCREEN_1 == 0
 #include "../include/bootscreen2.h"
 #endif
-		p.writeString((char *)"\n\n\n\nEnter password : ");
+		p.writeString((char *)"\n\n\n\nEnter user name : ");
+		char *user_name = KEYBOARD_DRIVER::readInput(p, 1);
+		for (int i = 0; user_name[i] != '\0'; i++) {
+			win.name[i] = user_name[i];
+			win.name[i + 1] = '\0';
+		}
+		p.writeString(win.name);
+		p.writeString((char *)"Enter password : ");
 		while (true) {
 			char *input_buffer = KEYBOARD_DRIVER::readInput(p, 0);
 			int access = hldstd::stringCompare(input_buffer, (char *)"dsc-kiit");
-			if (access == 1 || true) {
-w				break;
+			if (access == 1) {
+				break;
 			} else {
 				p.writeString("Incorrect password enter again : \nEnter the password again : ");
 			}

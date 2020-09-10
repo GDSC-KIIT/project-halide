@@ -10,7 +10,7 @@ class Window {
 public:
 	// & New feature implementation
 	static int instances;
-	static char *name;
+	static char name[20];
 	int lastCursorPosition[2];
 	static int buffer_data[3][2];
 	int m_x1, m_x2, m_y1, m_y2;
@@ -39,6 +39,6 @@ public:
 		// m_y1 = buffer_data[instances][0];
 		// m_y2 = buffer_data[instances][1];
 	}
-};
+}__attribute__((packed));
 
 #endif
