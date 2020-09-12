@@ -23,9 +23,11 @@ for linux based operating systems via the default package manager.
 
 ## Screenshots
 
+<div align="center">
+	
+</div>
 
-
-## Documentation
+<!-- ## Documentation -->
 
 
 
@@ -41,5 +43,5 @@ We use `clang-format` to make sure the code follows a consistent style. The deta
 
 Copyright (c) **DSC KIIT**. All rights reserved. Licensed under the MIT License
 
-[![forthebadge](https://forthebadge.com/images/badges/built-with-swag.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/made-with-c-plus-plus.svg)](https://forthebadge.com)
