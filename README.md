@@ -1,12 +1,47 @@
 # Project Halide
 
-An Experimental OS from DSC KIIT
+HalideOS is an experimental operating system written entirely from scratch, right from the kernel up to the user programs. It supports a basic shell with some commands including a command line calculator. You can boot it up and run it in a virtual machine.
 
-## Commands
+## Motivation
 
-`cd` into the `src` directory
+Developing an operating system from scratch is one of the hardest tasks in computer science. It is considered a pinnacle of software engineering. It requires a good grasp of C/C++, x86 assembly language, processor architecture and memory. But it is not something that undergraduate students can’t do as we learn all these subjects as a part of our coursework.
 
-* `make run` to generate the .iso file and launch it in qemu-system-i386
-* `make clean` to delete the generated files
+This project is an attempt by DSC KIIT to introduce students to the fascinating domain of operating systems development.
 
-Refer the `src/Makefile` for more details
+
+## Tools and Languages
+
+The bulk of HalideOS is written using C++17 with some x86 assembly code for the bootloader. These tools are easily available
+for linux based operating systems via the default package manager.
+
+* `g++`
+* `as`
+* `ld`
+* `make`
+* `qemu`
+
+
+## Screenshots
+
+
+
+## Documentation
+
+
+
+
+## Code Style
+
+We use `clang-format` to make sure the code follows a consistent style. The details are available in the 
+[.clang-format](./.clang-format) file. Most editors have features to automatically format using `clang-format`.
+
+<!-- ## Contribute -->
+
+## License
+
+Copyright (c) **DSC KIIT**. All rights reserved. Licensed under the MIT License
+
+<br></br>
+
+[![forthebadge](https://forthebadge.com/images/badges/built-with-swag.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/made-with-c-plus-plus.svg)](https://forthebadge.com)
