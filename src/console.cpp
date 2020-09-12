@@ -29,7 +29,7 @@ int init_console(FrameBuffer::Writer &p, Window &win) {
 
 		else if (hldstd::stringCompare(command.c_ptr(), "calculator")) {
 			p.writeString(" HalideOS - Basic Calculator\n");
-			p.writeString(" Enter an Expression (only +, -, *, /): ");
+			p.writeString(" Enter an algebriac expression (only use +, -, *, /): ");
 			hldstd::string c = KEYBOARD_DRIVER::readInput(p);
 			calculator(p, c);
 		}
