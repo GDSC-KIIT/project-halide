@@ -45,6 +45,12 @@ run-full-screen: kernel.iso
 run-vb: kernel.iso
 	VBoxManage startvm "HalideOS v.0.1"
 
+help:
+	@echo Write here
+	@echo Next line
+	@echo This goes on
+	@echo Use @echo command and write line it will be printed to the line
+
 archive:
 	mkdir -p ../Archives/${args}
 	cp ../include/ ../Archives/${args} -rf
