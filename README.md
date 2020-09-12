@@ -24,7 +24,7 @@ for linux based operating systems via the default package manager.
 ## Screenshots
 
 <div align="center">
-	<img width="70%" src="https://cdn.githubraw.com/DSC-KIIT/project-halide/master/img/home.png">	
+	<img width="70%" src="https://cdn.githubraw.com/DSC-KIIT/project-halide/b06ca381/img/home.png">	
 </div>
 
 
