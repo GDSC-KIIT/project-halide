@@ -1,8 +1,8 @@
 #include <console.h>
 #include <halidestdlib.h>
 
-void writeAbout(FrameBuffer::Writer &);
-void writeString_man(FrameBuffer::Writer &);
+void writeAbout(FrameBuffer::Writer &, Window &);
+void writeString_man(FrameBuffer::Writer &, Window &);
 void calculator(FrameBuffer::Writer &, hldstd::string &expression);
 static void writeString_man(FrameBuffer::Writer &);
 static int checkWindowToDestroy(Window win);
@@ -20,11 +20,11 @@ int init_console(FrameBuffer::Writer &p, Window &win) {
 		hldstd::string command = KEYBOARD_DRIVER::readInput(p);
 
 		if (hldstd::stringCompare(command.c_ptr(), "help")) {
-			writeString_man(p);
+			writeString_man(p, win);
 		}
 
 		else if (hldstd::stringCompare(command.c_ptr(), "about")) {
-			writeAbout(p);
+			writeAbout(p, win);
 		}
 
 		else if (hldstd::stringCompare(command.c_ptr(), "calculator")) {
@@ -38,8 +38,8 @@ int init_console(FrameBuffer::Writer &p, Window &win) {
 			p.clearLine(win.m_y1 + 1, win.m_y2 - 1);
 		}
 
-		else if (hldstd::stringCompare(command.c_ptr(), "switch console")) {
-			p.writeString("switchched console\n");
+		else if (hldstd::stringCompare(command.c_ptr(), "switch window")) {
+			p.writeString("switchched window\n");
 			p.clearLine(win.m_y1 + 1, win.m_y2 - 1); // Use this line of code till we impliment local state storage
 			_id = 1;
 			loop = 0;
@@ -47,7 +47,9 @@ int init_console(FrameBuffer::Writer &p, Window &win) {
 		}
 
 		else if (hldstd::stringCompare(command.c_ptr(), "greet")) {
-			p.writeString(" Hello User, Welcome to HalideOS\n");
+			p.writeString(" Hello ");
+			p.writeString((char *)win.name);
+			p.writeString(", Welcome to HalideOS\n");
 		}
 
 		else if (hldstd::stringCompare(command.c_ptr(), "destroy window")) {
@@ -74,21 +76,40 @@ int init_console(FrameBuffer::Writer &p, Window &win) {
 	return _id;
 }
 
-inline void writeAbout(FrameBuffer::Writer &p) {
-	p.writeString("\n     HalideOS v1.0 \n", FrameBuffer::Colours::LIGHT_BLUE);
-	p.writeString("     An experimental OS by DSC KIIT \n");
-	p.writeString("     github.com/DSC-KIIT/project-halide \n", FrameBuffer::Colours::GREEN);
-	p.writeString("     Developed by Ujjwal Shekhawat and Junaid Rahim\n\n");
+inline void writeAbout(FrameBuffer::Writer &p, Window &win) {
+	if ((win.m_y2 - win.m_y1) > 8) {
+		p.writeString("\n     HalideOS v1.0 \n", FrameBuffer::Colours::LIGHT_BLUE);
+		p.writeString("     An experimental OS by DSC KIIT \n");
+		p.writeString("     github.com/DSC-KIIT/project-halide \n", FrameBuffer::Colours::GREEN);
+		p.writeString("     Developed by Ujjwal Shekhawat and Junaid Rahim\n\n");
+	} else {
+		p.writeString("HalideOS v1.0 ", FrameBuffer::Colours::LIGHT_BLUE);
+		p.writeString("|An experimental OS by DSC KIIT|");
+		p.writeString("github.com/DSC-KIIT/project-halide|", FrameBuffer::Colours::GREEN);
+		p.writeString("Developed by Ujjwal Shekhawat and Junaid Rahim|");
+	}
 }
 
-inline void writeString_man(FrameBuffer::Writer &p) {
-	p.writeString(" List of Commands: \n", FrameBuffer::Colours::GREEN);
-	p.writeString("    about\n", FrameBuffer::Colours::WHITE);
-	p.writeString("    help\n", FrameBuffer::Colours::WHITE);
-	p.writeString("    greet\n", FrameBuffer::Colours::WHITE);
-	p.writeString("    calculator\n", FrameBuffer::Colours::WHITE);
-	p.writeString("    clear\n", FrameBuffer::Colours::WHITE);
-	p.writeString("    switch console\n", FrameBuffer::Colours::WHITE);
+inline void writeString_man(FrameBuffer::Writer &p, Window &win) {
+	if ((win.m_y2 - win.m_y1) > 8) {
+		p.writeString(" List of Commands: \n", FrameBuffer::Colours::GREEN);
+		p.writeString("    about\n", FrameBuffer::Colours::WHITE);
+		p.writeString("    help\n", FrameBuffer::Colours::WHITE);
+		p.writeString("    greet\n", FrameBuffer::Colours::WHITE);
+		p.writeString("    calculator\n", FrameBuffer::Colours::WHITE);
+		p.writeString("    clear\n", FrameBuffer::Colours::WHITE);
+		p.writeString("    switch window\n", FrameBuffer::Colours::WHITE);
+		p.writeString("    destroy window\n", FrameBuffer::Colours::WHITE);
+	} else {
+		p.writeString("List of Commands: ", FrameBuffer::Colours::GREEN);
+		p.writeString("about|", FrameBuffer::Colours::WHITE);
+		p.writeString("help|", FrameBuffer::Colours::WHITE);
+		p.writeString("greet|", FrameBuffer::Colours::WHITE);
+		p.writeString("calculator|", FrameBuffer::Colours::WHITE);
+		p.writeString("clear|", FrameBuffer::Colours::WHITE);
+		p.writeString("switch window|", FrameBuffer::Colours::WHITE);
+		p.writeString("destroy window|", FrameBuffer::Colours::WHITE);
+	}
 }
 
 int precedence(char c) {

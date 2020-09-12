@@ -6,7 +6,7 @@
 #include <keyboard.h>
 #include <windows.h>
 
-#define CONSOLES 1
+#define CONSOLES 2
 
 int Window::instances = 0;
 int Window::buffer_data[3][2];
