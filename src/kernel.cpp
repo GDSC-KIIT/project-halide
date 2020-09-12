@@ -32,36 +32,61 @@ static void initScreen(FrameBuffer::Writer &p, Window &win) {
 }
 
 extern "C" void k_main(const void *multiboot_structure, unsigned int multiboot) {
-	// * instantiate globaldescriptortable here
-	GLOBAL_DESCRIPTOR_TABLE::GlobalDescriptorTable globaldescriptortable;
-	InterruptManager interrupts(&globaldescriptortable); 
+
 	{
-		Window win;
-		FrameBuffer::Writer p(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::LIGHT_BLUE, &win);
+		Window win(0, 10, 0, 25, (char *)"WELCOME TO HALIDE OS");
+		FrameBuffer::Writer p(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::BLACK, &win);
 		initScreen(p, win);
-#if USE_BOOT_SCREEN_1 == 1
-#include "../include/bootscreen1.h"
-#elif USE_BOOT_SCREEN_1 == 0
-#include "../include/bootscreen2.h"
-#endif
-		p.writeString((char *)"\n\n\n\nEnter user name : ");
+		#include "../include/bootscreen1.h"
+		// p.writeString("Press Enter key : ");
+		p.writeString("\n\n\n\nEnter user name : ");
 		char *user_name = KEYBOARD_DRIVER::readInput(p, 1);
 		for (int i = 0; user_name[i] != '\0'; i++) {
 			win.name[i] = user_name[i];
 			win.name[i + 1] = '\0';
 		}
-		p.writeString((char *)"Enter password : ");
+		p.writeString("Enter password : ");
 		while (true) {
 			char *input_buffer = KEYBOARD_DRIVER::readInput(p, 0);
-			int access = hldstd::stringCompare(input_buffer, (char *)"dsc-kiit");
+			int access = hldstd::stringCompare(input_buffer, "dsc-kiit");
 			if (access == 1) {
 				break;
 			} else {
 				p.writeString("Incorrect password enter again : \nEnter the password again : ");
 			}
 		}
-		p.writeString("Loading OS ...");
 	}
+
+	// * instantiate globaldescriptortable here
+	GLOBAL_DESCRIPTOR_TABLE::GlobalDescriptorTable globaldescriptortable;
+	InterruptManager interrupts(&globaldescriptortable);
+// 	{
+// 		Window win;
+// 		FrameBuffer::Writer p(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::LIGHT_BLUE, &win);
+// 		initScreen(p, win);
+// #if USE_BOOT_SCREEN_1 == 1
+// #include "../include/bootscreen1.h"
+// #elif USE_BOOT_SCREEN_1 == 0
+// #include "../include/bootscreen2.h"
+// #endif
+// 		p.writeString("\n\n\n\nEnter user name : ");
+// 		char *user_name = KEYBOARD_DRIVER::readInput(p, 1);
+// 		for (int i = 0; user_name[i] != '\0'; i++) {
+// 			win.name[i] = user_name[i];
+// 			win.name[i + 1] = '\0';
+// 		}
+// 		p.writeString("Enter password : ");
+// 		while (true) {
+// 			char *input_buffer = KEYBOARD_DRIVER::readInput(p, 0);
+// 			int access = hldstd::stringCompare(input_buffer, "dsc-kiit");
+// 			if (access == 1) {
+// 				break;
+// 			} else {
+// 				p.writeString("Incorrect password enter again : \nEnter the password again : ");
+// 			}
+// 		}
+// 		p.writeString("Loading OS ...");
+// 	}
 
 	int widthWin1 = 15, widthWin2 = 20;
 
