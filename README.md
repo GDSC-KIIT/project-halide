@@ -41,7 +41,5 @@ We use `clang-format` to make sure the code follows a consistent style. The deta
 
 Copyright (c) **DSC KIIT**. All rights reserved. Licensed under the MIT License
 
-<br></br>
-
 [![forthebadge](https://forthebadge.com/images/badges/built-with-swag.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/made-with-c-plus-plus.svg)](https://forthebadge.com)
