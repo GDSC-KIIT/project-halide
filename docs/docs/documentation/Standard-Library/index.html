@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en" dir=>
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The Standard Library #  The standard library of HalideOS is a set of a few abstractions for some common data structures and utility functions that we used to again and again for the kernel as well as the shell programs.
+All the classes and the functions are encapsulated in the hldstd namespace for clarity.
+ Files: include/halidestdlib.h and src/halidestdlib.cpp Namespaces: hldstd, hldstd::math  Classes  hldstd::string hltstd::stack&lt;T&gt;   Functions Refer below for details on return types with accurate namespaces.">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="" />
+<meta property="og:description" content="The Standard Library #  The standard library of HalideOS is a set of a few abstractions for some common data structures and utility functions that we used to again and again for the kernel as well as the shell programs.
+All the classes and the functions are encapsulated in the hldstd namespace for clarity.
+ Files: include/halidestdlib.h and src/halidestdlib.cpp Namespaces: hldstd, hldstd::math  Classes  hldstd::string hltstd::stack&lt;T&gt;   Functions Refer below for details on return types with accurate namespaces." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://dsc-kiit.github.io/project-halide-website/docs/documentation/Standard-Library/" />
+<meta property="article:modified_time" content="2020-09-12T00:22:31+05:30" />
+<title>Standard Library | HalideOS</title>
+<link rel="manifest" href="/project-halide-website/manifest.json">
+<link rel="icon" href="/project-halide-website/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/project-halide-website/book.min.6cd8553a6854f4812343f0f0c8baca31271e686434f381fbe3c7226f66639176.css" integrity="sha256-bNhVOmhU9IEjQ/DwyLrKMSceaGQ084H748cib2ZjkXY=">
+<script defer src="/project-halide-website/en.search.min.9b50936dc03b55961d260444d4190c577f94d7dcce26e8be661c140782a66ed8.js" integrity="sha256-m1CTbcA7VZYdJgRE1BkMV3&#43;U19zOJui&#43;ZhwUB4Kmbtg="></script>
+
+<script defer src="/project-halide-website/sw.min.910ccf2ae2e1cf345f391a2f1856d6781c6b69513db4e23acb738e62f52b5f96.js" integrity="sha256-kQzPKuLhzzRfORovGFbWeBxraVE9tOI6y3OOYvUrX5Y="></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body dir=>
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/project-halide-website"><span>HalideOS</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <a href="/project-halide-website/docs/Getting-Started/" class="">Getting Started</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/project-halide-website/docs/Getting-Started/Introduction/" class="">Introduction</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/project-halide-website/docs/Getting-Started/Required-Knowledge/" class="">Required Knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/project-halide-website/docs/Getting-Started/Resources-and-Tutorials/" class="">Resources and Tutorials</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/project-halide-website/docs/Getting-Started/Running-Halide/" class="">Running Halide</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <a href="/project-halide-website/docs/documentation/" class="">Documentation</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/project-halide-website/docs/documentation/Console/" class="">Console</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/project-halide-website/docs/documentation/Frame-Buffer/" class="">Frame Buffer</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/project-halide-website/docs/documentation/Keyboard-Driver/" class="">Keyboard Driver</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/project-halide-website/docs/documentation/Standard-Library/" class="active">Standard Library</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/project-halide-website/docs/documentation/Windows/" class="">Windows</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/project-halide-website/posts/" >
+        Blog
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/DSC-KIIT/project-halide" target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/project-halide-website/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Standard Library</strong>
+
+  <label for="toc-control">
+    
+    <img src="/project-halide-website/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#the-standard-library">The Standard Library</a>
+      <ul>
+        <li><a href="#classes"><strong>Classes</strong></a></li>
+        <li><a href="#hldstdstring"><code>hldstd::string</code></a></li>
+        <li><a href="#hldstdstackt"><code>hldstd::stack&lt;T&gt;</code></a></li>
+        <li><a href="#functions"><strong>Functions</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="the-standard-library">
+  The Standard Library
+  <a class="anchor" href="#the-standard-library">#</a>
+</h1>
+<p>The standard library of HalideOS is a set of a few abstractions for some common data structures and utility
+functions that we used to again and again for the kernel as well as the shell programs.</p>
+<p>All the classes and the functions are encapsulated in the <code>hldstd</code> namespace for clarity.</p>
+<ul>
+<li>Files: <code>include/halidestdlib.h</code> and <code>src/halidestdlib.cpp</code></li>
+<li>Namespaces: <code>hldstd</code>, <code>hldstd::math</code></li>
+</ul>
+<div class="book-columns flex flex-wrap">
+  
+  <div class="flex-even markdown-inner">
+    <h2 id="classes">Classes</h2>
+<ul>
+<li><code>hldstd::string</code></li>
+<li><code>hltstd::stack&lt;T&gt;</code></li>
+</ul>
+
+  </div>
+  
+  <div class="flex-even markdown-inner">
+    <h2 id="functions">Functions</h2>
+<p>Refer below for details on return types with accurate namespaces.</p>
+<ul>
+<li><code>hldstd::stringCompare</code></li>
+<li><code>hldstd::stringLength</code></li>
+<li><code>hldstd::math::pow</code></li>
+<li><code>hldstd::math::abs</code></li>
+</ul>
+
+  </div>
+  
+</div>
+
+<hr>
+<h2 id="classes">
+  <strong>Classes</strong>
+  <a class="anchor" href="#classes">#</a>
+</h2>
+<h2 id="hldstdstring">
+  <code>hldstd::string</code>
+  <a class="anchor" href="#hldstdstring">#</a>
+</h2>
+<p>A regular string class to maintain a character array and it&rsquo;s size, with some conversion functions.</p>
+<p><strong>Functions</strong></p>
+<ul>
+<li><code>string(int x);</code> - Contructor to convert <code>int</code> to <code>string</code></li>
+<li><code>string(double x, int digits_after_point);</code> - Constructor to convert <code>double</code> to <code>string</code></li>
+<li><code>string(char *str);</code> - Constructor to convert a raw <code>char*</code> to <code>string</code></li>
+<li><code>string(bool val);</code> - Constructor to convert <code>bool</code> to <code>string</code></li>
+<li><code>string(string &amp;other);</code> - Copy Constructor</li>
+<li><code>int size();</code> - Returns size of the string</li>
+<li><code>char at(int i);</code> - Returns the character at index i of the string</li>
+<li><code>char *c_ptr();</code> - Returns a raw <code>char *</code> to the string</li>
+<li><code>int to_int();</code> - Converts the <code>string</code> to <code>int</code></li>
+<li><code>double to_double();</code> - Converts the <code>string</code> to <code>double</code></li>
+</ul>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>Examples - Click to Expand</span>
+      <span>↕</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;halidestdlib.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// Various ways to construct a hldstd::string
+</span><span style="color:#75715e"></span>hldstd<span style="color:#f92672">::</span>string a <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;From char *&#34;</span>;
+hldstd<span style="color:#f92672">::</span>string b <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>; 
+hldstd<span style="color:#f92672">::</span>string c <span style="color:#f92672">=</span> false;
+hldstd<span style="color:#f92672">::</span>string d(<span style="color:#ae81ff">10.21343</span>, <span style="color:#ae81ff">3</span>);
+hldstd<span style="color:#f92672">::</span>string e <span style="color:#f92672">=</span> a;
+
+<span style="color:#75715e">// Utility Functions
+</span><span style="color:#75715e"></span>hldstd<span style="color:#f92672">::</span>string s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;FooBarBaz&#34;</span>;
+
+<span style="color:#66d9ef">int</span> s_size <span style="color:#f92672">=</span> s.size() <span style="color:#75715e">// returns 9
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">char</span> s_char <span style="color:#f92672">=</span> a.at(<span style="color:#ae81ff">3</span>) <span style="color:#75715e">// returns &#39;B&#39;
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> s_ptr <span style="color:#f92672">=</span> s.c_ptr() <span style="color:#75715e">// returns a pointer to 
+</span><span style="color:#75715e"></span>						<span style="color:#75715e">// the char array stored in the class
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// Conversion
+</span><span style="color:#75715e"></span>hldstd<span style="color:#f92672">::</span>string i <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;1201032&#34;</span>;
+hldstd<span style="color:#f92672">::</span>srting j <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;1213.21434&#34;</span>
+
+<span style="color:#66d9ef">int</span> i_int <span style="color:#f92672">=</span> i.to_int(); <span style="color:#75715e">// return 1201032
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">double</span> j_double <span style="color:#f92672">=</span> j.to_double(); <span style="color:#75715e">// returns 1213.21434
+</span><span style="color:#75715e"></span>
+</code></pre></div>
+    </div>
+  </label>
+</div>
+
+<h2 id="hldstdstackt">
+  <code>hldstd::stack&lt;T&gt;</code>
+  <a class="anchor" href="#hldstdstackt">#</a>
+</h2>
+<p>A standard stack or LIFO list with the standard operations. This is a template class, the stack
+can hold any data-type <code>T</code></p>
+<p><strong>Functions</strong></p>
+<p>All functions are template functions with <code>&lt;typename T&gt;</code></p>
+<ul>
+<li><code>stack(int size, T x);</code> - Constructor to initialise the stack with size and the first element;</li>
+<li><code>bool pop();</code> - <code>false</code> for underflow, <code>true</code> for successful pop</li>
+<li><code>bool push(T x);</code> - <code>false</code> for overflow, <code>true</code> for successful push</li>
+<li><code>T top();</code> - Returns the top element of the stack</li>
+<li><code>bool isEmpty();</code> - Check if stack is empty or not.</li>
+</ul>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>Examples - Click to Expand</span>
+      <span>↕</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;halidestdlib.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+hldstd<span style="color:#f92672">::</span>stack<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> st(<span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">0</span>);
+
+st.push(<span style="color:#ae81ff">1</span>);
+st.push(<span style="color:#ae81ff">2</span>);
+st.push(<span style="color:#ae81ff">3</span>);
+
+st.pop();
+
+<span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> st.top(); <span style="color:#75715e">// returns true
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">bool</span> e <span style="color:#f92672">=</span> st.isEmpty(); <span style="color:#75715e">// returns false
+</span></code></pre></div>
+    </div>
+  </label>
+</div>
+
+<hr>
+<h2 id="functions">
+  <strong>Functions</strong>
+  <a class="anchor" href="#functions">#</a>
+</h2>
+<p>Some simple mathematical functions are declared in the <code>math</code> namespace.</p>
+<ul>
+<li><code>int hldstd::stringCompare(char *, char *)</code> - Compare 2 strings from the char pointers</li>
+<li><code>int hldstd::stringLength(char *)</code> - Get length of string</li>
+<li><code>double hldstd::math::pow(double x, int y)</code> - x^y</li>
+<li><code>int hldstd::math::abs(int x)</code> - |x|</li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+  <div><a class="flex align-center" href="https://github.com/alex-shpak/hugo-book/commit/3cd9d9d9cf502457d2c89a95204d572385260642" title='Last modified by Junaid Rahim | September 12, 2020' target="_blank" rel="noopener">
+      <img src="/project-halide-website/svg/calendar.svg" class="book-icon" alt="Calendar" />
+      <span>September 12, 2020</span>
+    </a>
+  </div>
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/alex-shpak/hugo-book/edit/master/exampleSite/content/docs/documentation/Standard%20Library.md" target="_blank" rel="noopener">
+      <img src="/project-halide-website/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#the-standard-library">The Standard Library</a>
+      <ul>
+        <li><a href="#classes"><strong>Classes</strong></a></li>
+        <li><a href="#hldstdstring"><code>hldstd::string</code></a></li>
+        <li><a href="#hldstdstackt"><code>hldstd::stack&lt;T&gt;</code></a></li>
+        <li><a href="#functions"><strong>Functions</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

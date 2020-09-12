@@ -192,7 +192,7 @@ void calculator(FrameBuffer::Writer &p, hldstd::string &expression) {
 
 		char buff[s];
 
-		for(int i=0; i<s; i++)
+		for (int i = 0; i < s; i++)
 			buff[i] = 0;
 
 		int index = 0;

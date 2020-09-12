@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en" dir=>
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Console Commands in HalideOS #  The console in Halide is pretty simple. Just a while loop that evaluates the the commands entered by the user using a big nested if else, and then defers execution of the command to the proper functions.
+ Files: include/console.h and src/console.cpp  The console supports the following commands
+ about help greet calculator - A basic command line calculator clear switch console - Switches to the next console  Refer the src/console.">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="" />
+<meta property="og:description" content="Console Commands in HalideOS #  The console in Halide is pretty simple. Just a while loop that evaluates the the commands entered by the user using a big nested if else, and then defers execution of the command to the proper functions.
+ Files: include/console.h and src/console.cpp  The console supports the following commands
+ about help greet calculator - A basic command line calculator clear switch console - Switches to the next console  Refer the src/console." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://dsc-kiit.github.io/project-halide-website/docs/documentation/7.-Console/" />
+<meta property="article:modified_time" content="2020-09-11T16:18:06+05:30" />
+<title>7. Console | HalideOS</title>
+<link rel="manifest" href="/project-halide-website/manifest.json">
+<link rel="icon" href="/project-halide-website/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/project-halide-website/book.min.6cd8553a6854f4812343f0f0c8baca31271e686434f381fbe3c7226f66639176.css" integrity="sha256-bNhVOmhU9IEjQ/DwyLrKMSceaGQ084H748cib2ZjkXY=">
+<script defer src="/project-halide-website/en.search.min.70e791ccec44a26153a636600356e9dad50a19f09bf7679ad9f154d75c75e0ed.js" integrity="sha256-cOeRzOxEomFTpjZgA1bp2tUKGfCb92ea2fFU11x14O0="></script>
+
+<script defer src="/project-halide-website/sw.min.910ccf2ae2e1cf345f391a2f1856d6781c6b69513db4e23acb738e62f52b5f96.js" integrity="sha256-kQzPKuLhzzRfORovGFbWeBxraVE9tOI6y3OOYvUrX5Y="></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body dir=>
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/project-halide-website"><span>HalideOS</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <a href="/project-halide-website/docs/Getting-Started/" class="">Getting Started</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/project-halide-website/docs/Getting-Started/Introduction/" class="">Introduction</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/project-halide-website/docs/Getting-Started/Required-Knowledge/" class="">Required Knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/project-halide-website/docs/Getting-Started/Resources-and-Tutorials/" class="">Resources and Tutorials</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/project-halide-website/docs/Getting-Started/Running-Halide/" class="">Running Halide</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <span>Documentation</span>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/project-halide-website/docs/documentation/1.-Introduction/" class="">1. Introduction</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/project-halide-website/docs/documentation/3.-Frame-Buffer/" class="">3. Frame Buffer</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/project-halide-website/docs/documentation/4.-Keyboard-Driver/" class="">4. Keyboard Driver</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/project-halide-website/docs/documentation/5.-Standard-Library/" class="">5. Standard Library</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/project-halide-website/docs/documentation/6.-Windows/" class="">6. Windows</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/project-halide-website/docs/documentation/7.-Console/" class="active">7. Console</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/project-halide-website/docs/documentation/Global-Descriptor-Tables/" class="">Global Descriptor Tables</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/project-halide-website/docs/documentation/Interrupts/" class="">Interrupts</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/project-halide-website/posts/" >
+        Blog
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/DSC-KIIT/project-halide" target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/project-halide-website/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>7. Console</strong>
+
+  <label for="toc-control">
+    
+    <img src="/project-halide-website/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#console-commands-in-halideos">Console Commands in HalideOS</a></li>
+  </ul>
+</nav>
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="console-commands-in-halideos">
+  Console Commands in HalideOS
+  <a class="anchor" href="#console-commands-in-halideos">#</a>
+</h1>
+<p>The console in Halide is pretty simple. Just a while loop that evaluates the the commands entered by the user
+using a big nested if else, and then defers execution of the command to the proper functions.</p>
+<ul>
+<li>Files: <code>include/console.h</code> and <code>src/console.cpp</code></li>
+</ul>
+<p>The console supports the following commands</p>
+<ul>
+<li><code>about</code></li>
+<li><code>help</code></li>
+<li><code>greet</code></li>
+<li><code>calculator</code> - A basic command line calculator</li>
+<li><code>clear</code></li>
+<li><code>switch console</code> - Switches to the next console</li>
+</ul>
+<p>Refer the <code>src/console.cpp</code> file to look at the implementation of these commands. Most of them are pretty simple as they just
+print text on the framebuffer.</p>
+<p>The <code>calculator</code> is the only command that does some work, it evaluates the passed expression and returns the results.
+We implemented a standard infix to postfix converter and evaluated that postfix expression. The calculator is the reason
+we implemented a stack abstraction in the standard library.</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+  <div><a class="flex align-center" href="https://github.com/alex-shpak/hugo-book/commit/a08306419f0e34deaa274543407e14f068d6e1af" title='Last modified by Junaid Rahim | September 11, 2020' target="_blank" rel="noopener">
+      <img src="/project-halide-website/svg/calendar.svg" class="book-icon" alt="Calendar" />
+      <span>September 11, 2020</span>
+    </a>
+  </div>
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/alex-shpak/hugo-book/edit/master/exampleSite/content/docs/documentation/7.%20Console.md" target="_blank" rel="noopener">
+      <img src="/project-halide-website/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#console-commands-in-halideos">Console Commands in HalideOS</a></li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

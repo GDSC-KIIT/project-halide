@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en" dir=>
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The Frame Buffer #  HalideOS uses the APIs provided by the BIOS to display text on the screen. We did not implement drivers for the graphics hardware to keep the code simple. BIOS implements a combination of memory-mapped I/O and I/O ports system to manipulate the screen and display the text.
+Memory Mapped I/O and I/O Ports #  There are usually two different ways to interact with the hardware, memory-mapped I/O and I/O ports.">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="" />
+<meta property="og:description" content="The Frame Buffer #  HalideOS uses the APIs provided by the BIOS to display text on the screen. We did not implement drivers for the graphics hardware to keep the code simple. BIOS implements a combination of memory-mapped I/O and I/O ports system to manipulate the screen and display the text.
+Memory Mapped I/O and I/O Ports #  There are usually two different ways to interact with the hardware, memory-mapped I/O and I/O ports." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://dsc-kiit.github.io/project-halide-website/docs/documentation/3.-Frame-Buffer/" />
+<meta property="article:modified_time" content="2020-09-10T17:09:19+05:30" />
+<title>3. Frame Buffer | HalideOS</title>
+<link rel="manifest" href="/project-halide-website/manifest.json">
+<link rel="icon" href="/project-halide-website/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/project-halide-website/book.min.6cd8553a6854f4812343f0f0c8baca31271e686434f381fbe3c7226f66639176.css" integrity="sha256-bNhVOmhU9IEjQ/DwyLrKMSceaGQ084H748cib2ZjkXY=">
+<script defer src="/project-halide-website/en.search.min.70e791ccec44a26153a636600356e9dad50a19f09bf7679ad9f154d75c75e0ed.js" integrity="sha256-cOeRzOxEomFTpjZgA1bp2tUKGfCb92ea2fFU11x14O0="></script>
+
+<script defer src="/project-halide-website/sw.min.910ccf2ae2e1cf345f391a2f1856d6781c6b69513db4e23acb738e62f52b5f96.js" integrity="sha256-kQzPKuLhzzRfORovGFbWeBxraVE9tOI6y3OOYvUrX5Y="></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body dir=>
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/project-halide-website"><span>HalideOS</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <a href="/project-halide-website/docs/Getting-Started/" class="">Getting Started</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/project-halide-website/docs/Getting-Started/Introduction/" class="">Introduction</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/project-halide-website/docs/Getting-Started/Required-Knowledge/" class="">Required Knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/project-halide-website/docs/Getting-Started/Resources-and-Tutorials/" class="">Resources and Tutorials</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/project-halide-website/docs/Getting-Started/Running-Halide/" class="">Running Halide</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <span>Documentation</span>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/project-halide-website/docs/documentation/1.-Introduction/" class="">1. Introduction</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/project-halide-website/docs/documentation/3.-Frame-Buffer/" class="active">3. Frame Buffer</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/project-halide-website/docs/documentation/4.-Keyboard-Driver/" class="">4. Keyboard Driver</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/project-halide-website/docs/documentation/5.-Standard-Library/" class="">5. Standard Library</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/project-halide-website/docs/documentation/6.-Windows/" class="">6. Windows</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/project-halide-website/docs/documentation/7.-Console/" class="">7. Console</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/project-halide-website/docs/documentation/Global-Descriptor-Tables/" class="">Global Descriptor Tables</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/project-halide-website/docs/documentation/Interrupts/" class="">Interrupts</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/project-halide-website/posts/" >
+        Blog
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/DSC-KIIT/project-halide" target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/project-halide-website/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>3. Frame Buffer</strong>
+
+  <label for="toc-control">
+    
+    <img src="/project-halide-website/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#the-frame-buffer">The Frame Buffer</a>
+      <ul>
+        <li><a href="#memory-mapped-io-and-io-ports">Memory Mapped I/O and I/O Ports</a></li>
+        <li><a href="#what-is-the-framebuffer-">What is the FrameBuffer ?</a>
+          <ul>
+            <li><a href="#displaying-text-on-the-screen">Displaying Text on the Screen</a></li>
+            <li><a href="#moving-the-cursor">Moving the Cursor</a></li>
+          </ul>
+        </li>
+        <li><a href="#the-framebuffer-driver-in-halideos">The FrameBuffer driver in HalideOS</a>
+          <ul>
+            <li><a href="#framebuffercolours"><code>FrameBuffer::Colours</code></a></li>
+            <li><a href="#framebufferwriter"><code>FrameBuffer::Writer</code></a></li>
+            <li><a href="#references">References</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="the-frame-buffer">
+  The Frame Buffer
+  <a class="anchor" href="#the-frame-buffer">#</a>
+</h1>
+<p>HalideOS uses the APIs provided by the BIOS to display text on the screen. We did not implement
+drivers for the graphics hardware to keep the code simple. BIOS implements a combination of
+memory-mapped I/O and I/O ports system to manipulate the screen and display the text.</p>
+<h2 id="memory-mapped-io-and-io-ports">
+  Memory Mapped I/O and I/O Ports
+  <a class="anchor" href="#memory-mapped-io-and-io-ports">#</a>
+</h2>
+<p>There are usually two different ways to interact with the hardware, memory-mapped I/O and I/O ports.</p>
+<p>If the hardware uses memory-mapped I/O then you can write to a specific memory address and the hardware will be updated
+with the new data. One example of this is the <strong>framebuffer</strong>. For example, if you write the value <code>0x410F</code> to address <code>0xB8000</code>,
+you will see the letter A in white color on a black background, will explain this in later sections.</p>
+<p>If the hardware uses I/O ports then the assembly code instructions <code>out</code> and <code>in</code> must be used to communicate with the hardware.
+The instruction out takes two parameters: the address of the I/O port and the data to send. The instruction in takes a single parameter,
+the address of the I/O port, and returns data from the hardware.</p>
+<h2 id="what-is-the-framebuffer-">
+  What is the FrameBuffer ?
+  <a class="anchor" href="#what-is-the-framebuffer-">#</a>
+</h2>
+<p>The framebuffer is a hardware device that is capable of displaying a buffer of memory on the screen. It has 80 columns
+and 25 rows, and the row and column indices start at 0 (so rows are labelled 0 - 24). You can think of it as a 2D matrix of 80x25.</p>
+<h3 id="displaying-text-on-the-screen">
+  Displaying Text on the Screen
+  <a class="anchor" href="#displaying-text-on-the-screen">#</a>
+</h3>
+<p>The starting address of the memory-mapped I/O for the framebuffer is <code>0xB8000</code>. The memory is divided into 16 bit cells, where the 16 bits determine both the character, the foreground color and the background color.</p>
+<p>The highest eight bits is the ASCII value of the character, bit 7 - 4 the background and bit 3 - 0 the foreground, as can be seen in the following figure:</p>
+<pre><code>Bit:     | 15 14 13 12 11 10 9 8 | 7 6 5 4 | 3 2 1 0 |
+Content: | ASCII                 | FG      | BG      |
+</code></pre><p>There are a set of 15 colour codes for foreground and background, these are hardcoded in the driver</p>
+<h3 id="moving-the-cursor">
+  Moving the Cursor
+  <a class="anchor" href="#moving-the-cursor">#</a>
+</h3>
+<p>Moving the cursor of the framebuffer is done via two different I/O ports.</p>
+<p>The cursor’s position is determined with a 16 bits integer:</p>
+<ul>
+<li>0 means row zero, column zero</li>
+<li>1 means row zero, column one</li>
+<li>80 means row one, column zero and so on.</li>
+</ul>
+<p>Since the position is 16 bits large, and the out assembly code instruction argument is 8 bits,
+the position must be sent in two turns, first 8 bits then the next 8 bits.</p>
+<p>The framebuffer has two I/O ports, one for accepting the data, and one for describing the data being received. Port <code>0x3D4</code> is the port that describes the data and port <code>0x3D5</code> is for the data itself.</p>
+<p>On <code>0x3D4</code>:</p>
+<ul>
+<li>Writing the integer <code>14</code> tells the framebuffer to expect the highest 8 bits of the position</li>
+<li>Writing the integer <code>15</code> tells the framebuffer to expect the lowest 8 bits of the position</li>
+</ul>
+<br>
+<hr>
+<h2 id="the-framebuffer-driver-in-halideos">
+  The FrameBuffer driver in HalideOS
+  <a class="anchor" href="#the-framebuffer-driver-in-halideos">#</a>
+</h2>
+<p>The driver is encapsulated in the <code>FrameBuffer</code> namespace. It has 2 components, <code>FrameBuffer::Colours</code> namespace has all the hex codes for the supported colours and the <code>FrameBuffer::Writer</code> class has all the functions to manage the cursor and the text on the framebuffer.</p>
+<ul>
+<li>Files : <code>include/frame_buffer.h</code> and <code>src/frame_buffer.cpp</code></li>
+<li>Namespaces: <code>FrameBuffer</code>, <code>FrameBuffer::Colours</code></li>
+<li>Classes: <code>FrameBuffer::Writer</code></li>
+</ul>
+<h3 id="framebuffercolours">
+  <code>FrameBuffer::Colours</code>
+  <a class="anchor" href="#framebuffercolours">#</a>
+</h3>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>All available colours - Click to expand</span>
+      <span>↕</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">namespace</span> Colours {
+	<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span> BLACK <span style="color:#f92672">=</span> (<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span>)<span style="color:#ae81ff">0x0</span>;
+	<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span> BLUE <span style="color:#f92672">=</span> (<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span>)<span style="color:#ae81ff">0x1</span>;
+	<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span> GREEN <span style="color:#f92672">=</span> (<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span>)<span style="color:#ae81ff">0x2</span>;
+	<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span> CYAN <span style="color:#f92672">=</span> (<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span>)<span style="color:#ae81ff">0x3</span>;
+	<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span> RED <span style="color:#f92672">=</span> (<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span>)<span style="color:#ae81ff">0x4</span>;
+	<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span> MAGENTA <span style="color:#f92672">=</span> (<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span>)<span style="color:#ae81ff">0x5</span>;
+	<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span> BROWN <span style="color:#f92672">=</span> (<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span>)<span style="color:#ae81ff">0x6</span>;
+	<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span> LIGHT_GREY <span style="color:#f92672">=</span> (<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span>)<span style="color:#ae81ff">0x7</span>;
+	<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span> DARK_GREY <span style="color:#f92672">=</span> (<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span>)<span style="color:#ae81ff">0x8</span>;
+	<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span> LIGHT_BLUE <span style="color:#f92672">=</span> (<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span>)<span style="color:#ae81ff">0x9</span>;
+	<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span> LIGHT_GREEN <span style="color:#f92672">=</span> (<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span>)<span style="color:#ae81ff">0xa</span>;
+	<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span> LIGHT_CYAN <span style="color:#f92672">=</span> (<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span>)<span style="color:#ae81ff">0xb</span>;
+	<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span> LIGHT_RED <span style="color:#f92672">=</span> (<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span>)<span style="color:#ae81ff">0xc</span>;
+	<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span> LIGHT_MAGENTA <span style="color:#f92672">=</span> (<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span>)<span style="color:#ae81ff">0xd</span>;
+	<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span> LIGHT_BROWN <span style="color:#f92672">=</span> (<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span>)<span style="color:#ae81ff">0xe</span>;
+	<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span> WHITE <span style="color:#f92672">=</span> (<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span>)<span style="color:#ae81ff">0xf</span>;
+} <span style="color:#75715e">// namespace Colours
+</span></code></pre></div>
+    </div>
+  </label>
+</div>
+
+<h3 id="framebufferwriter">
+  <code>FrameBuffer::Writer</code>
+  <a class="anchor" href="#framebufferwriter">#</a>
+</h3>
+<p><strong>Functions (all public)</strong></p>
+<ul>
+<li><code>Writer(const unsigned char &amp;foreground, const unsigned char &amp;background, Window*)</code></li>
+<li><code>void clearLine(unsigned char from, unsigned char to)</code></li>
+<li><code>void clearScreen()</code></li>
+<li><code>void initScreen(const unsigned char &amp;foreground, const unsigned char &amp;background)</code></li>
+<li><code>void setColorTheme(const unsigned char &amp;foreground, const unsigned char &amp;background)</code></li>
+<li><code>void writeString(char *str, unsigned char = FrameBuffer::Colours::WHITE)</code></li>
+<li><code>void writeHex(unsigned char key)</code></li>
+<li><code>void fillRemeaning(char *, bool)</code></li>
+<li><code>void writeAtIndex(int)</code></li>
+<li><code>void switchWindow(Writer &amp;)</code></li>
+<li><code>void clearCursor()</code></li>
+<li><code>void shiftCursor(int, char *)</code></li>
+<li><code>void updateCursor()</code></li>
+<li><code>void Rerender(Window*)</code></li>
+</ul>
+<p>Refer the source code for more details on the implementation.</p>
+<br>
+<h3 id="references">
+  References
+  <a class="anchor" href="#references">#</a>
+</h3>
+<ul>
+<li><a href="https://littleosbook.github.io/#output">https://littleosbook.github.io/#output</a></li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+  <div><a class="flex align-center" href="https://github.com/alex-shpak/hugo-book/commit/c29876a856a80cb5d161e0f3e27a4de372585fe4" title='Last modified by Junaid Rahim | September 10, 2020' target="_blank" rel="noopener">
+      <img src="/project-halide-website/svg/calendar.svg" class="book-icon" alt="Calendar" />
+      <span>September 10, 2020</span>
+    </a>
+  </div>
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/alex-shpak/hugo-book/edit/master/exampleSite/content/docs/documentation/3.%20Frame%20Buffer.md" target="_blank" rel="noopener">
+      <img src="/project-halide-website/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#the-frame-buffer">The Frame Buffer</a>
+      <ul>
+        <li><a href="#memory-mapped-io-and-io-ports">Memory Mapped I/O and I/O Ports</a></li>
+        <li><a href="#what-is-the-framebuffer-">What is the FrameBuffer ?</a>
+          <ul>
+            <li><a href="#displaying-text-on-the-screen">Displaying Text on the Screen</a></li>
+            <li><a href="#moving-the-cursor">Moving the Cursor</a></li>
+          </ul>
+        </li>
+        <li><a href="#the-framebuffer-driver-in-halideos">The FrameBuffer driver in HalideOS</a>
+          <ul>
+            <li><a href="#framebuffercolours"><code>FrameBuffer::Colours</code></a></li>
+            <li><a href="#framebufferwriter"><code>FrameBuffer::Writer</code></a></li>
+            <li><a href="#references">References</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
