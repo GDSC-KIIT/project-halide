@@ -24,7 +24,12 @@ for linux based operating systems via the default package manager.
 ## Screenshots
 
 <div align="center">
-	
+	<img width="70%" src="https://cdn.githubraw.com/DSC-KIIT/project-halide/master/img/home.png">	
+</div>
+
+
+<div align="center">
+	<img width="70%" src="https://cdn.githubraw.com/DSC-KIIT/project-halide/master/img/console.png">	
 </div>
 
 <!-- ## Documentation -->
