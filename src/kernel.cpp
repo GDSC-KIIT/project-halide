@@ -6,6 +6,8 @@
 #include <keyboard.h>
 #include <windows.h>
 
+#define CONSOLES 3
+
 int Window::instances = 0;
 int Window::buffer_data[3][2];
 char Window::name[] = {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
@@ -61,35 +63,58 @@ extern "C" void k_main(const void *multiboot_structure, unsigned int multiboot) 
 		p.writeString("Loading OS ...");
 	}
 
+#if CONSOLES >= 1
+
 	Window win1(10, 70, 0, 15, (char *)"Window 1");
 	FrameBuffer::Writer p(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::BLACK, &win1);
-	win1.storeBuffer(0, 15);
 	initScreen(p, win1);
+	win1.storeBuffer(0, 15);
 
-	Window win2(10, 70, 15, 25, (char *)"Window 2");
+#if CONSOLES >= 2
+
+	Window win2(10, 70, 15, 20, (char *)"Window 2");
 	FrameBuffer::Writer p1(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::BLUE, &win2);
-	win2.storeBuffer(15, 20);
 	initScreen(p1, win2);
+	win2.storeBuffer(15, 20);
 
-	// Window win3(10, 70, 20, 25, (char *)"Window 3");
-	// FrameBuffer::Writer p2(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::RED, &win3);
-	// win3.storeBuffer(20, 25);
-	// initScreen(p2, win3);
+#if CONSOLES == 3
+
+	Window win3(10, 70, 20, 25, (char *)"Window 3");
+	FrameBuffer::Writer p2(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::DARK_GREY, &win3);
+	initScreen(p2, win3);
+	win3.storeBuffer(20, 25);
+
+#endif
+#endif
+#endif
 
 	while (true) {
+#if CONSOLES >= 1
 		p.switchWindow(p);
 		int x = init_console(p, win1);
-
+#if CONSOLES >= 2
+		if (x == 3) {
+			win3.DestroyWindow(&win2);
+			p1.Rerender(&win1);
+		}
 		if (x == 2) {
 			win2.DestroyWindow(&win1);
 			p.Rerender(&win1);
 		}
+#if CONSOLES == 3
 		if (x == 1) {
 			if (win2.isDestroyed == false) {
 				p1.switchWindow(p1);
 				int y = init_console(p1, win2);
 			}
+			if (win3.isDestroyed == false) {
+				p2.switchWindow(p2);
+				int z = init_console(p2, win3);
+			}
 		}
+#endif
+#endif
+#endif
 	}
 	interrupts.Activate();
 	while (1)
