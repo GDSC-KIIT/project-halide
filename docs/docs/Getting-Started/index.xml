@@ -2,28 +2,28 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>HalideOS</title>
-    <link>https://dsc-kiit.github.io/project-halide-website/docs/Getting-Started/</link>
+    <link>https://dsc-kiit.github.io/project-halide/docs/Getting-Started/</link>
     <description>Recent content on HalideOS</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	<atom:link href="https://dsc-kiit.github.io/project-halide-website/docs/Getting-Started/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://dsc-kiit.github.io/project-halide/docs/Getting-Started/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title></title>
-      <link>https://dsc-kiit.github.io/project-halide-website/docs/Getting-Started/Introduction/</link>
+      <link>https://dsc-kiit.github.io/project-halide/docs/Getting-Started/Introduction/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dsc-kiit.github.io/project-halide-website/docs/Getting-Started/Introduction/</guid>
+      <guid>https://dsc-kiit.github.io/project-halide/docs/Getting-Started/Introduction/</guid>
       <description>Introduction to Operating Systems Development #  Please proceed with a really good grasp of C/C++ If you landed here then, congratulations! You are about to take on one of the most challenging projects in Software Engineering, that is, Operating System Developement. There are no proper roadmaps, no copy-paste code and lots of theory. You&amp;rsquo;ll be guided solely by passion and you will truly peak once you dive into the depths of OS Dev.</description>
     </item>
     
     <item>
       <title></title>
-      <link>https://dsc-kiit.github.io/project-halide-website/docs/Getting-Started/Required-Knowledge/</link>
+      <link>https://dsc-kiit.github.io/project-halide/docs/Getting-Started/Required-Knowledge/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dsc-kiit.github.io/project-halide-website/docs/Getting-Started/Required-Knowledge/</guid>
+      <guid>https://dsc-kiit.github.io/project-halide/docs/Getting-Started/Required-Knowledge/</guid>
       <description>Required Knowledge #    Basic Computer Programming
   Microprocessor architechture
   Assembly
@@ -35,20 +35,20 @@
     
     <item>
       <title></title>
-      <link>https://dsc-kiit.github.io/project-halide-website/docs/Getting-Started/Resources-and-Tutorials/</link>
+      <link>https://dsc-kiit.github.io/project-halide/docs/Getting-Started/Resources-and-Tutorials/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dsc-kiit.github.io/project-halide-website/docs/Getting-Started/Resources-and-Tutorials/</guid>
+      <guid>https://dsc-kiit.github.io/project-halide/docs/Getting-Started/Resources-and-Tutorials/</guid>
       <description>Resources and Tutorials #  A massive list of all sorts of tutorials, books and videos on operating systems.
 Web #   https://wiki.osdev.org/ http://www.lowlevel.eu/wiki/Hauptseite https://github.com/cfenollosa/os-tutorial  Books #   http://www.cs.bham.ac.uk/~exr/lectures/opsys/10_11/lectures/os-dev.pdf https://littleosbook.github.io/ Operating System Concepts - Galvin and Silberschatz Modern Operating Systems - Andrew Tanenbaum and Herbert Bos Operating Systems: Three Easy Pieces - Andrea C. Arpaci-Dusseau and Remzi H. Arpaci-Dusseau  Videos #   https://www.youtube.com/playlist?list=PLHh55M_Kq4OApWScZyPl5HhgsTJS9MZ6M  </description>
     </item>
     
     <item>
       <title></title>
-      <link>https://dsc-kiit.github.io/project-halide-website/docs/Getting-Started/Running-Halide/</link>
+      <link>https://dsc-kiit.github.io/project-halide/docs/Getting-Started/Running-Halide/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dsc-kiit.github.io/project-halide-website/docs/Getting-Started/Running-Halide/</guid>
+      <guid>https://dsc-kiit.github.io/project-halide/docs/Getting-Started/Running-Halide/</guid>
       <description>Running HalideOS on your System #  Dependencies #  It is recommended that you used a Linux based operating system for building HalideOS. The C/C++ development tools and ecosystem are much easier to use on a Linux based system.
  g++ - A C++ compiler nasm or as - An x86 assembler ld - The GNU Linker make - GNU Make, a build tool for linux qemu - An x86 Emulator git - For version control A text editor of your choice, we use Visual Studio Code  You can google up how to install these tools for your host operating system.</description>
     </item>

@@ -1,0 +1,1 @@
+if(navigator.serviceWorker){navigator.serviceWorker.register("/project-halide/sw.js",{scope:"/project-halide/"});}

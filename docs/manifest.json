@@ -1,14 +1,14 @@
 {
   "name": "HalideOS",
   "short_name": "HalideOS",
-  "start_url": "/project-halide-website/",
-  "scope": "/project-halide-website/",
+  "start_url": "/project-halide/",
+  "scope": "/project-halide/",
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#000000",
   "icons": [
     {
-      "src": "/project-halide-website/favicon.svg",
+      "src": "/project-halide/favicon.svg",
       "sizes": "512x512"
     }
   ]

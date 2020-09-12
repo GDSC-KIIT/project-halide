@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>HalideOS</title>
-    <link>https://dsc-kiit.github.io/project-halide-website/</link>
+    <link>https://dsc-kiit.github.io/project-halide/</link>
     <description>Recent content on HalideOS</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	<atom:link href="https://dsc-kiit.github.io/project-halide-website/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://dsc-kiit.github.io/project-halide/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title></title>
-      <link>https://dsc-kiit.github.io/project-halide-website/docs/documentation/Console/</link>
+      <link>https://dsc-kiit.github.io/project-halide/docs/documentation/Console/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dsc-kiit.github.io/project-halide-website/docs/documentation/Console/</guid>
+      <guid>https://dsc-kiit.github.io/project-halide/docs/documentation/Console/</guid>
       <description>Console Commands in HalideOS #  The console in Halide is pretty simple. Just a while loop that evaluates the the commands entered by the user using a big nested if else, and then defers execution of the command to the proper functions.
  Files: include/console.h and src/console.cpp  The console supports the following commands
  about help greet calculator - A basic command line calculator clear switch console - Switches to the next console  Refer the src/console.</description>
@@ -22,30 +22,30 @@
     
     <item>
       <title></title>
-      <link>https://dsc-kiit.github.io/project-halide-website/docs/documentation/Frame-Buffer/</link>
+      <link>https://dsc-kiit.github.io/project-halide/docs/documentation/Frame-Buffer/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dsc-kiit.github.io/project-halide-website/docs/documentation/Frame-Buffer/</guid>
+      <guid>https://dsc-kiit.github.io/project-halide/docs/documentation/Frame-Buffer/</guid>
       <description>The Frame Buffer #  HalideOS uses the APIs provided by the BIOS to display text on the screen. We did not implement drivers for the graphics hardware to keep the code simple. BIOS implements a combination of memory-mapped I/O and I/O ports system to manipulate the screen and display the text.
 Memory Mapped I/O and I/O Ports #  There are usually two different ways to interact with the hardware, memory-mapped I/O and I/O ports.</description>
     </item>
     
     <item>
       <title></title>
-      <link>https://dsc-kiit.github.io/project-halide-website/docs/documentation/Keyboard-Driver/</link>
+      <link>https://dsc-kiit.github.io/project-halide/docs/documentation/Keyboard-Driver/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dsc-kiit.github.io/project-halide-website/docs/documentation/Keyboard-Driver/</guid>
+      <guid>https://dsc-kiit.github.io/project-halide/docs/documentation/Keyboard-Driver/</guid>
       <description>The Keyboard Driver #  The keyboard driver does the task of reading the input coming from the keyboard and writing it to the screen using the FrameBuffer driver. The keyboard driver uses I/O ports mapped to memory addresses 0x64 and 0x60 to read the data coming from the keyboard.
 Every time a key on the keyboard is pressed, 0x64 is set and an 8 bit integer is available in 0x60 which is passed to a massive switch case that appropriately writes the text on the screen.</description>
     </item>
     
     <item>
       <title></title>
-      <link>https://dsc-kiit.github.io/project-halide-website/docs/documentation/Standard-Library/</link>
+      <link>https://dsc-kiit.github.io/project-halide/docs/documentation/Standard-Library/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dsc-kiit.github.io/project-halide-website/docs/documentation/Standard-Library/</guid>
+      <guid>https://dsc-kiit.github.io/project-halide/docs/documentation/Standard-Library/</guid>
       <description>The Standard Library #  The standard library of HalideOS is a set of a few abstractions for some common data structures and utility functions that we used to again and again for the kernel as well as the shell programs.
 All the classes and the functions are encapsulated in the hldstd namespace for clarity.
  Files: include/halidestdlib.h and src/halidestdlib.cpp Namespaces: hldstd, hldstd::math  Classes  hldstd::string hltstd::stack&amp;lt;T&amp;gt;   Functions Refer below for details on return types with accurate namespaces.</description>
@@ -53,29 +53,29 @@ All the classes and the functions are encapsulated in the hldstd namespace for c
     
     <item>
       <title></title>
-      <link>https://dsc-kiit.github.io/project-halide-website/docs/documentation/Windows/</link>
+      <link>https://dsc-kiit.github.io/project-halide/docs/documentation/Windows/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dsc-kiit.github.io/project-halide-website/docs/documentation/Windows/</guid>
+      <guid>https://dsc-kiit.github.io/project-halide/docs/documentation/Windows/</guid>
       <description>Windows in HalideOS #  We have added support to divide the screen into multiple consoles. It is very similar to diving a linux terminal into multiple parts. This was done using a Window class that is passed to the FrameBuffer::Writer so that it can restrict the movement of the cursor in the limits defined in the Windows class.
  Files: include/windows.h  Its a pretty small class, everything is done in the header file, you can refer the source code to understand what it does.</description>
     </item>
     
     <item>
       <title></title>
-      <link>https://dsc-kiit.github.io/project-halide-website/docs/Getting-Started/Introduction/</link>
+      <link>https://dsc-kiit.github.io/project-halide/docs/Getting-Started/Introduction/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dsc-kiit.github.io/project-halide-website/docs/Getting-Started/Introduction/</guid>
+      <guid>https://dsc-kiit.github.io/project-halide/docs/Getting-Started/Introduction/</guid>
       <description>Introduction to Operating Systems Development #  Please proceed with a really good grasp of C/C++ If you landed here then, congratulations! You are about to take on one of the most challenging projects in Software Engineering, that is, Operating System Developement. There are no proper roadmaps, no copy-paste code and lots of theory. You&amp;rsquo;ll be guided solely by passion and you will truly peak once you dive into the depths of OS Dev.</description>
     </item>
     
     <item>
       <title></title>
-      <link>https://dsc-kiit.github.io/project-halide-website/docs/Getting-Started/Required-Knowledge/</link>
+      <link>https://dsc-kiit.github.io/project-halide/docs/Getting-Started/Required-Knowledge/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dsc-kiit.github.io/project-halide-website/docs/Getting-Started/Required-Knowledge/</guid>
+      <guid>https://dsc-kiit.github.io/project-halide/docs/Getting-Started/Required-Knowledge/</guid>
       <description>Required Knowledge #    Basic Computer Programming
   Microprocessor architechture
   Assembly
@@ -87,20 +87,20 @@ All the classes and the functions are encapsulated in the hldstd namespace for c
     
     <item>
       <title></title>
-      <link>https://dsc-kiit.github.io/project-halide-website/docs/Getting-Started/Resources-and-Tutorials/</link>
+      <link>https://dsc-kiit.github.io/project-halide/docs/Getting-Started/Resources-and-Tutorials/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dsc-kiit.github.io/project-halide-website/docs/Getting-Started/Resources-and-Tutorials/</guid>
+      <guid>https://dsc-kiit.github.io/project-halide/docs/Getting-Started/Resources-and-Tutorials/</guid>
       <description>Resources and Tutorials #  A massive list of all sorts of tutorials, books and videos on operating systems.
 Web #   https://wiki.osdev.org/ http://www.lowlevel.eu/wiki/Hauptseite https://github.com/cfenollosa/os-tutorial  Books #   http://www.cs.bham.ac.uk/~exr/lectures/opsys/10_11/lectures/os-dev.pdf https://littleosbook.github.io/ Operating System Concepts - Galvin and Silberschatz Modern Operating Systems - Andrew Tanenbaum and Herbert Bos Operating Systems: Three Easy Pieces - Andrea C. Arpaci-Dusseau and Remzi H. Arpaci-Dusseau  Videos #   https://www.youtube.com/playlist?list=PLHh55M_Kq4OApWScZyPl5HhgsTJS9MZ6M  </description>
     </item>
     
     <item>
       <title></title>
-      <link>https://dsc-kiit.github.io/project-halide-website/docs/Getting-Started/Running-Halide/</link>
+      <link>https://dsc-kiit.github.io/project-halide/docs/Getting-Started/Running-Halide/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dsc-kiit.github.io/project-halide-website/docs/Getting-Started/Running-Halide/</guid>
+      <guid>https://dsc-kiit.github.io/project-halide/docs/Getting-Started/Running-Halide/</guid>
       <description>Running HalideOS on your System #  Dependencies #  It is recommended that you used a Linux based operating system for building HalideOS. The C/C++ development tools and ecosystem are much easier to use on a Linux based system.
  g++ - A C++ compiler nasm or as - An x86 assembler ld - The GNU Linker make - GNU Make, a build tool for linux qemu - An x86 Emulator git - For version control A text editor of your choice, we use Visual Studio Code  You can google up how to install these tools for your host operating system.</description>
     </item>
