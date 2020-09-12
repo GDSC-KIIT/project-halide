@@ -9,6 +9,11 @@ Developing an operating system from scratch is one of the hardest tasks in compu
 This project is an attempt by DSC KIIT to introduce students to the fascinating domain of operating systems development.
 
 
+## Documentation
+
+Instructions on how to running Halide, building it from source and other technical documentation are available at https://dsc-kiit.github.io/project-halide/
+
+
 ## Tools and Languages
 
 The bulk of HalideOS is written using C++17 with some x86 assembly code for the bootloader. These tools are easily available
