@@ -11,7 +11,7 @@ This project is an attempt by DSC KIIT to introduce students to the fascinating 
 
 ## Documentation
 
-Instructions on how to running Halide, building it from source and other technical documentation are available at https://dsc-kiit.github.io/project-halide/
+Instructions on how to run HalideOS in Oracle VirtualBox, building HalideOS from source and other technical documentation are available at https://dsc-kiit.github.io/project-halide/
 
 
 ## Tools and Languages
