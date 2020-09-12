@@ -176,6 +176,9 @@ void calculator(FrameBuffer::Writer &p, hldstd::string &expression) {
 		}
 	}
 
+	postfix[index] = ',';
+	index++;
+
 	while (!(st.isEmpty())) {
 		char c = st.top();
 		st.pop();
@@ -185,9 +188,13 @@ void calculator(FrameBuffer::Writer &p, hldstd::string &expression) {
 
 	if (validExpression) {
 		hldstd::stack<int> st2(s, 0);
-		postfix[s + op_count - 1] = '\0';
+		postfix[s + op_count] = '\0';
 
 		char buff[s];
+
+		for(int i=0; i<s; i++)
+			buff[i] = 0;
+
 		int index = 0;
 
 		for (int i = 0; postfix[i] != '\0'; i++) {
@@ -197,10 +204,6 @@ void calculator(FrameBuffer::Writer &p, hldstd::string &expression) {
 				index = 0;
 
 			} else if (isValidOperator(postfix[i])) {
-				if (postfix[i + 1] == '\0') {
-					hldstd::string int_val = &buff[0];
-					st2.push(int_val.to_int());
-				}
 
 				int a = st2.top();
 				st2.pop();
