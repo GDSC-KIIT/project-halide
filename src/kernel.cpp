@@ -34,7 +34,7 @@ static void initScreen(FrameBuffer::Writer &p, Window &win) {
 extern "C" void k_main(const void *multiboot_structure, unsigned int multiboot) {
 	// * instantiate globaldescriptortable here
 	GLOBAL_DESCRIPTOR_TABLE::GlobalDescriptorTable globaldescriptortable;
-	InterruptManager interrupts(&globaldescriptortable);
+	InterruptManager interrupts(&globaldescriptortable); 
 	{
 		Window win;
 		FrameBuffer::Writer p(FrameBuffer::Colours::WHITE, FrameBuffer::Colours::LIGHT_BLUE, &win);
