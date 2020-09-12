@@ -42,6 +42,9 @@ run: kernel.iso
 run-full-screen: kernel.iso
 	qemu-system-i386 -boot d -cdrom kernel.iso -full-screen
 
+run-vb: kernel.iso
+	VBoxManage startvm "HalideOS v.0.1"
+
 archive:
 	mkdir -p ../Archives/${args}
 	cp ../include/ ../Archives/${args} -rf
