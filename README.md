@@ -1,10 +1,10 @@
 # Project Halide
 
-HalideOS is an experimental operating system written entirely from scratch, right from the kernel up to the user programs. It supports a basic shell with some commands including a command line calculator. You can boot it up and run it in a virtual machine.
+HalideOS is an experimental operating system written entirely from scratch. It supports a basic shell with some commands including a command line calculator. You can boot it up and run it in a virtual machine.
 
 ## Motivation
 
-Developing an operating system from scratch is one of the hardest tasks in computer science. It is considered a pinnacle of software engineering. It requires a good grasp of C/C++, x86 assembly language, processor architecture and memory. But it is not something that undergraduate students can’t do as we learn all these subjects as a part of our coursework.
+Developing an operating system from scratch is one of the hardest tasks in computer science. It is considered a pinnacle of software engineering. It requires a good grasp of low level languages, assembly language for the targetted platform, processor architecture and memory. But it is not something that undergraduate students can’t do as we learn all these subjects as a part of our coursework.
 
 This project is an attempt by DSC KIIT to introduce students to the fascinating domain of operating systems development.
 
