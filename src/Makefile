@@ -51,6 +51,15 @@ help:
 	@echo This goes on
 	@echo Use @echo command and write line it will be printed to the line
 
+install_deps_debian:
+	sudo apt install qemu virtualbox nasm make gcc g++
+
+install_deps_arch:
+	
+install_deps_openSUSE:
+
+install_deps_RedHat:
+
 archive:
 	mkdir -p ../Archives/${args}
 	cp ../include/ ../Archives/${args} -rf
