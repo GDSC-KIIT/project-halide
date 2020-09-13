@@ -33,7 +33,7 @@ kernel.iso: kernel.bin
 	echo '  multiboot /boot/kernel.bin'    >> diskImage/boot/grub/grub.cfg
 	echo '  boot'                            >> diskImage/boot/grub/grub.cfg
 	echo '}'                                 >> diskImage/boot/grub/grub.cfg
-	grub-mkrescue --output=kernel.iso diskImage
+	grub-mkrescue --output=kernel.iso diskImage || grub2-mkrescue --output=kernel.iso diskImage
 	rm -rf diskImage
 
 run: kernel.iso
@@ -47,12 +47,13 @@ run-vb: kernel.iso
 
 
 install_deps_debian:
-	sudo apt install qemu virtualbox nasm make gcc g++
+	sudo apt install qemu virtualbox nasm gcc gcc-g++ xorriso
 
 install_deps_arch:
 	
 install_deps_openSUSE:
-
+	sudo zypper install gcc qemu virtualbox nasm grub xorriso mtools
+	@echo You have to install gcc-g++ form yor browser for your SUSE
 install_deps_RedHat:
 
 archive:
