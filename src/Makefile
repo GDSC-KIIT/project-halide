@@ -22,19 +22,19 @@ kernel.bin: linker.ld $(objects)
 	mv *.o objs/
 
 kernel.iso: kernel.bin
-	mkdir -p iso
-	mkdir -p iso/boot
-	mkdir -p iso/boot/grub
-	cp kernel.bin iso/boot/kernel.bin
-	echo 'set timeout=0'                      > iso/boot/grub/grub.cfg
-	echo 'set default=0'                     >> iso/boot/grub/grub.cfg
-	echo ''                                  >> iso/boot/grub/grub.cfg
-	echo 'menuentry "HalideOS" {' >> iso/boot/grub/grub.cfg
-	echo '  multiboot /boot/kernel.bin'    >> iso/boot/grub/grub.cfg
-	echo '  boot'                            >> iso/boot/grub/grub.cfg
-	echo '}'                                 >> iso/boot/grub/grub.cfg
-	grub-mkrescue --output=kernel.iso iso
-	rm -rf iso
+	mkdir -p diskImage
+	mkdir -p diskImage/boot
+	mkdir -p diskImage/boot/grub
+	cp kernel.bin diskImage/boot/kernel.bin
+	echo 'set timeout=0'                      > diskImage/boot/grub/grub.cfg
+	echo 'set default=0'                     >> diskImage/boot/grub/grub.cfg
+	echo ''                                  >> diskImage/boot/grub/grub.cfg
+	echo 'menuentry "HalideOS" {' >> diskImage/boot/grub/grub.cfg
+	echo '  multiboot /boot/kernel.bin'    >> diskImage/boot/grub/grub.cfg
+	echo '  boot'                            >> diskImage/boot/grub/grub.cfg
+	echo '}'                                 >> diskImage/boot/grub/grub.cfg
+	grub-mkrescue --output=kernel.iso diskImage
+	rm -rf diskImage
 
 run: kernel.iso
 	qemu-system-i386 -boot d -cdrom kernel.iso
