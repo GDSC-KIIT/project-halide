@@ -13,7 +13,7 @@ This project is an attempt by DSC KIIT to introduce students to the fascinating 
 
 Instructions on how to run HalideOS in Oracle VirtualBox, building HalideOS from source and other technical documentation are available at https://dsc-kiit.github.io/project-halide/
 
-Head over to the Releases section to download the `.iso` file.
+Head over to the [Releases](https://github.com/DSC-KIIT/project-halide/releases) section to download the `.iso` file.
 
 
 ## Tools and Languages
