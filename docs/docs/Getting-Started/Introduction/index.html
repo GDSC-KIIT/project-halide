@@ -4,17 +4,17 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Introduction to Operating Systems Development #  Please proceed with a really good grasp of C/C&#43;&#43; If you landed here then, congratulations! You are about to take on one of the most challenging projects in Software Engineering, that is, Operating System Developement. There are no proper roadmaps, no copy-paste code and lots of theory. You&rsquo;ll be guided solely by passion and you will truly peak once you dive into the depths of OS Dev.">
+<meta name="description" content="Introduction to Operating Systems Development #  Please proceed with a really good grasp of C/C&#43;&#43; If you landed here then, congratulations! You are about to take on one of the most challenging projects in Software Engineering, that is, developing an Operating System. There are no proper roadmaps, no copy-paste code and lots of theory. You&rsquo;ll be guided solely by passion and you will truly peak once you dive into the depths of OS Dev.">
 <meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="" />
-<meta property="og:description" content="Introduction to Operating Systems Development #  Please proceed with a really good grasp of C/C&#43;&#43; If you landed here then, congratulations! You are about to take on one of the most challenging projects in Software Engineering, that is, Operating System Developement. There are no proper roadmaps, no copy-paste code and lots of theory. You&rsquo;ll be guided solely by passion and you will truly peak once you dive into the depths of OS Dev." />
+<meta property="og:description" content="Introduction to Operating Systems Development #  Please proceed with a really good grasp of C/C&#43;&#43; If you landed here then, congratulations! You are about to take on one of the most challenging projects in Software Engineering, that is, developing an Operating System. There are no proper roadmaps, no copy-paste code and lots of theory. You&rsquo;ll be guided solely by passion and you will truly peak once you dive into the depths of OS Dev." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dsc-kiit.github.io/project-halide/docs/Getting-Started/Introduction/" />
-<meta property="article:modified_time" content="2020-09-13T08:54:46+05:30" />
+<meta property="article:modified_time" content="2020-09-13T17:28:36+05:30" />
 <title>Introduction | HalideOS</title>
 <link rel="manifest" href="/project-halide/manifest.json">
 <link rel="icon" href="/project-halide/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/project-halide/book.min.6cd8553a6854f4812343f0f0c8baca31271e686434f381fbe3c7226f66639176.css" integrity="sha256-bNhVOmhU9IEjQ/DwyLrKMSceaGQ084H748cib2ZjkXY=">
-<script defer src="/project-halide/en.search.min.d34e61723e7f68cbfac771b048fd0be6d68c357b97cd864594c5e45fa7a702b4.js" integrity="sha256-005hcj5/aMv6x3GwSP0L5taMNXuXzYZFlMXkX6enArQ="></script>
+<script defer src="/project-halide/en.search.min.746a6c085b95bcc0a4e472370a7de3b5866219700cd0d8bd9563349ecdb9b461.js" integrity="sha256-dGpsCFuVvMCk5HI3Cn3jtYZiGXAM0Ni9lWM0ns25tGE="></script>
 
 <script defer src="/project-halide/sw.min.028c4e56db1c4bcf04be41ef517f7c2f0f1ef9fc2d51a55e745e8f47573a22dd.js" integrity="sha256-AoxOVtscS88EvkHvUX98Lw8e&#43;fwtUaVedF6PR1c6It0="></script>
 <!--
@@ -305,7 +305,7 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#introduction-to-operating-systems-development">#</a>
 </h1>
 <center><h3>Please proceed with a <b>really good</b> grasp of C/C++</h3></center>
-<p>If you landed here then, congratulations! You are about to take on one of the most challenging projects in Software Engineering, that is, Operating System Developement. There are no proper roadmaps, no copy-paste code and lots of theory. You&rsquo;ll be guided solely by passion and you will truly peak once you dive into the depths of OS Dev.</p>
+<p>If you landed here then, congratulations! You are about to take on one of the most challenging projects in Software Engineering, that is, developing an Operating System. There are no proper roadmaps, no copy-paste code and lots of theory. You&rsquo;ll be guided solely by passion and you will truly peak once you dive into the depths of OS Dev.</p>
 <p>You need to be able to understand how hardware works, read and write assembly code to boot up your kernel and fairly good C/C++ code to add other features. It will require time, patience and careful code designs filled with abstractions.</p>
 <p>If the prerequisites sound overwhelming, maybe this is not the right time for you to get into OS Dev. It&rsquo;s not a week-long project that you can just be done with. It may takes months of work to take care of every possible test case for one typo, one loophole, will be enough to break your system. in short, this is an ongoing process.</p>
 <p>Finally, this is not the guide to make the next Linux or Windows. This is a beginners guide based on our mistakes and learnings as we proceeded to make the experimental <strong>Halide OS</strong>.</p>
@@ -335,7 +335,7 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#operating-systemhttpsenwikipediaorgwikioperating_system">#</a>
 </h3>
 <p>In the Kingdom of Hardware, the national language is machine code comprising of 0&rsquo;s/1&rsquo;s, on&rsquo;s/off&rsquo;s etc. But since it was useless on its own, it was merged with the Kingdom of Software where everyone spoke various low to high-level languages. This led to mass confusion as the Hardware residents couldn&rsquo;t understand Software residents and vice-versa. To solve this problem, a translator called Operating System was called.</p>
-<p>An Operating System is a framework that tells your computer how to use its hardware. Specifically, it hides hardware complexity, manages memory and other system resources, schedules and multiplexes processes and threads, provides a basic user interface and application programmer interface, also focussing on isolation and protection. Not every Operating System in the market provides all these functionalities. Therefore you have to be clear with your goals.</p>
+<p>An Operating System is a framework that tells your computer how to use its hardware. Specifically, it hides hardware complexity, manages memory and other system resources, schedules and multiplexes processes and threads, provides a basic user interface and application programming interface, also focussing on isolation and protection. Not every Operating System in the market provides all these functionalities. Therefore you have to be clear with your goals.</p>
 <p>Some popular examples include 
   <a href="https://en.wikipedia.org/wiki/Microsoft_Windows">Windows</a> which has a huge user base, 
   <a href="https://en.wikipedia.org/wiki/Linux">Linux</a> which is lightweight because of small, specific components (
@@ -433,7 +433,7 @@ https://github.com/alex-shpak/hugo-book
 
 
 
-  <div><a class="flex align-center" href="https://github.com/alex-shpak/hugo-book/commit/e1d4036aef66f8ecb4c50ebb643f0f6d17ef9aa6" title='Last modified by Priyansi | September 13, 2020' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/alex-shpak/hugo-book/commit/3b84a4454879650ef6474122d41f66c8e6db50a9" title='Last modified by Junaid Rahim | September 13, 2020' target="_blank" rel="noopener">
       <img src="/project-halide/svg/calendar.svg" class="book-icon" alt="Calendar" />
       <span>September 13, 2020</span>
     </a>
