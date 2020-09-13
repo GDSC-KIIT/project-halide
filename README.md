@@ -37,17 +37,12 @@ for linux based operating systems via the default package manager.
 	<img width="80%" src="https://cdn.githubraw.com/DSC-KIIT/project-halide/master/img/console.png">	
 </div>
 
-<!-- ## Documentation -->
-
-
-
 
 ## Code Style
 
 We use `clang-format` to make sure the code follows a consistent style. The details are available in the 
 [.clang-format](./.clang-format) file. Most editors have features to automatically format using `clang-format`.
 
-<!-- ## Contribute -->
 
 ## License
 
