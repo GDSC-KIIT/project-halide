@@ -15,7 +15,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://dsc-kiit.github.io/project-halide/docs/documentation/Console/</guid>
-      <description>Console Commands in HalideOS #  The console in Halide is pretty simple. Just a while loop that evaluates the the commands entered by the user using a big nested if else, and then defers execution of the command to the proper functions.
+      <description>Console Commands in HalideOS #  The console in Halide is pretty simple. Just a while loop that evaluates the the commands entered by the user using a big nested if-else, and then defers execution of the command to the proper functions.
  Files: include/console.h and src/console.cpp  The console supports the following commands
  about help greet calculator - A basic command line calculator clear switch console - Switches to the next console  Refer the src/console.</description>
     </item>
@@ -57,7 +57,7 @@ All the classes and the functions are encapsulated in the hldstd namespace for c
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://dsc-kiit.github.io/project-halide/docs/documentation/Windows/</guid>
-      <description>Windows in HalideOS #  We have added support to divide the screen into multiple consoles. It is very similar to diving a linux terminal into multiple parts. This was done using a Window class that is passed to the FrameBuffer::Writer so that it can restrict the movement of the cursor in the limits defined in the Windows class.
+      <description>Windows in HalideOS #  We have added support to divide the screen into multiple consoles. It is very similar to diving a Linux terminal into multiple parts. This was done using a Window class that is passed to the FrameBuffer::Writer so that it can restrict the movement of the cursor in the limits defined in the Windows class.
  Files: include/windows.h  Its a pretty small class, everything is done in the header file, you can refer the source code to understand what it does.</description>
     </item>
     

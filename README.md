@@ -1,6 +1,6 @@
 # Project Halide
 
-HalideOS is an experimental operating system written entirely from scratch. It supports a basic shell with some commands including a command line calculator. You can boot it up and run it in a virtual machine.
+HalideOS is an experimental operating system written entirely from scratch. It supports a basic shell with some commands including a command line calculator. You can boot it up in virtual box.
 
 ## Motivation
 
@@ -9,9 +9,11 @@ Developing an operating system from scratch is one of the hardest tasks in compu
 This project is an attempt by DSC KIIT to introduce students to the fascinating domain of operating systems development.
 
 
-## Documentation
+## Documentation and Download
 
 Instructions on how to run HalideOS in Oracle VirtualBox, building HalideOS from source and other technical documentation are available at https://dsc-kiit.github.io/project-halide/
+
+Head over to the [Releases](https://github.com/DSC-KIIT/project-halide/releases) section to download the `.iso` file.
 
 
 ## Tools and Languages
@@ -28,6 +30,9 @@ for linux based operating systems via the default package manager.
 
 ## Screenshots
 
+Username: `<any name>`
+Password: `dsc-kiit`
+
 <div align="center">
 	<img width="80%" src="https://cdn.githubraw.com/DSC-KIIT/project-halide/b06ca381/img/home.png">	
 </div>
@@ -37,17 +42,12 @@ for linux based operating systems via the default package manager.
 	<img width="80%" src="https://cdn.githubraw.com/DSC-KIIT/project-halide/master/img/console.png">	
 </div>
 
-<!-- ## Documentation -->
-
-
-
 
 ## Code Style
 
 We use `clang-format` to make sure the code follows a consistent style. The details are available in the 
 [.clang-format](./.clang-format) file. Most editors have features to automatically format using `clang-format`.
 
-<!-- ## Contribute -->
 
 ## License
 
