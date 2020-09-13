@@ -24,13 +24,8 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://dsc-kiit.github.io/project-halide/docs/Getting-Started/Required-Knowledge/</guid>
-      <description>Required Knowledge #    Basic Computer Programming
-  Microprocessor architechture
-  Assembly
-  Memory
-  UNIX/ Linux Experience
-  Version Control
-  </description>
+      <description>Required Knowledge #    Basic Computer Science - You should have a good grasp on theorertical concepts like binary and hexadecimal systems, data structures and algorithms and abstraction among other things.
+  Programming - You need to be familar with the nooks and crannies of languages like C and C++. On top of that, good coding practices are something you have to follow for it is not okay to write inefficient software.</description>
     </item>
     
     <item>
@@ -40,17 +35,19 @@
       
       <guid>https://dsc-kiit.github.io/project-halide/docs/Getting-Started/Resources-and-Tutorials/</guid>
       <description>Resources and Tutorials #  A massive list of all sorts of tutorials, books and videos on operating systems.
-Web #   https://wiki.osdev.org/ http://www.lowlevel.eu/wiki/Hauptseite https://github.com/cfenollosa/os-tutorial  Books #   http://www.cs.bham.ac.uk/~exr/lectures/opsys/10_11/lectures/os-dev.pdf https://littleosbook.github.io/ Operating System Concepts - Galvin and Silberschatz Modern Operating Systems - Andrew Tanenbaum and Herbert Bos Operating Systems: Three Easy Pieces - Andrea C. Arpaci-Dusseau and Remzi H. Arpaci-Dusseau  Videos #   https://www.youtube.com/playlist?list=PLHh55M_Kq4OApWScZyPl5HhgsTJS9MZ6M  </description>
+Web #    Wiki OS Dev - Provides information and a community  Wiki Low level Community - A TODO list of what needs to be done  OS Tutorial - Several step-by-step README tutorials and code samples  Books #    Writing a Simple Operating System - A 77 page masterpiece by Nick Blundell  The Little Book about OS Development - A practical guide to writing your own x86 operating system by Eric Helen and Adam Roseberg  Operating System Concepts - An introduction to essential concepts by Galvin and Silberschatz  Modern Operating Systems - By Andrew Tanenbaum and Herbert Bos  Operating Systems: Three Easy Pieces - All about virtualization, concurrency and persistance by Andrea C.</description>
     </item>
     
     <item>
       <title></title>
-      <link>https://dsc-kiit.github.io/project-halide/docs/Getting-Started/Running-Halide/</link>
+      <link>https://dsc-kiit.github.io/project-halide/docs/Getting-Started/Running-and-Compiling-Halide/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dsc-kiit.github.io/project-halide/docs/Getting-Started/Running-Halide/</guid>
-      <description>Running HalideOS on your System #  Dependencies #  It is recommended that you used a Linux based operating system for building HalideOS. The C/C++ development tools and ecosystem are much easier to use on a Linux based system.
- g++ - A C++ compiler nasm or as - An x86 assembler ld - The GNU Linker make - GNU Make, a build tool for linux qemu - An x86 Emulator git - For version control A text editor of your choice, we use Visual Studio Code  You can google up how to install these tools for your host operating system.</description>
+      <guid>https://dsc-kiit.github.io/project-halide/docs/Getting-Started/Running-and-Compiling-Halide/</guid>
+      <description>Running and Compiling HalideOS on your System #  Running HalideOS in Oracle Virtual Box #  The first step would be to head over to the Releases section of the github repository and download the halide.iso file
+ The open up the Oracle VM Virtual Box program. Click on New
+ Put in the name as HalideOS. Set Type to Other and Version to Other/Unknown
+ Set the memory size.</description>
     </item>
     
   </channel>
