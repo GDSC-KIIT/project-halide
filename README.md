@@ -1,6 +1,6 @@
 # Project Halide
 
-HalideOS is an experimental operating system written entirely from scratch. It supports a basic shell with some commands including a command line calculator. You can boot it up and run it in a virtual machine.
+HalideOS is an experimental operating system written entirely from scratch. It supports a basic shell with some commands including a command line calculator. You can boot it up in virtual box.
 
 ## Motivation
 
@@ -9,9 +9,11 @@ Developing an operating system from scratch is one of the hardest tasks in compu
 This project is an attempt by DSC KIIT to introduce students to the fascinating domain of operating systems development.
 
 
-## Documentation
+## Documentation and Download
 
 Instructions on how to run HalideOS in Oracle VirtualBox, building HalideOS from source and other technical documentation are available at https://dsc-kiit.github.io/project-halide/
+
+Head over to the Releases section to download the `.iso` file.
 
 
 ## Tools and Languages
