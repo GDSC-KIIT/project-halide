@@ -28,6 +28,9 @@ for linux based operating systems via the default package manager.
 
 ## Screenshots
 
+Username: `<any name>`
+Password: `dsc-kiit`
+
 <div align="center">
 	<img width="80%" src="https://cdn.githubraw.com/DSC-KIIT/project-halide/b06ca381/img/home.png">	
 </div>
