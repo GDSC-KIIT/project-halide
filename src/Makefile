@@ -45,11 +45,6 @@ run-full-screen: kernel.iso
 run-vb: kernel.iso
 	VBoxManage startvm "HalideOS v.0.1"
 
-help:
-	@echo Write here
-	@echo Next line
-	@echo This goes on
-	@echo Use @echo command and write line it will be printed to the line
 
 install_deps_debian:
 	sudo apt install qemu virtualbox nasm make gcc g++
@@ -69,9 +64,24 @@ archive:
 	cp ../README.md ../Archives/${args} -rf
 	@echo Saved current copy of os in Archives/${args}
 
-cleararchives:
+clear-archives:
 	rm ../Archives/* -rf
 	@echo removed all saved archives
 
 clean:
 	rm ./objs/*.o *.iso *.bin
+
+
+help:
+	@echo HalideOS - List of all the make commands and their functions
+	@echo Usage: make [option]
+	@echo Options: 
+	
+	@echo run - Compile and launch iso in qemu [windowed mode]
+	@echo run-full-screen - Compile and launch iso in qemu [full screen mode]
+	@echo run-vb - Compile and launch iso in Oracle VM Virtual Box, make sure you have it installed
+	@echo kernel.bin - Compile into a binary executable
+	@echo kernel.iso - Compile and just build the .iso image
+	@echo clean - Delete object files and the iso [run this before pushing your code]
+	@echo archive - Create an archive of the current source code
+	@echo clear-archives - Delete the archives
