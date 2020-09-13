@@ -47,7 +47,7 @@ run-vb: kernel.iso
 
 
 install_deps_debian:
-	sudo apt install qemu virtualbox nasm gcc gcc-g++ xorriso
+	sudo apt install qemu virtualbox nasm gcc g++ xorriso
 
 install_deps_arch:
 	
