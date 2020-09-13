@@ -96,10 +96,7 @@ Web #    Wiki OS Dev - Provides information and a community  Wiki Low level Comm
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://dsc-kiit.github.io/project-halide/docs/Getting-Started/Running-and-Compiling-Halide/</guid>
-      <description>Running and Compiling HalideOS on your System #  Running HalideOS in Oracle Virtual Box #  The first step would be to head over to the Releases section of the github repository and download the halide.iso file
- The open up the Oracle VM Virtual Box program. Click on New
- Put in the name as HalideOS. Set Type to Other and Version to Other/Unknown
- Set the memory size.</description>
+      <description>Running and Compiling HalideOS on your System #  Running HalideOS in Oracle Virtual Box #   Head over to the Releases section of the GitHub repository and download the halide.iso file.   Open up Oracle VM VirtualBox. Click on New.   Put HalideOS as the name. Set Type to Other and Version to Other/Unknown.   Set the memory size. 64 MB will be enough.   Click on Next and select Do not add a virtual disk and click on Create.</description>
     </item>
     
   </channel>
