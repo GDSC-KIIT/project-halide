@@ -30,7 +30,7 @@ kernel.iso: kernel.bin
 	echo 'set default=0'                     >> diskImage/boot/grub/grub.cfg
 	echo ''                                  >> diskImage/boot/grub/grub.cfg
 	echo 'menuentry "HalideOS" {' >> diskImage/boot/grub/grub.cfg
-	echo '  multiboot /boot/kernel.bin'    >> diskImage/boot/grub/grub.cfg
+	echo '  multiboot /boot/kernel.bin'      >> diskImage/boot/grub/grub.cfg
 	echo '  boot'                            >> diskImage/boot/grub/grub.cfg
 	echo '}'                                 >> diskImage/boot/grub/grub.cfg
 	grub-mkrescue --output=kernel.iso diskImage || grub2-mkrescue --output=kernel.iso diskImage
