@@ -29,5 +29,5 @@ _stop:
 
 
 .section .bss
-.space 4*1024*1024; 4Mib
+.space 4*1024*1024# 4Mib
 kernel_stack:
