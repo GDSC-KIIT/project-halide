@@ -11,8 +11,8 @@ char *KEYBOARD_DRIVER::readInput(FrameBuffer::Writer &p, int mode) {
 	bool shift = false;
 	char *buffstr = (char *)mem_alloc(200);
 	while (receiving) {
-		if ((Port8Bit::Read8(0x64) & 0x1) && mode == 1) {
-			switch (Port8Bit::Read8(0x60)) {
+		if ((__8bitport::Read8(0x64) & 0x1) && mode == 1) {
+			switch (__8bitport::Read8(0x60)) {
 				/*case 1:
 				p.writeString("*char)27);           Escape button Dont use it please
 				buffstr[i] = 'c'ar)27;

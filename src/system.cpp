@@ -14,32 +14,32 @@ Port::Port(unsigned short portnumber) { this->portnumber = portnumber; }
 
 Port::~Port() {}
 
-Port8Bit::Port8Bit(unsigned short portnumber) : Port(portnumber) {}
+__8bitport::__8bitport(unsigned short portnumber) : Port(portnumber) {}
 
-Port8Bit::~Port8Bit() {}
+__8bitport::~__8bitport() {}
 
-void Port8Bit::Write(unsigned char data) { Write8(portnumber, data); }
+void __8bitport::Write(unsigned char data) { Write8(portnumber, data); }
 
-unsigned char Port8Bit::Read() { return Read8(portnumber); }
+unsigned char __8bitport::Read() { return Read8(portnumber); }
 
-Port8BitSlow::Port8BitSlow(unsigned short portnumber) : Port8Bit(portnumber) {}
+__8bitportSlow::__8bitportSlow(unsigned short portnumber) : __8bitport(portnumber) {}
 
-Port8BitSlow::~Port8BitSlow() {}
+__8bitportSlow::~__8bitportSlow() {}
 
-void Port8BitSlow::Write(unsigned char data) { Write8Slow(portnumber, data); }
+void __8bitportSlow::Write(unsigned char data) { Write8Slow(portnumber, data); }
 
-Port16Bit::Port16Bit(unsigned short portnumber) : Port(portnumber) {}
+__16bitPort::__16bitPort(unsigned short portnumber) : Port(portnumber) {}
 
-Port16Bit::~Port16Bit() {}
+__16bitPort::~__16bitPort() {}
 
-void Port16Bit::Write(unsigned short data) { Write16(portnumber, data); }
+void __16bitPort::Write(unsigned short data) { Write16(portnumber, data); }
 
-unsigned short Port16Bit::Read() { return Read16(portnumber); }
+unsigned short __16bitPort::Read() { return Read16(portnumber); }
 
-Port32Bit::Port32Bit(unsigned short portnumber) : Port(portnumber) {}
+__32bitPort::__32bitPort(unsigned short portnumber) : Port(portnumber) {}
 
-Port32Bit::~Port32Bit() {}
+__32bitPort::~__32bitPort() {}
 
-void Port32Bit::Write(unsigned int data) { Write32(portnumber, data); }
+void __32bitPort::Write(unsigned int data) { Write32(portnumber, data); }
 
-unsigned int Port32Bit::Read() { return Read32(portnumber); }
+unsigned int __32bitPort::Read() { return Read32(portnumber); }

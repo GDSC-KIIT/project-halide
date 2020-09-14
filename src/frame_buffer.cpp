@@ -163,10 +163,10 @@ void FrameBuffer::Writer::updateCursor() {
 
 	position = cursorY * s_width + cursorX;
 
-	Port16Bit::Write16(0x3D4, 14);
-	Port16Bit::Write16(0x3D5, position >> 8);
-	Port16Bit::Write16(0x3D4, 15);
-	Port16Bit::Write16(0x3D5, position);
+	__16bitPort::Write16(0x3D4, 14);
+	__16bitPort::Write16(0x3D5, position >> 8);
+	__16bitPort::Write16(0x3D4, 15);
+	__16bitPort::Write16(0x3D5, position);
 	/* outportb(0x3D4, 14);
 	outportb(0x3D5, position >> 8);
 	outportb(0x3D4, 15);

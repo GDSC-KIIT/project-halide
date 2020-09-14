@@ -14,10 +14,10 @@ protected:
 	unsigned short portnumber;
 };
 
-class Port8Bit : public Port {
+class __8bitport : public Port {
 public:
-	Port8Bit(unsigned short portnumber);
-	~Port8Bit();
+	__8bitport(unsigned short portnumber);
+	~__8bitport();
 
 	virtual unsigned char Read();
 	virtual void Write(unsigned char data);
@@ -32,10 +32,10 @@ public:
 	static inline void Write8(unsigned short _port, unsigned char _data) { __asm__ volatile("outb %0, %1" : : "a"(_data), "Nd"(_port)); }
 };
 
-class Port8BitSlow : public Port8Bit {
+class __8bitportSlow : public __8bitport {
 public:
-	Port8BitSlow(unsigned short portnumber);
-	~Port8BitSlow();
+	__8bitportSlow(unsigned short portnumber);
+	~__8bitportSlow();
 
 	virtual void Write(unsigned char data);
 
@@ -43,10 +43,10 @@ protected:
 	static inline void Write8Slow(unsigned short _port, unsigned char _data) { __asm__ volatile("outb %0, %1\njmp 1f\n1: jmp 1f\n1:" : : "a"(_data), "Nd"(_port)); }
 };
 
-class Port16Bit : public Port {
+class __16bitPort : public Port {
 public:
-	Port16Bit(unsigned short portnumber);
-	~Port16Bit();
+	__16bitPort(unsigned short portnumber);
+	~__16bitPort();
 
 	virtual unsigned short Read();
 	virtual void Write(unsigned short data);
@@ -61,10 +61,10 @@ public:
 	static inline void Write16(unsigned short _port, unsigned short _data) { __asm__ volatile("outw %0, %1" : : "a"(_data), "Nd"(_port)); }
 };
 
-class Port32Bit : public Port {
+class __32bitPort : public Port {
 public:
-	Port32Bit(unsigned short portnumber);
-	~Port32Bit();
+	__32bitPort(unsigned short portnumber);
+	~__32bitPort();
 
 	virtual unsigned int Read();
 	virtual void Write(unsigned int data);
