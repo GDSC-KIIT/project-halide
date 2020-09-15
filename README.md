@@ -11,6 +11,8 @@ This project is an attempt by DSC KIIT to introduce students to the fascinating 
 
 ## Documentation and Download
 
+[![Gitter](https://badges.gitter.im/project-halide/community.svg)](https://gitter.im/project-halide/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
 Instructions on how to run HalideOS in Oracle VirtualBox, building HalideOS from source and other technical documentation are available at https://dsc-kiit.github.io/project-halide/
 
 Head over to the [Releases](https://github.com/DSC-KIIT/project-halide/releases) section to download the `.iso` file.
