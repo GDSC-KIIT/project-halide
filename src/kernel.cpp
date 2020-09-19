@@ -56,9 +56,10 @@ static void puts(char *string) {
 extern "C" void k_main(unsigned int *multiboot) {
 	set_framebuffer(multiboot);
 	setup_memmgr(multiboot);
-	// setup_terminal(multiboot); // Termial dimentions
+	setup_terminal(multiboot); // Termial dimentions
+	set_printing_coords(300, 100);
 
-	// puts("Hello world"); // ! Fix the ASCII mapping with new font table
+	puts("Hello world"); // ! Fix the ASCII mapping with new font table
 	// for (int i = 0; i < 58; i++) {
 	// 	for (int j = 0; j < 79; j++) {
 	// 		(i != 10) ? put_char(i) : put_char(0);
@@ -67,8 +68,8 @@ extern "C" void k_main(unsigned int *multiboot) {
 	// }
 	// init_console();
 	window_t *wnd = window(nullptr, "Hello world", 0, 0, 1024, 768);
-	wnd->border_color = 0x00000000;
-	wnd->background_color = 0xffffffff;
+	wnd->border_color = 0xffffffff;
+	wnd->background_color = 0x33333333;
 	wnd->draw(wnd);
 
 	window_t *titlebar = window(wnd, "Hello world", 256, 365, 400, 100);
@@ -80,61 +81,82 @@ extern "C" void k_main(unsigned int *multiboot) {
 	titlebar->background_color = 0xffff0000;
 	titlebar->draw(titlebar);
 
+	titlebar = window(wnd, "Hello world", 300, 100, 400, 100);
+	titlebar->border_color = 0xAFAFAFAF;
+	titlebar->background_color = 0x00000000;
+	wnd->draw(wnd);
+	wnd->draw(titlebar);
+	titlebar = button(titlebar,  "Hello world", 300, 100, 10, 10);
+	titlebar->border_color = 0xAFAFAFAF;
+	titlebar->background_color = 0xffff0000;
+	titlebar->draw(titlebar);
+	set_printing_coords(300+8, 100+20);
+	puts("$->Terminal Instance 1");
 
-	int i = 300, j = 100, smoothness=5;
+	puts("Hello world"); // ! Fix the ASCII mapping with new font table
+
+	int i = 300, j = 100, smoothness=100;
 	while (1) {
 		if ((Port8Bit::Read8(0x64) & 0x1)) {
 			switch(Port8Bit::Read8(0x60)) {
 			case 0x4B:
 				i-=smoothness;
 				titlebar = window(wnd, "Hello world", i, j, 400, 100);
-				titlebar->border_color = 0x00000000;
+				titlebar->border_color = 0xAFAFAFAF;
 				titlebar->background_color = 0x00000000;
 				wnd->draw(wnd);
 				wnd->draw(titlebar);
 				titlebar = button(titlebar,  "Hello world", i, j, 10, 10);
-				titlebar->border_color = 0x00000000;
+				titlebar->border_color = 0xAFAFAFAF;
 				titlebar->background_color = 0xffff0000;
 				titlebar->draw(titlebar);
+				set_printing_coords(i+1, j+20);
+				puts("$->Terminal Instance 1");
 				// move = moveWindow(titlebar, "Hello world", i+i, j);
 				break;
 			case 0x4D:
 				i+=smoothness;
 				titlebar = window(wnd, "Hello world", i, j, 400, 100);
-				titlebar->border_color = 0x00000000;
+				titlebar->border_color = 0xAFAFAFAF;
 				titlebar->background_color = 0x00000000;
 				wnd->draw(wnd);
 				wnd->draw(titlebar);
 				titlebar = button(titlebar,  "Hello world", i, j, 10, 10);
-				titlebar->border_color = 0x00000000;
+				titlebar->border_color = 0xAFAFAFAF;
 				titlebar->background_color = 0xffff0000;
 				titlebar->draw(titlebar);
+				set_printing_coords(i+1, j+20);
+				puts("$->Terminal Instance 1");
 				break;
 
 				case 0x48:
 				j-=smoothness;
 				titlebar = window(wnd, "Hello world", i, j, 400, 100);
-				titlebar->border_color = 0x00000000;
+				titlebar->border_color = 0xAFAFAFAF;
 				titlebar->background_color = 0x00000000;
 				wnd->draw(wnd);
 				wnd->draw(titlebar);
 				titlebar = button(titlebar,  "Hello world", i, j, 10, 10);
-				titlebar->border_color = 0x00000000;
+				titlebar->border_color = 0xAFAFAFAF;
 				titlebar->background_color = 0xffff0000;
 				titlebar->draw(titlebar);
+				set_printing_coords(i+1, j+20);
+				puts("$->Terminal Instance 1");
 				break;
 
 				case 0x50:
 				j+=smoothness;
 				titlebar = window(wnd, "Hello world", i, j, 400, 100);
-				titlebar->border_color = 0x00000000;
+				titlebar->border_color = 0xAFAFAFAF;
 				titlebar->background_color = 0x00000000;
 				wnd->draw(wnd);
 				wnd->draw(titlebar);
 				titlebar = button(titlebar,  "Hello world", i, j, 10, 10);
-				titlebar->border_color = 0x00000000;
+				titlebar->border_color = 0xAFAFAFAF;
 				titlebar->background_color = 0xffff0000;
 				titlebar->draw(titlebar);
+				set_printing_coords(i+1, j+20);
+				puts("$->Terminal Instance 1");
 				break;
 
 			default:

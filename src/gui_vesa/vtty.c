@@ -24,21 +24,6 @@ void set_printing_coords(int dx, int dy)
 	y = dy;
 }
 
-// void print_ch(char c)
-// {
-// 	int lx; int ly;
-// 	uint8_t *bitmap = font8x8_basic[c % 128];
-// 	for (lx = 0; lx < GLYPH_WIDTH; lx++) {
-// 		for (ly = 0; ly < GLYPH_HEIGHT; ly++) {
-// 			uint8_t row = bitmap[ly];
-// 			if ((row >> lx) & 1)
-// 				putpixeli(x+lx, y+ly, fg);
-// 			else
-// 				putpixeli(x+lx, y+ly, bg);
-// 		}
-// 	}
-// }
-
 void print_ch(char c)
 {
 	int lx; int ly;
@@ -47,12 +32,27 @@ void print_ch(char c)
 		for (ly = 0; ly < GLYPH_HEIGHT; ly++) {
 			uint8_t row = bitmap[ly];
 			if ((row >> lx) & 1)
-				putpixeli(x-lx, y-ly, fg);
+				putpixeli(x+lx, y+ly, fg);
 			else
-				putpixeli(x-lx, y-ly, bg); 
+				putpixeli(x+lx, y+ly, bg);
 		}
 	}
 }
+
+// void print_ch(char c)
+// {
+// 	int lx; int ly;
+// 	uint8_t *bitmap = font8x8_basic[c % 128];
+// 	for (lx = 0; lx < GLYPH_WIDTH; lx++) {
+// 		for (ly = 0; ly < GLYPH_HEIGHT; ly++) {
+// 			uint8_t row = bitmap[ly];
+// 			if ((row >> lx) & 1)
+// 				putpixeli(x-lx, y-ly, fg);
+// 			else
+// 				putpixeli(x-lx, y-ly, bg);
+// 		}
+// 	}
+// }
 
 void put_char(char c)
 {

@@ -5,10 +5,10 @@
 extern "C" {
 #endif
 
-#define GLYPH_WIDTH 13
-#define GLYPH_HEIGHT 13
+#define GLYPH_WIDTH 8
+#define GLYPH_HEIGHT 8
 
-#ifdef HIGHREZ
+#ifndef HIGHREZ
 char font8x8_basic[128][8] = {
     { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00},   // U+0000 (nul)
     { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00},   // U+0001
