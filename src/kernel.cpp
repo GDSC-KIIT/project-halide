@@ -89,7 +89,7 @@ extern "C" void k_main(unsigned int *multiboot) {
 			switch(Port8Bit::Read8(0x60)) {
 			case 0x4B:
 				i+=10;
-				titlebar = window(wnd, "Hello world", 512+i, 512+j, 400, 100);
+				titlebar = window(wnd, "Hello world", 300+i, 100+j, 400, 100);
 				wnd->border_color = 0xffff00ff;
 				wnd->background_color = 0xff0ff0ff;
 				wnd->draw(wnd);
@@ -98,7 +98,7 @@ extern "C" void k_main(unsigned int *multiboot) {
 				break;
 			case 0x4D:
 				j+=10;
-				titlebar = window(wnd, "Hello world", 512+i, 512+j, 400, 100);
+				titlebar = window(wnd, "Hello world", 300+i, 100+j, 400, 100);
 				wnd->border_color = 0xffff00ff;
 				wnd->background_color = 0xff0ff0ff;
 				wnd->draw(wnd);
