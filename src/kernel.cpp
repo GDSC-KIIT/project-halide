@@ -71,38 +71,70 @@ extern "C" void k_main(unsigned int *multiboot) {
 	wnd->background_color = 0xffffffff;
 	wnd->draw(wnd);
 
-	window_t *titlebar = window(wnd, "Hello world", 256, 368, 400, 100);
-	wnd->border_color = 0xff0ff000;
-	wnd->background_color = 0xffffffff;
+	window_t *titlebar = window(wnd, "Hello world", 256, 365, 400, 100);
+	titlebar->border_color = 0x00000000;
+	titlebar->background_color = 0x00000000;
 	wnd->draw(titlebar);
-
-	titlebar = window(wnd, "Hello world", 300, 100, 400, 100);
-	wnd->border_color = 0xffff00ff;
-	wnd->background_color = 0xff0ff0ff;
-	wnd->draw(wnd);
-	wnd->draw(titlebar);
+	titlebar = button(titlebar,  "Hello world", 256, 365, 10, 10);
+	titlebar->border_color = 0x00000000;
+	titlebar->background_color = 0xffff0000;
+	titlebar->draw(titlebar);
 
 
-	int i = 0, j = 0;
+	int i = 300, j = 100, smoothness=5;
 	while (1) {
 		if ((Port8Bit::Read8(0x64) & 0x1)) {
 			switch(Port8Bit::Read8(0x60)) {
 			case 0x4B:
-				i+=10;
-				titlebar = window(wnd, "Hello world", 300+i, 100+j, 400, 100);
-				wnd->border_color = 0xffff00ff;
-				wnd->background_color = 0xff0ff0ff;
+				i-=smoothness;
+				titlebar = window(wnd, "Hello world", i, j, 400, 100);
+				titlebar->border_color = 0x00000000;
+				titlebar->background_color = 0x00000000;
 				wnd->draw(wnd);
 				wnd->draw(titlebar);
-				// move = moveWindow(titlebar, "Hello world", 256+i, 368);
+				titlebar = button(titlebar,  "Hello world", i, j, 10, 10);
+				titlebar->border_color = 0x00000000;
+				titlebar->background_color = 0xffff0000;
+				titlebar->draw(titlebar);
+				// move = moveWindow(titlebar, "Hello world", i+i, j);
 				break;
 			case 0x4D:
-				j+=10;
-				titlebar = window(wnd, "Hello world", 300+i, 100+j, 400, 100);
-				wnd->border_color = 0xffff00ff;
-				wnd->background_color = 0xff0ff0ff;
+				i+=smoothness;
+				titlebar = window(wnd, "Hello world", i, j, 400, 100);
+				titlebar->border_color = 0x00000000;
+				titlebar->background_color = 0x00000000;
 				wnd->draw(wnd);
 				wnd->draw(titlebar);
+				titlebar = button(titlebar,  "Hello world", i, j, 10, 10);
+				titlebar->border_color = 0x00000000;
+				titlebar->background_color = 0xffff0000;
+				titlebar->draw(titlebar);
+				break;
+
+				case 0x48:
+				j-=smoothness;
+				titlebar = window(wnd, "Hello world", i, j, 400, 100);
+				titlebar->border_color = 0x00000000;
+				titlebar->background_color = 0x00000000;
+				wnd->draw(wnd);
+				wnd->draw(titlebar);
+				titlebar = button(titlebar,  "Hello world", i, j, 10, 10);
+				titlebar->border_color = 0x00000000;
+				titlebar->background_color = 0xffff0000;
+				titlebar->draw(titlebar);
+				break;
+
+				case 0x50:
+				j+=smoothness;
+				titlebar = window(wnd, "Hello world", i, j, 400, 100);
+				titlebar->border_color = 0x00000000;
+				titlebar->background_color = 0x00000000;
+				wnd->draw(wnd);
+				wnd->draw(titlebar);
+				titlebar = button(titlebar,  "Hello world", i, j, 10, 10);
+				titlebar->border_color = 0x00000000;
+				titlebar->background_color = 0xffff0000;
+				titlebar->draw(titlebar);
 				break;
 
 			default:
