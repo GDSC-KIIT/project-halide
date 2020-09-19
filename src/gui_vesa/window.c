@@ -35,6 +35,17 @@ window_t *window(window_t *parent, char * text, int x, int y, int w, int h)
 	self->draw = draw_textfield;
 }
 
+window_t *moveWindow   (window_t * parent, int x, int y, int w, int h) {
+	window_t *self = (window_t *) kalloc(sizeof(window_t));
+	self->parent = parent;
+	self->title = parent->title;
+	self->x = x;
+	self->y = y;
+	self->w = w;
+	self->h = h;
+	self->draw = draw_textfield;
+}
+
 window_t *button(window_t *parent, char * text, int x, int y, int w, int h)
 {
 

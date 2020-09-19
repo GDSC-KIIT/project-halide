@@ -41,7 +41,7 @@ window_t *button       (window_t *, char *, int, int, int, int);
 window_t *textfield    (window_t *, char *, int, int, int, int);
 window_t *label        (window_t *, char *, int, int, int, int);
 window_t *custom_window(window_t *, char *, int, int, int, int, void (*)(window_t *));
-window_t *moveWindow   (window_t *, char *, int, int);
+window_t *moveWindow   (window_t *, int, int, int, int);
 
 #ifdef __cplusplus
 }

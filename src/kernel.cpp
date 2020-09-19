@@ -5,6 +5,9 @@
 #include <keyboard.h>
 #include <windows.h>
 
+// Temo include
+#include <system.h>
+
 #include "../include/vesa_drivers/vesa.h"
 #include <mem.h>
 #include <vesa_drivers/window.h>
@@ -51,9 +54,9 @@ static void puts(char *string) {
 }
 
 extern "C" void k_main(unsigned int *multiboot) {
-	// set_framebuffer(multiboot);
+	set_framebuffer(multiboot);
 	setup_memmgr(multiboot);
-	setup_terminal(multiboot); // Termial dimentions
+	// setup_terminal(multiboot); // Termial dimentions
 
 	// puts("Hello world"); // ! Fix the ASCII mapping with new font table
 	// for (int i = 0; i < 58; i++) {
@@ -62,16 +65,44 @@ extern "C" void k_main(unsigned int *multiboot) {
 	// 	}
 	// 	put_char('\n');
 	// }
-	init_console();
-	// window_t *wnd = window(nullptr, "Hello world", 12, 10, 1024, 768);
-	// wnd->border_color = 0x00000000;
-	// wnd->background_color = 0xffffffff;
-	// wnd->draw(wnd);
+	// init_console();
+	window_t *wnd = window(nullptr, "Hello world", 0, 0, 1024, 768);
+	wnd->border_color = 0x00000000;
+	wnd->background_color = 0xffffffff;
+	wnd->draw(wnd);
 
-	// window_t *titlebar = window(wnd, "Hello world", 13, 11, 998, 100);
-	// wnd->border_color = 0xff0ff000;
-	// wnd->background_color = 0xffffffff;
-	// wnd->draw(titlebar);
+	window_t *titlebar = window(wnd, "Hello world", 256, 368, 400, 100);
+	wnd->border_color = 0xff0ff000;
+	wnd->background_color = 0xffffffff;
+	wnd->draw(titlebar);
+
+	titlebar = window(wnd, "Hello world", 512, 512, 400, 100);
+	wnd->border_color = 0xffff00ff;
+	wnd->background_color = 0xff0ff0ff;
+	wnd->draw(titlebar);
+
+
+	int i = 0;
+	while (1) {
+		if ((Port8Bit::Read8(0x64) & 0x1)) {
+			switch(Port8Bit::Read8(0x60)) {
+			case 2:
+				i++;
+				titlebar = window(wnd, "Hello world", 512+i, 512+i, 400, 100);
+				wnd->border_color = 0xffff00ff;
+				wnd->background_color = 0xff0ff0ff;
+				wnd->draw(titlebar);
+				// move = moveWindow(titlebar, "Hello world", 256+i, 368);
+				break;
+			case 3:
+				i++;
+				break;
+
+			default:
+				break;
+			}
+		}
+	}
 
 	// // * instantiate globaldescriptortable here
 	// GLOBAL_DESCRIPTOR_TABLE::GlobalDescriptorTable globaldescriptortable;
@@ -157,3 +188,14 @@ extern "C" void k_main(unsigned int *multiboot) {
 	while (1)
 		;
 }
+
+
+// Ppls Doubts
+
+
+// del(struct node* current) {
+// 	struct node* t = current;
+// 	t = current->next;
+// 	current->next = t->next;
+// 	free(t);
+// }
