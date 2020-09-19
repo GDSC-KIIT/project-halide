@@ -38,7 +38,7 @@ kernel.iso: kernel.bin
 	rm -rf iso
 
 run: kernel.iso
-	qemu-system-i386 -boot d -cdrom kernel.iso
+	VBoxManage startvm "HalideOS"
 
 run-full-screen: kernel.iso
 	qemu-system-i386 -boot d -cdrom kernel.iso -full-screen
