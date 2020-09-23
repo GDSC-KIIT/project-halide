@@ -53,7 +53,7 @@ install_deps_arch:
 	
 install_deps_openSUSE:
 	sudo zypper install gcc qemu virtualbox nasm grub xorriso mtools
-	@echo You have to install gcc-g++ form yor browser for your SUSE
+	@echo You have to install gcc-g++ from your browser for your SUSE
 install_deps_RedHat:
 
 archive:
