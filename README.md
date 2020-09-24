@@ -51,6 +51,11 @@ We use `clang-format` to make sure the code follows a consistent style. The deta
 [.clang-format](./.clang-format) file. Most editors have features to automatically format using `clang-format`.
 
 
+## Code of Conduct
+
+Please refer to the [code of conduct](CODE_OF_CONDUCT.md) for the rules for interacting with this project.
+
+
 ## License
 
 Copyright (c) **DSC KIIT**. All rights reserved. Licensed under the MIT License
