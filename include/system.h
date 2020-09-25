@@ -1,5 +1,4 @@
-#ifndef __SYSTEM_H
-#define __SYSTEM_H
+#pragma once
 
 // & Old implimentation
 unsigned char inportb(unsigned short _port);
@@ -78,5 +77,3 @@ protected:
 
 	static inline void Write32(unsigned short _port, unsigned int _data) { __asm__ volatile("outl %0, %1" : : "a"(_data), "Nd"(_port)); }
 };
-
-#endif

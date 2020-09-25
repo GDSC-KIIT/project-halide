@@ -1,5 +1,4 @@
-#ifndef __IDT_H
-#define __IDT_H
+#pragma once
 
 #include <globaldescriptortable.h>
 #include <system.h>
@@ -39,4 +38,3 @@ public:
 
 	~InterruptManager();
 };
-#endif

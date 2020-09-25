@@ -1,6 +1,3 @@
-#ifndef __UTILITY_H
-#define __UTILITY_H
+#pragma once
 
 void *mem_alloc(int nbytes);
-
-#endif

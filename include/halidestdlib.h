@@ -1,5 +1,4 @@
-#ifndef __HALIDE_STD_LIB
-#define __HALIDE_STD_LIB
+#pragma once
 
 #include <utils.h>
 namespace hldstd {
@@ -80,5 +79,3 @@ template <typename T> bool hldstd::stack<T>::push(T x) { // false for overflow, 
 template <typename T> T hldstd::stack<T>::top() { return stack_arr[m_top]; }
 
 template <typename T> bool hldstd::stack<T>::isEmpty() { return m_top == 0; }
-
-#endif

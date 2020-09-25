@@ -1,5 +1,4 @@
-#ifndef __WINDOWS_H
-#define __WINDOWS_H
+#pragma once
 
 /*
  ^ Overview of class window
@@ -42,5 +41,3 @@ public:
 		// m_y2 = buffer_data[instances][1];
 	}
 }__attribute__((packed));
-
-#endif

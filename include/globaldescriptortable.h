@@ -1,5 +1,4 @@
-#ifndef __GLOBAL_DESCRIPTOR_TABLE_H
-#define __GLOBAL_DESCRIPTOR_TABLE_H
+#pragma once
 
 namespace GLOBAL_DESCRIPTOR_TABLE {
 	class GlobalDescriptorTable {
@@ -31,5 +30,3 @@ namespace GLOBAL_DESCRIPTOR_TABLE {
 		~GlobalDescriptorTable();
 	};
 } // namespace GLOBAL_DESCRIPTOR_TABLE
-
-#endif

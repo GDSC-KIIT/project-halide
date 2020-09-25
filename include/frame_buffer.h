@@ -1,3 +1,5 @@
+#pragma once
+
 /*
 Abstraction for console output using the framebuffer
 
@@ -7,9 +9,6 @@ First byte is for the ASCII Character,
 next 4 bits for the foreground colour and
 the next 4 bits for the background colour
 */
-
-#ifndef FRAME_BUFFER_H
-#define FRAME_BUFFER_H
 
 #include <windows.h>
 
@@ -63,5 +62,3 @@ namespace FrameBuffer {
 		void Rerender(Window*);
 	};
 } // namespace FrameBuffer
-
-#endif
