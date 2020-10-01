@@ -17,8 +17,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: configure
-      run: ./configure
     - name: making kernel.iso
       run: |
         cd src
