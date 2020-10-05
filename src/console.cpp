@@ -1,10 +1,9 @@
 #include <console.h>
 #include <halidestdlib.h>
 
-void writeAbout(FrameBuffer::Writer &, Window &);
-void writeString_man(FrameBuffer::Writer &, Window &);
+static void writeAbout(FrameBuffer::Writer &, Window &);
+static void writeHelpContent(FrameBuffer::Writer &, Window &);
 void calculator(FrameBuffer::Writer &, hldstd::string &expression);
-static void writeHelpContent(FrameBuffer::Writer &, Window &win);
 static int checkWindowToDestroy(Window win);
 
 // Start the Console
