@@ -4,14 +4,16 @@
 void writeAbout(FrameBuffer::Writer &, Window &);
 void writeString_man(FrameBuffer::Writer &, Window &);
 void calculator(FrameBuffer::Writer &, hldstd::string &expression);
-static void writeString_man(FrameBuffer::Writer &);
+static void writeHelpContent(FrameBuffer::Writer &, Window &win);
 static int checkWindowToDestroy(Window win);
 
+// Start the Console
 int init_console(FrameBuffer::Writer &p, Window &win) {
 	p.writeString("Now running console instance : \n");
 	unsigned int loop = 1;
 	int _id = 0;
 
+	// Command Loop
 	while (loop) {
 		p.writeString((char *)win.name, FrameBuffer::Colours::RED);
 		p.writeString("@");
@@ -19,14 +21,17 @@ int init_console(FrameBuffer::Writer &p, Window &win) {
 
 		hldstd::string command = KEYBOARD_DRIVER::readInput(p);
 
+		// Command - help
 		if (hldstd::stringCompare(command.c_ptr(), "help")) {
-			writeString_man(p, win);
+			writeHelpContent(p, win);
 		}
 
+		// Command - about
 		else if (hldstd::stringCompare(command.c_ptr(), "about")) {
 			writeAbout(p, win);
 		}
 
+		// Command - calculator
 		else if (hldstd::stringCompare(command.c_ptr(), "calculator")) {
 			p.writeString(" HalideOS - Basic Calculator\n");
 			p.writeString(" Enter an algebriac expression (only use +, -, *, /): ");
@@ -34,10 +39,12 @@ int init_console(FrameBuffer::Writer &p, Window &win) {
 			calculator(p, c);
 		}
 
+		// Command - clear 
 		else if (hldstd::stringCompare(command.c_ptr(), "clear")) {
 			p.clearLine(win.m_y1 + 1, win.m_y2 - 1);
 		}
 
+		// Command - switch window 
 		else if (hldstd::stringCompare(command.c_ptr(), "switch window")) {
 			p.writeString("switchched window\n");
 			p.clearLine(win.m_y1 + 1, win.m_y2 - 1); // Use this line of code till we impliment local state storage
@@ -46,12 +53,14 @@ int init_console(FrameBuffer::Writer &p, Window &win) {
 			break;
 		}
 
+		// Command - greet
 		else if (hldstd::stringCompare(command.c_ptr(), "greet")) {
 			p.writeString(" Hello ");
 			p.writeString((char *)win.name);
 			p.writeString(", Welcome to HalideOS\n");
 		}
 
+		// Command - destroy window
 		else if (hldstd::stringCompare(command.c_ptr(), "destroy window")) {
 			if (win.m_y1 > 1) {
 				p.writeString("Cannot call this command from base windows\n");
@@ -72,10 +81,12 @@ int init_console(FrameBuffer::Writer &p, Window &win) {
 			p.writeString("Invalid command\n"); // For info on how to set color codes please visit that website
 		}
 	}
+
 	p.writeString("Exiting console\n");
 	return _id;
 }
 
+// Content for the about command
 inline void writeAbout(FrameBuffer::Writer &p, Window &win) {
 	if ((win.m_y2 - win.m_y1) > 8) {
 		p.writeString("\n     HalideOS v1.0 \n", FrameBuffer::Colours::LIGHT_BLUE);
@@ -90,7 +101,8 @@ inline void writeAbout(FrameBuffer::Writer &p, Window &win) {
 	}
 }
 
-inline void writeString_man(FrameBuffer::Writer &p, Window &win) {
+// Content for the help command
+inline void writeHelpContent(FrameBuffer::Writer &p, Window &win) {
 	if ((win.m_y2 - win.m_y1) > 8) {
 		p.writeString(" List of Commands: \n", FrameBuffer::Colours::GREEN);
 		p.writeString("    about\n", FrameBuffer::Colours::WHITE);

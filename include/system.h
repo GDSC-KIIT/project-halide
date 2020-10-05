@@ -1,12 +1,11 @@
 #ifndef __SYSTEM_H
 #define __SYSTEM_H
 
-// & Old implimentation
+// & Old implementation
 unsigned char inportb(unsigned short _port);
-
 void outportb(unsigned short _port, unsigned char _data);
 
-// & New implimentation
+// & New implementation
 class Port {
 protected:
 	Port(unsigned short portnumber);
@@ -21,7 +20,6 @@ public:
 
 	virtual unsigned char Read();
 	virtual void Write(unsigned char data);
-	// ! Public for now
 public:
 	static inline unsigned char Read8(unsigned short _port) {
 		unsigned char result;
@@ -40,7 +38,9 @@ public:
 	virtual void Write(unsigned char data);
 
 protected:
-	static inline void Write8Slow(unsigned short _port, unsigned char _data) { __asm__ volatile("outb %0, %1\njmp 1f\n1: jmp 1f\n1:" : : "a"(_data), "Nd"(_port)); }
+	static inline void Write8Slow(unsigned short _port, unsigned char _data) {
+		__asm__ volatile("outb %0, %1\njmp 1f\n1: jmp 1f\n1:" : : "a"(_data), "Nd"(_port));
+	}
 };
 
 class __16bitPort : public Port {
@@ -50,7 +50,6 @@ public:
 
 	virtual unsigned short Read();
 	virtual void Write(unsigned short data);
-	// ! Public for now
 public:
 	static inline unsigned short Read16(unsigned short _port) {
 		unsigned short result;

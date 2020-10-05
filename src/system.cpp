@@ -1,6 +1,6 @@
 #include <system.h>
 
-//& Old implimentation
+//& Old implementation
 unsigned char inportb(unsigned short _port) {
 	unsigned char rv;
 	__asm__ __volatile__("inb %1, %0" : "=a"(rv) : "dN"(_port));
@@ -9,7 +9,7 @@ unsigned char inportb(unsigned short _port) {
 
 void outportb(unsigned short _port, unsigned char _data) { __asm__ __volatile__("outb %1, %0" : : "dN"(_port), "a"(_data)); }
 
-// & New implimentation
+// & New implementation
 Port::Port(unsigned short portnumber) { this->portnumber = portnumber; }
 
 Port::~Port() {}
