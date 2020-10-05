@@ -43,11 +43,11 @@ run-full-screen: kernel.iso
 	qemu-system-i386 -boot d -cdrom kernel.iso -full-screen
 
 run-vb: kernel.iso
-	VBoxManage startvm "HalideOS v.0.1"
+	VBoxManage startvm "HalideOS"
 
 
 install_deps_debian:
-	sudo apt install qemu virtualbox nasm gcc g++ xorriso
+	sudo apt install qemu-system-i386 virtualbox nasm gcc g++ xorriso
 
 install_deps_arch:
 	
