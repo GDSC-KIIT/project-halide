@@ -138,6 +138,7 @@ extern "C" void k_main(const void *multiboot_structure, unsigned int multiboot) 
 #endif
 #endif
 	}
+	
 	interrupts.Activate();
 	while (1)
 		;

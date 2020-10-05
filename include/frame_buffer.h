@@ -15,22 +15,22 @@ the next 4 bits for the background colour
 
 namespace FrameBuffer {
 	namespace Colours {
-		static const unsigned char BLACK = (unsigned char)0x0;
-		static const unsigned char BLUE = (unsigned char)0x1;
-		static const unsigned char GREEN = (unsigned char)0x2;
-		static const unsigned char CYAN = (unsigned char)0x3;
-		static const unsigned char RED = (unsigned char)0x4;
-		static const unsigned char MAGENTA = (unsigned char)0x5;
-		static const unsigned char BROWN = (unsigned char)0x6;
-		static const unsigned char LIGHT_GREY = (unsigned char)0x7;
-		static const unsigned char DARK_GREY = (unsigned char)0x8;
-		static const unsigned char LIGHT_BLUE = (unsigned char)0x9;
-		static const unsigned char LIGHT_GREEN = (unsigned char)0xa;
-		static const unsigned char LIGHT_CYAN = (unsigned char)0xb;
-		static const unsigned char LIGHT_RED = (unsigned char)0xc;
-		static const unsigned char LIGHT_MAGENTA = (unsigned char)0xd;
-		static const unsigned char LIGHT_BROWN = (unsigned char)0xe;
-		static const unsigned char WHITE = (unsigned char)0xf;
+		constexpr unsigned char BLACK = (unsigned char)0x0;
+		constexpr unsigned char BLUE = (unsigned char)0x1;
+		constexpr unsigned char GREEN = (unsigned char)0x2;
+		constexpr unsigned char CYAN = (unsigned char)0x3;
+		constexpr unsigned char RED = (unsigned char)0x4;
+		constexpr unsigned char MAGENTA = (unsigned char)0x5;
+		constexpr unsigned char BROWN = (unsigned char)0x6;
+		constexpr unsigned char LIGHT_GREY = (unsigned char)0x7;
+		constexpr unsigned char DARK_GREY = (unsigned char)0x8;
+		constexpr unsigned char LIGHT_BLUE = (unsigned char)0x9;
+		constexpr unsigned char LIGHT_GREEN = (unsigned char)0xa;
+		constexpr unsigned char LIGHT_CYAN = (unsigned char)0xb;
+		constexpr unsigned char LIGHT_RED = (unsigned char)0xc;
+		constexpr unsigned char LIGHT_MAGENTA = (unsigned char)0xd;
+		constexpr unsigned char LIGHT_BROWN = (unsigned char)0xe;
+		constexpr unsigned char WHITE = (unsigned char)0xf;
 	} // namespace Colours
 
 	class Writer {
