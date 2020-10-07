@@ -76,7 +76,7 @@ extern "C" void k_main(unsigned int *multiboot) {
 	titlebar->border_color = 0x00000000;
 	titlebar->background_color = 0x00000000;
 	wnd->draw(titlebar);
-	titlebar = button(titlebar,  "Hello world", 256, 365, 10, 10);
+	titlebar = button(titlebar, "Hello world", 256, 365, 10, 10);
 	titlebar->border_color = 0x00000000;
 	titlebar->background_color = 0xffff0000;
 	titlebar->draw(titlebar);
@@ -86,76 +86,76 @@ extern "C" void k_main(unsigned int *multiboot) {
 	titlebar->background_color = 0x00000000;
 	wnd->draw(wnd);
 	wnd->draw(titlebar);
-	titlebar = button(titlebar,  "Hello world", 300, 100, 10, 10);
+	titlebar = button(titlebar, "Hello world", 300, 100, 10, 10);
 	titlebar->border_color = 0xAFAFAFAF;
 	titlebar->background_color = 0xffff0000;
 	titlebar->draw(titlebar);
-	set_printing_coords(300+8, 100+20);
+	set_printing_coords(300 + 8, 100 + 20);
 	puts("$->Terminal Instance 1");
 
 	puts("Hello world"); // ! Fix the ASCII mapping with new font table
 
-	int i = 300, j = 100, smoothness=100;
+	int i = 300, j = 100, smoothness = 100;
 	while (1) {
 		if ((Port8Bit::Read8(0x64) & 0x1)) {
-			switch(Port8Bit::Read8(0x60)) {
+			switch (Port8Bit::Read8(0x60)) {
 			case 0x4B:
-				i-=smoothness;
+				i -= smoothness;
 				titlebar = window(wnd, "Hello world", i, j, 400, 100);
 				titlebar->border_color = 0xAFAFAFAF;
 				titlebar->background_color = 0x00000000;
 				wnd->draw(wnd);
 				wnd->draw(titlebar);
-				titlebar = button(titlebar,  "Hello world", i, j, 10, 10);
+				titlebar = button(titlebar, "Hello world", i, j, 10, 10);
 				titlebar->border_color = 0xAFAFAFAF;
 				titlebar->background_color = 0xffff0000;
 				titlebar->draw(titlebar);
-				set_printing_coords(i+1, j+20);
+				set_printing_coords(i + 1, j + 20);
 				puts("$->Terminal Instance 1");
 				// move = moveWindow(titlebar, "Hello world", i+i, j);
 				break;
 			case 0x4D:
-				i+=smoothness;
+				i += smoothness;
 				titlebar = window(wnd, "Hello world", i, j, 400, 100);
 				titlebar->border_color = 0xAFAFAFAF;
 				titlebar->background_color = 0x00000000;
 				wnd->draw(wnd);
 				wnd->draw(titlebar);
-				titlebar = button(titlebar,  "Hello world", i, j, 10, 10);
+				titlebar = button(titlebar, "Hello world", i, j, 10, 10);
 				titlebar->border_color = 0xAFAFAFAF;
 				titlebar->background_color = 0xffff0000;
 				titlebar->draw(titlebar);
-				set_printing_coords(i+1, j+20);
+				set_printing_coords(i + 1, j + 20);
 				puts("$->Terminal Instance 1");
 				break;
 
-				case 0x48:
-				j-=smoothness;
+			case 0x48:
+				j -= smoothness;
 				titlebar = window(wnd, "Hello world", i, j, 400, 100);
 				titlebar->border_color = 0xAFAFAFAF;
 				titlebar->background_color = 0x00000000;
 				wnd->draw(wnd);
 				wnd->draw(titlebar);
-				titlebar = button(titlebar,  "Hello world", i, j, 10, 10);
+				titlebar = button(titlebar, "Hello world", i, j, 10, 10);
 				titlebar->border_color = 0xAFAFAFAF;
 				titlebar->background_color = 0xffff0000;
 				titlebar->draw(titlebar);
-				set_printing_coords(i+1, j+20);
+				set_printing_coords(i + 1, j + 20);
 				puts("$->Terminal Instance 1");
 				break;
 
-				case 0x50:
-				j+=smoothness;
+			case 0x50:
+				j += smoothness;
 				titlebar = window(wnd, "Hello world", i, j, 400, 100);
 				titlebar->border_color = 0xAFAFAFAF;
 				titlebar->background_color = 0x00000000;
 				wnd->draw(wnd);
 				wnd->draw(titlebar);
-				titlebar = button(titlebar,  "Hello world", i, j, 10, 10);
+				titlebar = button(titlebar, "Hello world", i, j, 10, 10);
 				titlebar->border_color = 0xAFAFAFAF;
 				titlebar->background_color = 0xffff0000;
 				titlebar->draw(titlebar);
-				set_printing_coords(i+1, j+20);
+				set_printing_coords(i + 1, j + 20);
 				puts("$->Terminal Instance 1");
 				break;
 
@@ -250,9 +250,7 @@ extern "C" void k_main(unsigned int *multiboot) {
 		;
 }
 
-
 // Ppls Doubts
-
 
 // del(struct node* current) {
 // 	struct node* t = current;

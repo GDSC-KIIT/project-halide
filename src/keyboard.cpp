@@ -10,7 +10,6 @@
 #include <vesa_drivers/text.h>
 #include <vesa_drivers/video-tty.h>
 
-
 extern unsigned char inportb(unsigned short _port);
 
 char *KEYBOARD_DRIVER::readInput() {
@@ -136,7 +135,7 @@ char *KEYBOARD_DRIVER::readInput() {
 				buffstr[i] = '=';
 				i++;
 				break;
-			case 14:									// Case for back space
+			case 14: // Case for back space
 				if (i > 0) {
 					put_char('\r');
 				}
