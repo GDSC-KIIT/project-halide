@@ -5,7 +5,7 @@ nasm-flags = -f elf32
 linkerflags = -melf_i386
 
 args = `arg="$(filter-out $@,$(MAKECMDGOALS))" && echo $${arg:-${1}}`
-objects = loader.o kernel.o frame_buffer.o system.o keyboard.o utils.o mouse.o halidestdlib.o globaldescriptortable.o console.o \
+objects = loader.o kernel.o frame_buffer.o system.o keyboard.o utils.o mouse.o halidestdlib.o globaldescriptortable.o console.o windowmanager.o \
 		  mem.o colors.o drvg.o drvi.o drvs.o vtty.o window.o
 
 %.o: %.cpp
