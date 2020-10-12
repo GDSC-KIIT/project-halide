@@ -19,7 +19,7 @@ FrameBuffer::Writer::Writer(const unsigned char &foreground, const unsigned char
 // Clear the line between from and to
 void FrameBuffer::Writer::clearLine(unsigned char from, unsigned char to) {
 	unsigned int i = s_width * from * sd;
-	char *vidmem = (char *)0xb8000;
+	char *vidmem = (char *)START;
 	for (i; i < (s_width * to * sd); i++) {
 		vidmem[(i / 2) * 2 + 1] = (((unsigned char)bg & 0x0f) << 4) | ((unsigned char)fg & 0x0f);
 		vidmem[(i / 2) * 2] = ' ';
@@ -71,7 +71,7 @@ void FrameBuffer::Writer::writeAtIndex(int x) {
 }
 
 void FrameBuffer::Writer::writeString(char *str, unsigned char textColor) {
-	char *vidmem = (char *)0x000B8000;
+	char *vidmem = (char *)START;
 	for (int i = 0; str[i] != '\0'; i++) {
 		if (str[i] == '\n') {
 			vidmem[((cursorY * s_width) + cursorX) * 2] = ' ';

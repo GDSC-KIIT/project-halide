@@ -35,7 +35,7 @@ namespace FrameBuffer {
 
 	class Writer {
 	private:
-		char *START = (char *)0xB8000;
+		char *START = (char *)0xC03FF000;
 		const unsigned int s_width = 80, s_height = 25, sd = 2;
 		
 		unsigned char fg, bg;
