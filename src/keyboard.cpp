@@ -341,11 +341,7 @@ char *KEYBOARD_DRIVER::readInput(FrameBuffer::Writer &p, int mode) {
 				buffstr[i] = '/';
 				i++;
 				break;
-			case 54:
-				p.writeString(".");
-				buffstr[i] = '.';
-				i++;
-				break;
+
 			case 55:
 				p.writeString("/");
 				buffstr[i] = '/';
@@ -359,14 +355,22 @@ char *KEYBOARD_DRIVER::readInput(FrameBuffer::Writer &p, int mode) {
 				//}
 
 			// Implementing shift
-			case 42:
+			case 42:			//	Scan code for key left shift pressed
+				shift = true;
+				break;
+		
+			case 54:			//	Scan code for key right shift pressed
 				shift = true;
 				break;
 
-			case 0xAA:
+			case 0xAA:			//	Scan code for key left shift released
 				shift = false;
 				break;
-
+				
+			case 0xB6:			//	Scan code for key right shift released
+				shift=false;
+				break;
+				
 			case 0x4B:
 				if (i > 0) {
 					char *newMem = (char *)mem_alloc(200);
