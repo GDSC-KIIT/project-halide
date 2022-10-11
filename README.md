@@ -1,7 +1,6 @@
 # Project Halide
 
-This project is accepting contributions for HactoberFest 2022 under the initiative taken up by GDSC x iNeuron. Our top contributors will receive swags.
-
+This project is accepting contributions for HactoberFest 2022 under the initiative taken up by GDSC x iNeuron. 
 HalideOS is an experimental operating system written entirely from scratch. It supports a basic shell with some commands including a command line calculator. You can boot it up in virtual box.
 
 ## Motivation
